@@ -20,5 +20,3 @@ The book
 
 - [Setting up cucumber with gradle and Kotlin](https://github.com/eaneto/gradle-kotlin-dsl-cucumber-configuration/blob/master/build.gradle.kts)
 - [Getting into Cucumber and Kotlin](https://cucumber.io/docs/guides/10-minute-tutorial/#write-a-scenario)
-
-

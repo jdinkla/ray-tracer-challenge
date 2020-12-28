@@ -14,6 +14,8 @@ class StepDefs {
     lateinit var a: tuple
     lateinit var p: tuple
     lateinit var v: tuple
+    lateinit var a1: tuple
+    lateinit var a2: tuple
 
     @Given("a ← tuple\\({double}, {double}, {double}, {double})")
     fun a_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?) {
@@ -79,4 +81,73 @@ class StepDefs {
     fun v_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
         assertEquals(v, tuple(int1!!, int2!!, int3!!, int4!!))
     }
+
+    @Given("a1 ← tuple\\({int}, {int}, {int}, {int})")
+    fun a1_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+        a1 = tuple(int1!!, int2!!, int3!!, int4!!)
+    }
+
+    @Given("a2 ← tuple\\({int}, {int}, {int}, {int})")
+    fun a2_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+        a2 = tuple(int1!!, int2!!, int3!!, int4!!)
+    }
+
+    @Then("a1 + a2 = tuple\\({int}, {int}, {int}, {int})")
+    fun a1_a2_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+        assertEquals(a1 + a2, tuple(int1!!, int2!!, int3!!, int4!!))
+     }
+
+    lateinit var p1: tuple
+    lateinit var p2: tuple
+
+    @Given("p1 ← point\\({int}, {int}, {int})")
+    fun p1_point(int1: Int?, int2: Int?, int3: Int?) {
+        p1 = point(int1!!, int2!!, int3!!)
+    }
+
+    @Given("p2 ← point\\({int}, {int}, {int})")
+    fun p2_point(int1: Int?, int2: Int?, int3: Int?) {
+        p2 = point(int1!!, int2!!, int3!!)
+    }
+
+    @Then("p1 - p2 = vector\\({int}, {int}, {int})")
+    fun p1_p2_vector(int1: Int?, int2: Int?, int3: Int?) {
+        assertEquals(p1 - p2, vector(int1!!, int2!!, int3!!))
+    }
+
+    @Then("p - v = point\\({int}, {int}, {int})")
+    fun p_v_point(int1: Int?, int2: Int?, int3: Int?) {
+        assertEquals(p - v, point(int1!!, int2!!, int3!!))
+    }
+
+    lateinit var v1: tuple
+    lateinit var v2: tuple
+
+    @Given("v1 ← vector\\({int}, {int}, {int})")
+    fun v1_vector(int1: Int?, int2: Int?, int3: Int?) {
+        v1 = vector(int1!!, int2!!, int3!!)
+    }
+
+    @Given("v2 ← vector\\({int}, {int}, {int})")
+    fun v2_vector(int1: Int?, int2: Int?, int3: Int?) {
+        v2 = vector(int1!!, int2!!, int3!!)
+    }
+
+    @Then("v1 - v2 = vector\\({int}, {int}, {int})")
+    fun v1_v2_vector(int1: Int?, int2: Int?, int3: Int?) {
+        assertEquals(v1 - v2, vector(int1!!, int2!!, int3!!))
+    }
+
+    lateinit var zero: tuple
+
+    @Given("zero ← vector\\({int}, {int}, {int})")
+    fun zero_vector(int1: Int?, int2: Int?, int3: Int?) {
+        zero = vector(int1!!, int2!!, int3!!)
+    }
+
+    @Then("zero - v = vector\\({int}, {int}, {int})")
+    fun zero_v_vector(int1: Int?, int2: Int?, int3: Int?) {
+        assertEquals(zero - v, vector(int1!!, int2!!, int3!!))
+    }
+
 }
