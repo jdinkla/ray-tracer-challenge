@@ -8,6 +8,9 @@ import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.tuple
 import net.dinkla.raytracerchallenge.math.vector
 import org.junit.Assert.*
+import kotlin.math.sqrt
+
+val EPSILON: Double = 0.000001
 
 class StepDefs {
 
@@ -24,22 +27,22 @@ class StepDefs {
 
     @Then("a.x = {double}")
     fun a_x(double1: Double?) {
-        assertEquals(double1!!, a.x, 0.00001)
+        assertEquals(double1!!, a.x, EPSILON)
     }
 
     @Then("a.y = {double}")
     fun a_y(double1: Double?) {
-        assertEquals(double1!!, a.y, 0.00001)
+        assertEquals(double1!!, a.y, EPSILON)
     }
 
     @Then("a.z = {double}")
     fun a_z(double1: Double?) {
-        assertEquals(double1!!, a.z, 0.00001)
+        assertEquals(double1!!, a.z, EPSILON)
     }
 
     @Then("a.w = {double}")
     fun a_w(double1: Double?) {
-        assertEquals(double1!!, a.w, 0.00001)
+        assertEquals(double1!!, a.w, EPSILON)
     }
 
     @Then("a is a point")
@@ -154,5 +157,33 @@ class StepDefs {
     fun a_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
         assertEquals(-a, tuple(int1!!, int2!!, int3!!, int4!!))
     }
+
+    @Then("a * {double} = tuple\\({double}, {double}, {double}, {double})")
+    fun a_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?, double5: Double?) {
+        assertEquals(a*double1!!, tuple(double2!!, double3!!, double4!!, double5!!))
+    }
+
+    lateinit var ad: tuple
+
+    @Given("ad ← tuple\\({int}, {int}, {int}, {int})")
+    fun ad_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+        ad = tuple(int1!!, int2!!, int3!!, int4!!)
+    }
+
+    @Then("ad / {double} = tuple\\({double}, {double}, {double}, {double})")
+    fun ad_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?, double5: Double?) {
+        assertEquals(ad/double1!!, tuple(double2!!, double3!!, double4!!, double5!!))
+    }
+
+    @Then("magnitude\\(v2) = {int}")
+    fun magnitude_v2(int1: Int?) {
+        assertEquals(sqrt(int1!!.toDouble()), v2.magnitude(), EPSILON)
+    }
+
+    @Then("magnitude\\(v) = √{int}")
+    fun magnitude_v(int1: Int?) {
+        assertEquals(sqrt(int1!!.toDouble()), v.magnitude(), EPSILON)
+    }
+
 
 }
