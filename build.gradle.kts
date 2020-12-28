@@ -17,6 +17,9 @@ dependencies {
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+
+    testImplementation("io.cucumber:cucumber-java:6.8.1")
+    testImplementation("io.cucumber:cucumber-junit:6.8.1")
 }
 
 tasks.test {
@@ -25,4 +28,21 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "11"
+}
+
+configurations {}
+
+val cucumberRuntime by configurations.creating {
+    extendsFrom(configurations["testImplementation"])
+}
+
+task("cucumber") {
+    dependsOn("assemble", "compileTestJava")
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
+            args = listOf("--plugin", "pretty", "--glue", "net.dinkla.raytracerchallenge", "src/test/resources")
+        }
+    }
 }
