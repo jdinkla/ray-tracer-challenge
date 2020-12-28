@@ -150,4 +150,9 @@ class StepDefs {
         assertEquals(zero - v, vector(int1!!, int2!!, int3!!))
     }
 
+    @Then("-a = tuple\\({int}, {int}, {int}, {int})")
+    fun a_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+        assertEquals(-a, tuple(int1!!, int2!!, int3!!, int4!!))
+    }
+
 }
