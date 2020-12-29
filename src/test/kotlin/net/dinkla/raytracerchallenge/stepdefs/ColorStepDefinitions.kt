@@ -30,14 +30,10 @@ class ColorStepDefinitions {
         assertEquals(double1!!, c.blue, EPSILON)
     }
 
-    lateinit var c1: Color
-
     @Given("c1 ← color\\({double}, {double}, {double})")
     fun c1_color(double1: Double?, double2: Double?, double3: Double?) {
         c1 = Color(double1!!, double2!!, double3!!)
     }
-
-    lateinit var c2: Color
 
     @Given("c2 ← color\\({double}, {double}, {double})")
     fun c2_color(double1: Double?, double2: Double?, double3: Double?) {
@@ -48,8 +44,6 @@ class ColorStepDefinitions {
     fun c1_c2_color(double1: Double?, double2: Double?, double3: Double?) {
         assertEquals(c1 + c2, Color(double1!!, double2!!, double3!!))
     }
-
-    lateinit var c3: Color
 
     @Given("c3 ← color\\({double}, {double}, {double})")
     fun c3_color(double1: Double?, double2: Double?, double3: Double?) {
@@ -65,8 +59,6 @@ class ColorStepDefinitions {
     fun c_color(double1: Double?, double2: Double?, double3: Double?, double4: Double?) {
         assertEquals(c * double1!!, Color(double2!!, double3!!, double4!!))
     }
-
-    lateinit var c4: Color
 
     @Given("c4 ← color\\({double}, {double}, {double})")
     fun c4_color(double1: Double?, double2: Double?, double3: Double?) {
