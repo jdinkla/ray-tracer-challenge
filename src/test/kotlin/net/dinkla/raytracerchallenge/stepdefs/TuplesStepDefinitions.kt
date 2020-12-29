@@ -1,28 +1,28 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
-import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.When
 import io.cucumber.java.en.Then
+import net.dinkla.raytracerchallenge.math.Approx.EPSILON
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.tuple
+import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.math.vector
 import org.junit.Assert.*
 import kotlin.math.sqrt
 
-val EPSILON: Double = 0.000001
 
 class TuplesStepDefinitions {
 
-    lateinit var a: tuple
-    lateinit var p: tuple
-    lateinit var v: tuple
-    lateinit var a1: tuple
-    lateinit var a2: tuple
+    lateinit var a: Tuple
+    lateinit var p: Tuple
+    lateinit var v: Tuple
+    lateinit var a1: Tuple
+    lateinit var a2: Tuple
 
     @Given("a ← tuple\\({double}, {double}, {double}, {double})")
     fun a_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?) {
-        a = tuple(double1!!, double2!!, double3!!, double4!!)
+        a = Tuple(double1!!, double2!!, double3!!, double4!!)
     }
 
     @Then("a.x = {double}")
@@ -100,8 +100,8 @@ class TuplesStepDefinitions {
         assertEquals(a1 + a2, tuple(int1!!, int2!!, int3!!, int4!!))
      }
 
-    lateinit var p1: tuple
-    lateinit var p2: tuple
+    lateinit var p1: Tuple
+    lateinit var p2: Tuple
 
     @Given("p1 ← point\\({int}, {int}, {int})")
     fun p1_point(int1: Int?, int2: Int?, int3: Int?) {
@@ -123,8 +123,8 @@ class TuplesStepDefinitions {
         assertEquals(p - v, point(int1!!, int2!!, int3!!))
     }
 
-    lateinit var v1: tuple
-    lateinit var v2: tuple
+    lateinit var v1: Tuple
+    lateinit var v2: Tuple
 
     @Given("v1 ← vector\\({int}, {int}, {int})")
     fun v1_vector(int1: Int?, int2: Int?, int3: Int?) {
@@ -141,7 +141,7 @@ class TuplesStepDefinitions {
         assertEquals(v1 - v2, vector(int1!!, int2!!, int3!!))
     }
 
-    lateinit var zero: tuple
+    lateinit var zero: Tuple
 
     @Given("zero ← vector\\({int}, {int}, {int})")
     fun zero_vector(int1: Int?, int2: Int?, int3: Int?) {
@@ -160,10 +160,10 @@ class TuplesStepDefinitions {
 
     @Then("a * {double} = tuple\\({double}, {double}, {double}, {double})")
     fun a_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?, double5: Double?) {
-        assertEquals(a*double1!!, tuple(double2!!, double3!!, double4!!, double5!!))
+        assertEquals(a*double1!!, Tuple(double2!!, double3!!, double4!!, double5!!))
     }
 
-    lateinit var ad: tuple
+    lateinit var ad: Tuple
 
     @Given("ad ← tuple\\({int}, {int}, {int}, {int})")
     fun ad_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
@@ -172,7 +172,7 @@ class TuplesStepDefinitions {
 
     @Then("ad / {double} = tuple\\({double}, {double}, {double}, {double})")
     fun ad_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?, double5: Double?) {
-        assertEquals(ad/double1!!, tuple(double2!!, double3!!, double4!!, double5!!))
+        assertEquals(ad/double1!!, Tuple(double2!!, double3!!, double4!!, double5!!))
     }
 
     @Then("magnitude\\(v2) = {int}")
@@ -190,7 +190,7 @@ class TuplesStepDefinitions {
         a = vector(int1!!, int2!!, int3!!)
     }
 
-    lateinit var b: tuple
+    lateinit var b: Tuple
 
     @Given("b ← vector\\({int}, {int}, {int})")
     fun b_vector(int1: Int?, int2: Int?, int3: Int?) {
@@ -212,5 +212,26 @@ class TuplesStepDefinitions {
         assertEquals(b cross a, vector(int1!!, int2!!, int3!!))
     }
 
+    @Then("normalize\\(v) = vector\\({int}, {int}, {int})")
+    fun normalize_v_vector(int1: Int?, int2: Int?, int3: Int?) {
+        assertEquals(v.normalize(), vector(int1!!, int2!!, int3!!))
+    }
+
+    @Then("normalize\\(v) = approximately vector\\({double}, {double}, {double})")
+    fun normalize_v_approximately_vector(double1: Double?, double2: Double?, double3: Double?) {
+        print(v.normalize())
+        assertTrue(v.normalize().equals(vector(double1!!, double2!!, double3!!)))
+    }
+
+    lateinit var norm: Tuple
+    @When("norm ← normalize\\(v)")
+    fun norm_normalize_v() {
+        norm = v.normalize()
+    }
+
+    @Then("magnitude\\(norm) = {int}")
+    fun magnitude_norm(int1: Int?) {
+        assertEquals(int1!!.toDouble(), norm.magnitude(), EPSILON)
+    }
 
 }

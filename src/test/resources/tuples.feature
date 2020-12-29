@@ -87,19 +87,19 @@ Scenario: Computing the magnitude of vector(-1, -2, -3)
   Given v ← vector(-1, -2, -3)
   Then magnitude(v) = √14
 
-#Scenario: Normalizing vector(4, 0, 0) gives (1, 0, 0)
-#  Given v ← vector(4, 0, 0)
-#  Then normalize(v) = vector(1, 0, 0)
-#
-#Scenario: Normalizing vector(1, 2, 3)
-#  Given v ← vector(1, 2, 3)
-#                                  # vector(1/√14,   2/√14,   3/√14)
-#  Then normalize(v) = approximately vector(0.26726, 0.53452, 0.80178)
-#
-#Scenario: The magnitude of a normalized vector
-#  Given v ← vector(1, 2, 3)
-#  When norm ← normalize(v)
-#  Then magnitude(norm) = 1
+Scenario: Normalizing vector(4, 0, 0) gives (1, 0, 0)
+  Given v ← vector(4, 0, 0)
+  Then normalize(v) = vector(1, 0, 0)
+
+Scenario: Normalizing vector(1, 2, 3)
+  Given v ← vector(1, 2, 3)
+                                  # vector(1/√14,   2/√14,   3/√14)
+  Then normalize(v) = approximately vector(0.26726, 0.53452, 0.80178)
+
+Scenario: The magnitude of a normalized vector
+  Given v ← vector(1, 2, 3)
+  When norm ← normalize(v)
+  Then magnitude(norm) = 1
 
 Scenario: The dot product of two tuples
   Given a ← vector(1, 2, 3)
