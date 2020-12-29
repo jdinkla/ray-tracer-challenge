@@ -42,7 +42,8 @@ task("cucumber") {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
-            args = listOf("--plugin", "pretty", "--glue", "net.dinkla.raytracerchallenge", "src/test/resources")
+            args = listOf("--plugin", "pretty", "--glue", "net.dinkla.raytracerchallenge.stepdefs", "src/test/resources")
+            jvmArgs = listOf( "-Dfile.encoding=utf-8")
         }
     }
 }

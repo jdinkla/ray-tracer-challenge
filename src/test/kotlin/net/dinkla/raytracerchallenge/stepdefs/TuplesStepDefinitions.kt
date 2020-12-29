@@ -1,4 +1,4 @@
-package net.dinkla.raytracerchallenge
+package net.dinkla.raytracerchallenge.stepdefs
 
 import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
@@ -12,7 +12,7 @@ import kotlin.math.sqrt
 
 val EPSILON: Double = 0.000001
 
-class StepDefs {
+class TuplesStepDefinitions {
 
     lateinit var a: tuple
     lateinit var p: tuple
@@ -183,6 +183,33 @@ class StepDefs {
     @Then("magnitude\\(v) = √{int}")
     fun magnitude_v(int1: Int?) {
         assertEquals(sqrt(int1!!.toDouble()), v.magnitude(), EPSILON)
+    }
+
+    @Given("a ← vector\\({int}, {int}, {int})")
+    fun a_vector(int1: Int?, int2: Int?, int3: Int?) {
+        a = vector(int1!!, int2!!, int3!!)
+    }
+
+    lateinit var b: tuple
+
+    @Given("b ← vector\\({int}, {int}, {int})")
+    fun b_vector(int1: Int?, int2: Int?, int3: Int?) {
+        b = vector(int1!!, int2!!, int3!!)
+    }
+
+    @Then("dot\\(a, b) = {int}")
+    fun dot_a_b(int1: Int?) {
+        assertEquals(int1!!.toDouble(), a dot b, EPSILON)
+    }
+
+    @Then("cross\\(a, b) = vector\\({int}, {int}, {int})")
+    fun cross_a_b_vector(int1: Int?, int2: Int?, int3: Int?) {
+        assertEquals(a cross b, vector(int1!!, int2!!, int3!!))
+    }
+
+    @Then("cross\\(b, a) = vector\\({int}, {int}, {int})")
+    fun cross_b_a_vector(int1: Int?, int2: Int?, int3: Int?) {
+        assertEquals(b cross a, vector(int1!!, int2!!, int3!!))
     }
 
 
