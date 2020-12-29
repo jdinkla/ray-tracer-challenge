@@ -3,6 +3,9 @@ package net.dinkla.raytracerchallenge.math
 import net.dinkla.raytracerchallenge.math.Approx.compare
 import kotlin.math.sqrt
 
+typealias Vector = Tuple
+typealias Point = Tuple
+
 data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     fun isPoint(): Boolean = w == 1.0
     fun isVector(): Boolean  = w == 0.0
@@ -20,16 +23,16 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     operator fun times(s: Double) = Tuple(x * s, y * s, z * s, w * s)
     operator fun div(s: Double) = Tuple(x / s, y / s, z / s, w / s)
 
-    infix fun dot(t: Tuple): Double {
+    infix fun dot(v: Vector): Double {
         assert(isVector())
-        assert(t.isVector())
-        return x * t.x + y * t.y + z * t.z // + w * t.w
+        assert(v.isVector())
+        return x * v.x + y * v.y + z * v.z // + w * t.w
     }
 
-    infix fun cross(t: Tuple): Tuple {
+    infix fun cross(v: Vector): Vector {
         assert(isVector())
-        assert(t.isVector())
-        return vector(y * t.z - z * t.y, z * t.x - x * t.z, x * t.y - y * t.x)
+        assert(v.isVector())
+        return vector(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x)
     }
 
     fun magnitude(): Double {
@@ -38,7 +41,7 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         return sqrt(sqrLength())
     }
 
-    fun normalize(): Tuple {
+    fun normalize(): Vector {
         val l = magnitude()
         return vector(x / l, y / l, z / l)
     }
