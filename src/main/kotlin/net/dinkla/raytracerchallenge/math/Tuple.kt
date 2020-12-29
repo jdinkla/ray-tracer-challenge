@@ -1,6 +1,6 @@
 package net.dinkla.raytracerchallenge.math
 
-import net.dinkla.raytracerchallenge.math.Approx.approx
+import net.dinkla.raytracerchallenge.math.Approx.compare
 import kotlin.math.sqrt
 
 data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
@@ -45,7 +45,7 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
     override fun equals(other: Any?): Boolean {
         val p: Tuple = other as? Tuple ?: return false
-        return approx(x, p.x) && approx(y, p.y) && approx(z, p.z) && w == p.w
+        return compare(x, p.x) && compare(y, p.y) && compare(z, p.z) && w == p.w
     }
 
     fun reflect(n: Tuple): Tuple {

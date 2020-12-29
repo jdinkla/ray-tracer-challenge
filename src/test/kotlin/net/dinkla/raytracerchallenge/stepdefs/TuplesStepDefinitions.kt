@@ -13,7 +13,6 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import kotlin.math.sqrt
 
-
 class TuplesStepDefinitions {
 
     lateinit var a: Tuple

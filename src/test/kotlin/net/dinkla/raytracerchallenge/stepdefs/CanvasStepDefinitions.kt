@@ -30,7 +30,7 @@ class CanvasStepDefinitions {
     fun every_pixel_of_c_is_color(int1: Int?, int2: Int?, int3: Int?) {
         for (y in 0 until c.height) {
             for (x in 0 until c.width) {
-                assertEquals(Color(0), c[x, y])
+                assertEquals(Color(int1!!, int2!!, int3!!), c[x, y])
             }
         }
     }

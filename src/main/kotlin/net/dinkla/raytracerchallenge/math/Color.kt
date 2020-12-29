@@ -1,6 +1,6 @@
 package net.dinkla.raytracerchallenge.math
 
-import net.dinkla.raytracerchallenge.math.Approx.approx
+import net.dinkla.raytracerchallenge.math.Approx.compare
 
 data class Color(val red: Double, val green: Double, val blue: Double) {
 
@@ -14,7 +14,7 @@ data class Color(val red: Double, val green: Double, val blue: Double) {
 
     override fun equals(other: Any?): Boolean {
         val p: Color = other as? Color ?: return false
-        return approx(red, p.red) && approx(green, p.green) && approx(blue, p.blue)
+        return compare(red, p.red) && compare(green, p.green) && compare(blue, p.blue)
     }
 
     companion object {

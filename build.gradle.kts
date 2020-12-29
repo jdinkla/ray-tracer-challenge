@@ -4,6 +4,7 @@ val junitVersion = "5.6.2"
 
 plugins {
     kotlin("jvm") version "1.4.21"
+    id("io.gitlab.arturbosch.detekt").version("1.15.0")
 }
 
 group = "dinkla.net"
@@ -11,6 +12,7 @@ version = "0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -47,3 +49,9 @@ task("cucumber") {
         }
     }
 }
+
+detekt {
+    input = files("src/main/kotlin", "src/test/kotlin")
+    config = files("detekt-config.yml")
+}
+

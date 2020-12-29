@@ -1,14 +1,10 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
-import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
-import io.cucumber.java.en.When
 import io.cucumber.java.en.Then
-import net.dinkla.raytracerchallenge.math.*
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
-import org.junit.Assert.*
-import kotlin.math.sqrt
-
+import net.dinkla.raytracerchallenge.math.Color
+import org.junit.Assert.assertEquals
 
 class ColorStepDefinitions {
 
