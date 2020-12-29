@@ -3,7 +3,6 @@
 ## Todo
 
 - not allowed p+p
-- epsilon comparison of tuples
 
 ## Questions
 

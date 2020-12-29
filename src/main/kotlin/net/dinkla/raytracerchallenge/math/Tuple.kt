@@ -7,8 +7,14 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     fun isPoint(): Boolean = w == 1.0
     fun isVector(): Boolean  = w == 0.0
 
-    operator fun plus(t: Tuple) = Tuple(x + t.x, y + t.y, z + t.z,w + t.w)
-    operator fun minus(t: Tuple) = Tuple(x - t.x, y - t.y, z - t.z,w - t.w)
+    operator fun plus(t: Tuple): Tuple {
+        assert(w + t.w <= 1.0)
+        return Tuple(x + t.x, y + t.y, z + t.z,w + t.w)
+    }
+    operator fun minus(t: Tuple): Tuple {
+        assert(w - t.w >= 0.0)
+        return Tuple(x - t.x, y - t.y, z - t.z,w - t.w)
+    }
     operator fun unaryMinus() = Tuple(-x, -y, -z, -w)
 
     operator fun times(s: Double) = Tuple(x * s, y * s, z * s, w * s)
