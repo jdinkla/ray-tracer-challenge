@@ -1,14 +1,16 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
 import io.cucumber.java.en.Given
-import io.cucumber.java.en.When
 import io.cucumber.java.en.Then
+import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
+import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.tuple
-import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.math.vector
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import kotlin.math.sqrt
 
 
@@ -232,6 +234,25 @@ class TuplesStepDefinitions {
     @Then("magnitude\\(norm) = {int}")
     fun magnitude_norm(int1: Int?) {
         assertEquals(int1!!.toDouble(), norm.magnitude(), EPSILON)
+    }
+
+    lateinit var n: Tuple
+
+    @Given("n ← vector\\({double}, {double}, {double})")
+    fun n_vector(double1: Double?, double2: Double?, double3: Double?) {
+        n = vector(double1!!, double2!!, double3!!)
+    }
+
+    lateinit var r: Tuple
+
+    @When("r ← reflect\\(v, n)")
+    fun r_reflect_v_n() {
+        r = v.reflect(n)
+    }
+
+    @Then("r = vector\\({int}, {int}, {int})")
+    fun r_vector(int1: Int?, int2: Int?, int3: Int?) {
+        assertEquals(r, vector(int1!!, int2!!, int3!!))
     }
 
 }
