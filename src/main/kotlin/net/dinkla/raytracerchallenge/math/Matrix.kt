@@ -10,14 +10,18 @@ class Matrix(val n: Int) {
     }
 
     private var m: DoubleArray = DoubleArray(n * n)
+    private var isChangeable = true
+
 
     operator fun get(i: Int, j: Int) = m[index(i, j)]
 
     operator fun set(i: Int, j: Int, value: Double) {
+        assert(isChangeable)
         m[index(i, j)] = value
     }
 
     operator fun set(i: Int, value: Double) {
+        assert(isChangeable)
         m[i] = value
     }
 
@@ -151,7 +155,7 @@ class Matrix(val n: Int) {
             }
         }
 
-        val identity4 = identity(4)
+        val identity4 = identity(4).apply { isChangeable = false }
     }
 
 }

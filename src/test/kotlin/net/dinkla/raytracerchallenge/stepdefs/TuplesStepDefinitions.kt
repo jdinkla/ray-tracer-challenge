@@ -15,8 +15,6 @@ import kotlin.math.sqrt
 
 class TuplesStepDefinitions {
 
-    lateinit var p: Tuple
-    lateinit var v: Tuple
     lateinit var a1: Tuple
     lateinit var a2: Tuple
 
