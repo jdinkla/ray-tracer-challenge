@@ -1,6 +1,6 @@
 package net.dinkla.raytracerchallenge
 
-data class PPM(val contents: String) {
+class PPM private constructor(val contents: String) {
 
     private class Appender(val sb: StringBuilder) {
         var lineLength = 0

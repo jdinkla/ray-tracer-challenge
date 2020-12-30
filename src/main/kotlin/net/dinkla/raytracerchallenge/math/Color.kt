@@ -30,6 +30,13 @@ data class Color(val red: Double, val green: Double, val blue: Double) {
         return Triple(r, g, b)
     }
 
+    fun toSingleInt(): Int {
+        val r = (clamp(red) * 255).toInt()
+        val g = (clamp(green) * 255).toInt()
+        val b = (clamp(blue) * 255).toInt()
+        return r shl 16 or (g shl 8) or b
+    }
+
     private fun clamp(d: Double) = max(0.0, min(d, 1.0))
 
     companion object {

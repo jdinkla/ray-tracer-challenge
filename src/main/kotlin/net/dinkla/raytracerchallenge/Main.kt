@@ -1,7 +1,11 @@
 package net.dinkla.raytracerchallenge
 
 import net.dinkla.raytracerchallenge.math.*
+import java.awt.image.BufferedImage
+import java.awt.image.BufferedImage.TYPE_INT_RGB
 import java.io.File
+import java.io.IOException
+import javax.imageio.ImageIO
 
 data class Projectile(val position: Point, val velocity: Vector) {
     fun tick(env: Environment, speed: Double): Projectile {
@@ -39,7 +43,7 @@ private fun max(p: Projectile, e: Environment, speed: Double): Pair<Double, Doub
     return Pair(xMax, yMax)
 }
 
-fun projectile_ppm_example() {
+private fun simulate(): Canvas {
     val speed = 0.01
     val canvas = Canvas(1920, 1080)
     var p = Projectile(point(0, 1, 0), vector(1, 1, 0).normalize())
@@ -53,11 +57,22 @@ fun projectile_ppm_example() {
         canvas[xC.toInt(), yC.toInt()] = Color.WHITE
         p = p.tick(e, speed)
     }
+    return canvas
+}
 
+fun save_as_ppm(canvas: Canvas) {
     val ppm = PPM.create(canvas)
     File("projectile_ppm_example.ppm").writeText(ppm.contents)
 }
 
+fun save_as_png(canvas: Canvas) {
+    val file = File("projectile_ppm_example.png")
+    val img = PNG.create(canvas)
+    ImageIO.write(img,"png", file)
+}
+
 fun main() {
-    projectile_ppm_example()
+    val canvas = simulate()
+    save_as_ppm(canvas)
+    save_as_png(canvas)
 }
