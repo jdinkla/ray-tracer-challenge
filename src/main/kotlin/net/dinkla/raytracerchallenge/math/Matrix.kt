@@ -4,6 +4,10 @@ import java.util.Objects.hash
 
 class Matrix(val n: Int) {
 
+    init {
+        assert(n >= 2)
+    }
+
     private var m: DoubleArray = DoubleArray(n * n)
 
     operator fun get(i: Int, j: Int) = m[index(i, j)]
@@ -48,8 +52,8 @@ class Matrix(val n: Int) {
     fun index(i: Int, j: Int) = n * i + j
 
     inline fun loop(f: (Int, Int) -> Unit) {
-        for (j in 0 until n) {
-            for (i in 0 until n) {
+        for (i in 0 until n) {
+            for (j in 0 until n) {
                 f(i, j)
             }
         }
@@ -84,8 +88,53 @@ class Matrix(val n: Int) {
         if (n == 2) {
             return m[0] * m[3] - m[1] * m[2]
         }
-        throw NotImplementedError()
+        var det = 0.0
+        for (i in 0 until n) {
+            det += m[i] * cofactor(0, i)
+        }
+        return det
     }
+
+    fun inverse(): Matrix {
+        return Matrix(n)
+    }
+
+    fun submatrix(i: Int, j: Int): Matrix {
+        assert(n >= 2)
+        val result = Matrix(n-1)
+        var idx = 0
+        loop { li: Int, lj: Int ->
+            if (li != i) {
+                if (lj != j) {
+                    result[idx++] = m[index(li, lj)]
+                }
+            }
+        }
+        return result
+    }
+
+    fun minor(i: Int, j: Int): Double = submatrix(i, j).determinant()
+
+    fun cofactor(i: Int, j: Int): Double {
+        val m = minor(i, j)
+        return if (i+j % 2 == 0) m else -m
+    }
+
+    override fun toString() = buildString {
+        fun line(l: Int): String {
+            var sep = ""
+            return buildString {
+                for (i in 0 until n) {
+                    append("${m[index(i, l)]} ")
+                }
+            }
+        }
+        for (j in 0 until n) {
+            appendLine(line(j))
+        }
+    }
+
+    fun isInvertible(): Boolean = determinant() != 0.0
 
     companion object {
         fun identity(n: Int): Matrix = Matrix(n).apply {

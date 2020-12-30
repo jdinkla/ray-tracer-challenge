@@ -9,7 +9,9 @@ import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
 import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.math.tuple
 import org.junit.Assert.assertEquals
-import kotlin.test.assertNotEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertTrue
 
 class MatrixStepDefinitions {
 
@@ -126,146 +128,99 @@ class MatrixStepDefinitions {
 
     @Given("the following 3x3 matrix A:")
     fun the_following_3x3_matrix_a(dataTable: List<List<Double>>) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw PendingException()
+        a = Matrix(3)
+        a.from(dataTable)
     }
 
     @Then("submatrix\\(A, {int}, {int}) is the following 2x2 matrix:")
     fun submatrix_a_is_the_following_2x2_matrix(int1: Int?, int2: Int?, dataTable: List<List<Double>>) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw PendingException()
+        val sub_a = Matrix(2)
+        sub_a.from(dataTable)
+        assertEquals(sub_a, a.submatrix(int1!!, int2!!))
     }
 
     @Given("the following 4x4 matrix A:")
     fun the_following_4x4_matrix_a(dataTable: List<List<Double>>) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw PendingException()
+        a = Matrix(4)
+        a.from(dataTable)
     }
 
     @Then("submatrix\\(A, {int}, {int}) is the following 3x3 matrix:")
     fun submatrix_a_is_the_following_3x3_matrix(int1: Int?, int2: Int?, dataTable: List<List<Double>>) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw PendingException()
+        val sub_a = Matrix(3)
+        sub_a.from(dataTable)
+        assertEquals(sub_a, a.submatrix(int1!!, int2!!))
     }
 
     @Given("B ← submatrix\\(A, {int}, {int})")
     fun b_submatrix_a(int1: Int?, int2: Int?) {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+        b = a.submatrix(int1!!, int2!!)
     }
 
     @Then("determinant\\(B) = {int}")
     fun determinant_b(int1: Int?) {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+        assertEquals(int1!!.toDouble(), b.determinant(), EPSILON)
     }
 
     @Then("minor\\(A, {int}, {int}) = {int}")
     fun minor_a(int1: Int?, int2: Int?, int3: Int?) {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+        assertEquals(int3!!.toDouble(), a.minor(int1!!, int2!!), EPSILON)
     }
 
     @Then("cofactor\\(A, {int}, {int}) = {int}")
     fun cofactor_a(int1: Int?, int2: Int?, int3: Int?) {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+        assertEquals(int3!!.toDouble(), a.cofactor(int1!!, int2!!), EPSILON)
     }
 
     @Then("A is invertible")
     fun a_is_invertible() {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+       assertTrue(a.isInvertible())
     }
 
     @Then("A is not invertible")
     fun a_is_not_invertible() {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+        assertFalse(a.isInvertible())
     }
 
     @Given("B ← inverse\\(A)")
     fun b_inverse_a() {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+        b = a.inverse()
     }
 
-    @Then("B[{double}] = {int}\\/{int}")
-    fun b(double1: Double?, int1: Int?, int2: Int?) {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+    @Then("B[{int}, {int}] = {int}\\/{int}")
+    fun b(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+        assertEquals(int3!!.toDouble()/int4!!.toDouble(), b[int1!!, int2!!], EPSILON)
     }
 
     @Then("B is the following 4x4 matrix:")
     fun b_is_the_following_4x4_matrix(dataTable: List<List<Double>>) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw PendingException()
+        b = Matrix(4)
+        b.from(dataTable)
     }
 
     @Then("inverse\\(A) is the following 4x4 matrix:")
     fun inverse_a_is_the_following_4x4_matrix(dataTable: List<List<Double>>) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw PendingException()
+        val inverse_a = Matrix(4)
+        inverse_a.from(dataTable)
+        assertEquals(inverse_a, a.inverse())
     }
 
     @Given("the following 4x4 matrix B:")
     fun the_following_4x4_matrix_b(dataTable: List<List<Double>>) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw PendingException()
+        b = Matrix(4)
+        b.from(dataTable)
     }
+
+    lateinit var c : Matrix
 
     @Given("C ← A * B")
     fun c_a_b() {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+        c = a * b
     }
 
     @Then("C * inverse\\(B) = A")
     fun c_inverse_b_a() {
-        // Write code here that turns the phrase above into concrete actions
-        throw PendingException()
+        assertEquals(a, c * b.inverse())
     }
 
 }
