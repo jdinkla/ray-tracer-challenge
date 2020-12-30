@@ -1,6 +1,5 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
-import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
@@ -136,7 +135,7 @@ class MatrixStepDefinitions {
     fun submatrix_a_is_the_following_2x2_matrix(int1: Int?, int2: Int?, dataTable: List<List<Double>>) {
         val sub_a = Matrix(2)
         sub_a.from(dataTable)
-        assertEquals(sub_a, a.submatrix(int1!!, int2!!))
+        assertEquals(sub_a, a.subMatrix(int1!!, int2!!))
     }
 
     @Given("the following 4x4 matrix A:")
@@ -149,12 +148,12 @@ class MatrixStepDefinitions {
     fun submatrix_a_is_the_following_3x3_matrix(int1: Int?, int2: Int?, dataTable: List<List<Double>>) {
         val sub_a = Matrix(3)
         sub_a.from(dataTable)
-        assertEquals(sub_a, a.submatrix(int1!!, int2!!))
+        assertEquals(sub_a, a.subMatrix(int1!!, int2!!))
     }
 
     @Given("B ← submatrix\\(A, {int}, {int})")
     fun b_submatrix_a(int1: Int?, int2: Int?) {
-        b = a.submatrix(int1!!, int2!!)
+        b = a.subMatrix(int1!!, int2!!)
     }
 
     @Then("determinant\\(B) = {int}")

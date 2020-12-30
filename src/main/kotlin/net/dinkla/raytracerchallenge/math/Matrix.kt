@@ -59,21 +59,6 @@ class Matrix(val n: Int) {
         }
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (null == other || other !is Matrix) {
-            return false
-        } else {
-            loop { i: Int, j: Int ->
-                if (this[i, j] != other[i, j]) {
-                    return false
-                }
-            }
-            return true
-        }
-    }
-
-    override fun hashCode(): Int = hash(m)
-
     fun from(dataTable: List<List<Double>>) {
         assert(dataTable.size <= n * n)
         var idx = 0
@@ -99,7 +84,7 @@ class Matrix(val n: Int) {
         return Matrix(n)
     }
 
-    fun submatrix(i: Int, j: Int): Matrix {
+    fun subMatrix(i: Int, j: Int): Matrix {
         assert(n >= 2)
         val result = Matrix(n-1)
         var idx = 0
@@ -113,12 +98,29 @@ class Matrix(val n: Int) {
         return result
     }
 
-    fun minor(i: Int, j: Int): Double = submatrix(i, j).determinant()
+    fun minor(i: Int, j: Int): Double = subMatrix(i, j).determinant()
 
     fun cofactor(i: Int, j: Int): Double {
         val m = minor(i, j)
         return if (i+j % 2 == 0) m else -m
     }
+
+    fun isInvertible(): Boolean = determinant() != 0.0
+
+    override fun equals(other: Any?): Boolean {
+        if (null == other || other !is Matrix) {
+            return false
+        } else {
+            loop { i: Int, j: Int ->
+                if (this[i, j] != other[i, j]) {
+                    return false
+                }
+            }
+            return true
+        }
+    }
+
+    override fun hashCode(): Int = hash(m)
 
     override fun toString() = buildString {
         fun line(l: Int): String {
@@ -134,12 +136,10 @@ class Matrix(val n: Int) {
         }
     }
 
-    fun isInvertible(): Boolean = determinant() != 0.0
-
     companion object {
         fun identity(n: Int): Matrix = Matrix(n).apply {
-            loop { i: Int, j: Int ->
-                this[i, j] = if (i == j) 1.0 else 0.0
+            for (i in 0 until n) {
+                this[i, i] = 1.0
             }
         }
 
