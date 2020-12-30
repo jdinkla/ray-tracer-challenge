@@ -1,6 +1,7 @@
 package net.dinkla.raytracerchallenge.math
 
 import net.dinkla.raytracerchallenge.math.Approx.compare
+import java.util.Objects
 import kotlin.math.max
 import kotlin.math.min
 
@@ -19,6 +20,8 @@ data class Color(val red: Double, val green: Double, val blue: Double) {
         val p: Color = other as? Color ?: return false
         return compare(red, p.red) && compare(green, p.green) && compare(blue, p.blue)
     }
+
+    override fun hashCode(): Int = Objects.hash(red, green, blue)
 
     fun toInt(): Triple<Int, Int, Int> {
         val r = (clamp(red) * 255).toInt()

@@ -1,6 +1,7 @@
 package net.dinkla.raytracerchallenge.math
 
 import net.dinkla.raytracerchallenge.math.Approx.compare
+import java.util.Objects
 import kotlin.math.sqrt
 
 typealias Vector = Tuple
@@ -50,6 +51,8 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         val p: Tuple = other as? Tuple ?: return false
         return compare(x, p.x) && compare(y, p.y) && compare(z, p.z) && w == p.w
     }
+
+    override fun hashCode(): Int = Objects.hash(x, y, z, w)
 
     fun reflect(n: Tuple): Tuple {
         assert(false)

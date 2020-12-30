@@ -15,7 +15,6 @@ import kotlin.math.sqrt
 
 class TuplesStepDefinitions {
 
-    lateinit var a: Tuple
     lateinit var p: Tuple
     lateinit var v: Tuple
     lateinit var a1: Tuple
@@ -23,47 +22,47 @@ class TuplesStepDefinitions {
 
     @Given("a ← tuple\\({double}, {double}, {double}, {double})")
     fun a_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?) {
-        a = Tuple(double1!!, double2!!, double3!!, double4!!)
+        a_tuple = Tuple(double1!!, double2!!, double3!!, double4!!)
     }
 
     @Then("a.x = {double}")
     fun a_x(double1: Double?) {
-        assertEquals(double1!!, a.x, EPSILON)
+        assertEquals(double1!!, a_tuple.x, EPSILON)
     }
 
     @Then("a.y = {double}")
     fun a_y(double1: Double?) {
-        assertEquals(double1!!, a.y, EPSILON)
+        assertEquals(double1!!, a_tuple.y, EPSILON)
     }
 
     @Then("a.z = {double}")
     fun a_z(double1: Double?) {
-        assertEquals(double1!!, a.z, EPSILON)
+        assertEquals(double1!!, a_tuple.z, EPSILON)
     }
 
     @Then("a.w = {double}")
     fun a_w(double1: Double?) {
-        assertEquals(double1!!, a.w, EPSILON)
+        assertEquals(double1!!, a_tuple.w, EPSILON)
     }
 
     @Then("a is a point")
     fun a_is_a_point() {
-        assertTrue(a.isPoint())
+        assertTrue(a_tuple.isPoint())
     }
 
     @Then("a is not a vector")
     fun a_is_not_a_vector() {
-        assertFalse(a.isVector())
+        assertFalse(a_tuple.isVector())
     }
 
     @Then("a is not a point")
     fun a_is_not_a_point() {
-        assertFalse(a.isPoint())
+        assertFalse(a_tuple.isPoint())
     }
 
     @Then("a is a vector")
     fun a_is_a_vector() {
-        assertTrue(a.isVector())
+        assertTrue(a_tuple.isVector())
     }
 
     @Given("p ← point\\({int}, {int}, {int})")
@@ -156,12 +155,12 @@ class TuplesStepDefinitions {
 
     @Then("-a = tuple\\({int}, {int}, {int}, {int})")
     fun a_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
-        assertEquals(-a, tuple(int1!!, int2!!, int3!!, int4!!))
+        assertEquals(-a_tuple, tuple(int1!!, int2!!, int3!!, int4!!))
     }
 
     @Then("a * {double} = tuple\\({double}, {double}, {double}, {double})")
     fun a_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?, double5: Double?) {
-        assertEquals(a*double1!!, Tuple(double2!!, double3!!, double4!!, double5!!))
+        assertEquals(a_tuple*double1!!, Tuple(double2!!, double3!!, double4!!, double5!!))
     }
 
     lateinit var ad: Tuple
@@ -188,7 +187,7 @@ class TuplesStepDefinitions {
 
     @Given("a ← vector\\({int}, {int}, {int})")
     fun a_vector(int1: Int?, int2: Int?, int3: Int?) {
-        a = vector(int1!!, int2!!, int3!!)
+        a_tuple = vector(int1!!, int2!!, int3!!)
     }
 
     lateinit var b: Tuple
@@ -200,17 +199,17 @@ class TuplesStepDefinitions {
 
     @Then("dot\\(a, b) = {int}")
     fun dot_a_b(int1: Int?) {
-        assertEquals(int1!!.toDouble(), a dot b, EPSILON)
+        assertEquals(int1!!.toDouble(), a_tuple dot b, EPSILON)
     }
 
     @Then("cross\\(a, b) = vector\\({int}, {int}, {int})")
     fun cross_a_b_vector(int1: Int?, int2: Int?, int3: Int?) {
-        assertEquals(a cross b, vector(int1!!, int2!!, int3!!))
+        assertEquals(a_tuple cross b, vector(int1!!, int2!!, int3!!))
     }
 
     @Then("cross\\(b, a) = vector\\({int}, {int}, {int})")
     fun cross_b_a_vector(int1: Int?, int2: Int?, int3: Int?) {
-        assertEquals(b cross a, vector(int1!!, int2!!, int3!!))
+        assertEquals(b cross a_tuple, vector(int1!!, int2!!, int3!!))
     }
 
     @Then("normalize\\(v) = vector\\({int}, {int}, {int})")
