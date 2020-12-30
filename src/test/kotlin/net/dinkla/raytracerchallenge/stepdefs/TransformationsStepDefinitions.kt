@@ -1,17 +1,18 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
-import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
+import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.math.Matrix
+import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Transformation.rotationX
 import net.dinkla.raytracerchallenge.math.Transformation.rotationY
 import net.dinkla.raytracerchallenge.math.Transformation.rotationZ
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
+import net.dinkla.raytracerchallenge.math.Transformation.shearing
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
-import kotlin.math.exp
 import kotlin.test.assertEquals
 
 class TransformationsStepDefinitions {
@@ -115,4 +116,81 @@ class TransformationsStepDefinitions {
         full_quarter = rotationZ(Math.PI / int1!!.toDouble())
     }
 
+    @Given("transform ← shearing\\({int}, {int}, {int}, {int}, {int}, {int})")
+    fun transform_shearing(int1: Int?, int2: Int?, int3: Int?, int4: Int?, int5: Int?, int6: Int?) {
+        transform = shearing(int1!!.toDouble(), int2!!.toDouble(), int3!!.toDouble(), int4!!.toDouble(), int5!!.toDouble(), int6!!.toDouble())
+    }
+
+    lateinit var a: Matrix
+
+    @Given("A ← rotation_x\\(π \\/ {int})")
+    fun a_rotation_x_π(int1: Int?) {
+        a = rotationX(Math.PI / int1!!.toDouble())
+    }
+
+    lateinit var b: Matrix
+
+    @Given("B ← scaling\\({int}, {int}, {int})")
+    fun b_scaling(int1: Int?, int2: Int?, int3: Int?) {
+        b = scaling(int1!!, int2!!, int3!!)
+    }
+
+    lateinit var c: Matrix
+
+    @Given("C ← translation\\({int}, {int}, {int})")
+    fun c_translation(int1: Int?, int2: Int?, int3: Int?) {
+        c = translation(int1!!, int2!!, int3!!)
+    }
+
+    lateinit var p2: Point
+
+    @When("p2 ← A * p")
+    fun p2_a_p() {
+        p2 = a * p
+    }
+
+    @Then("p2 = point\\({int}, {int}, {int})")
+    fun p2_point(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = point(int1!!, int2!!, int3!!)
+        assertEquals(expected, p2)
+    }
+
+    lateinit var p3: Point
+
+    @When("p3 ← B * p2")
+    fun p3_b_p2() {
+        p3 = b * p2
+    }
+
+    @Then("p3 = point\\({int}, {int}, {int})")
+    fun p3_point(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = point(int1!!, int2!!, int3!!)
+        assertEquals(expected, p3)
+    }
+
+    lateinit var p4: Point
+
+    @When("p4 ← C * p3")
+    fun p4_c_p3() {
+        p4 = c * p3
+    }
+
+    @Then("p4 = point\\({int}, {int}, {int})")
+    fun p4_point(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = point(int1!!, int2!!, int3!!)
+        assertEquals(expected, p4)
+    }
+
+    lateinit var t: Matrix
+
+    @When("T ← C * B * A")
+    fun t_c_b_a() {
+        t = c * b * a
+    }
+
+    @Then("T * p = point\\({int}, {int}, {int})")
+    fun t_p_point(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = point(int1!!, int2!!, int3!!)
+        assertEquals(expected, t * p)
+    }
 }

@@ -1,11 +1,11 @@
 # Todo
 
+- √2/2 was bugged in JVM cucumber, replaced it with 0.7071
+
+
 ## Todo
 
-- not allowed p+p
-
-
-√2/2 was bugged in JVM cucumber, replaced it with 0.7071
+- fluent api, see p55
 
 ## Questions
 

@@ -64,59 +64,59 @@ Scenario: Reflection is scaling by a negative value
     Then half_quarter * p = point(-0.7071, 0.7071, 0.0)
     And full_quarter * p = point(-1, 0, 0)
 
-#  Scenario: A shearing transformation moves x in proportion to y
-#    Given transform ← shearing(1, 0, 0, 0, 0, 0)
-#    And p ← point(2, 3, 4)
-#    Then transform * p = point(5, 3, 4)
-#
-#  Scenario: A shearing transformation moves x in proportion to z
-#    Given transform ← shearing(0, 1, 0, 0, 0, 0)
-#    And p ← point(2, 3, 4)
-#    Then transform * p = point(6, 3, 4)
-#
-#  Scenario: A shearing transformation moves y in proportion to x
-#    Given transform ← shearing(0, 0, 1, 0, 0, 0)
-#    And p ← point(2, 3, 4)
-#    Then transform * p = point(2, 5, 4)
-#
-#  Scenario: A shearing transformation moves y in proportion to z
-#    Given transform ← shearing(0, 0, 0, 1, 0, 0)
-#    And p ← point(2, 3, 4)
-#    Then transform * p = point(2, 7, 4)
-#
-#  Scenario: A shearing transformation moves z in proportion to x
-#    Given transform ← shearing(0, 0, 0, 0, 1, 0)
-#    And p ← point(2, 3, 4)
-#    Then transform * p = point(2, 3, 6)
-#
-#  Scenario: A shearing transformation moves z in proportion to y
-#    Given transform ← shearing(0, 0, 0, 0, 0, 1)
-#    And p ← point(2, 3, 4)
-#    Then transform * p = point(2, 3, 7)
-#
-#  Scenario: Individual transformations are applied in sequence
-#    Given p ← point(1, 0, 1)
-#    And A ← rotation_x(π / 2)
-#    And B ← scaling(5, 5, 5)
-#    And C ← translation(10, 5, 7)
-#  # apply rotation first
-#    When p2 ← A * p
-#    Then p2 = point(1, -1, 0)
-#  # then apply scaling
-#    When p3 ← B * p2
-#    Then p3 = point(5, -5, 0)
-#  # then apply translation
-#    When p4 ← C * p3
-#    Then p4 = point(15, 0, 7)
-#
-#  Scenario: Chained transformations must be applied in reverse order
-#    Given p ← point(1, 0, 1)
-#    And A ← rotation_x(π / 2)
-#    And B ← scaling(5, 5, 5)
-#    And C ← translation(10, 5, 7)
-#    When T ← C * B * A
-#    Then T * p = point(15, 0, 7)
-#
+  Scenario: A shearing transformation moves x in proportion to y
+    Given transform ← shearing(1, 0, 0, 0, 0, 0)
+    And p ← point(2, 3, 4)
+    Then transform * p = point(5, 3, 4)
+
+  Scenario: A shearing transformation moves x in proportion to z
+    Given transform ← shearing(0, 1, 0, 0, 0, 0)
+    And p ← point(2, 3, 4)
+    Then transform * p = point(6, 3, 4)
+
+  Scenario: A shearing transformation moves y in proportion to x
+    Given transform ← shearing(0, 0, 1, 0, 0, 0)
+    And p ← point(2, 3, 4)
+    Then transform * p = point(2, 5, 4)
+
+  Scenario: A shearing transformation moves y in proportion to z
+    Given transform ← shearing(0, 0, 0, 1, 0, 0)
+    And p ← point(2, 3, 4)
+    Then transform * p = point(2, 7, 4)
+
+  Scenario: A shearing transformation moves z in proportion to x
+    Given transform ← shearing(0, 0, 0, 0, 1, 0)
+    And p ← point(2, 3, 4)
+    Then transform * p = point(2, 3, 6)
+
+  Scenario: A shearing transformation moves z in proportion to y
+    Given transform ← shearing(0, 0, 0, 0, 0, 1)
+    And p ← point(2, 3, 4)
+    Then transform * p = point(2, 3, 7)
+
+  Scenario: Individual transformations are applied in sequence
+    Given p ← point(1, 0, 1)
+    And A ← rotation_x(π / 2)
+    And B ← scaling(5, 5, 5)
+    And C ← translation(10, 5, 7)
+  # apply rotation first
+    When p2 ← A * p
+    Then p2 = point(1, -1, 0)
+  # then apply scaling
+    When p3 ← B * p2
+    Then p3 = point(5, -5, 0)
+  # then apply translation
+    When p4 ← C * p3
+    Then p4 = point(15, 0, 7)
+
+  Scenario: Chained transformations must be applied in reverse order
+    Given p ← point(1, 0, 1)
+    And A ← rotation_x(π / 2)
+    And B ← scaling(5, 5, 5)
+    And C ← translation(10, 5, 7)
+    When T ← C * B * A
+    Then T * p = point(15, 0, 7)
+
 #  Scenario: The transformation matrix for the default orientation
 #    Given from ← point(0, 0, 0)
 #    And to ← point(0, 0, -1)
