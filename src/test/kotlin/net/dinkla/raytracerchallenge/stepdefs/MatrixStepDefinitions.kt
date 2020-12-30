@@ -193,8 +193,9 @@ class MatrixStepDefinitions {
 
     @Then("B is the following 4x4 matrix:")
     fun b_is_the_following_4x4_matrix(dataTable: List<List<Double>>) {
-        b = Matrix(4)
-        b.from(dataTable)
+        val b_expected = Matrix(4)
+        b_expected.from(dataTable)
+        assertEquals(b_expected, b)
     }
 
     @Then("inverse\\(A) is the following 4x4 matrix:")

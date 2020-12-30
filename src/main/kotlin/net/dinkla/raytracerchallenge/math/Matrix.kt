@@ -1,5 +1,6 @@
 package net.dinkla.raytracerchallenge.math
 
+import net.dinkla.raytracerchallenge.math.Approx.isDifferenceSmall
 import java.util.Objects.hash
 
 class Matrix(val n: Int) {
@@ -80,19 +81,13 @@ class Matrix(val n: Int) {
         return det
     }
 
-    fun inverse(): Matrix {
-        return Matrix(n)
-    }
-
     fun subMatrix(i: Int, j: Int): Matrix {
         assert(n >= 2)
-        val result = Matrix(n-1)
+        val result = Matrix(n - 1)
         var idx = 0
         loop { li: Int, lj: Int ->
-            if (li != i) {
-                if (lj != j) {
-                    result[idx++] = m[index(li, lj)]
-                }
+            if (li != i && lj != j) {
+                result[idx++] = m[index(li, lj)]
             }
         }
         return result
@@ -102,17 +97,31 @@ class Matrix(val n: Int) {
 
     fun cofactor(i: Int, j: Int): Double {
         val m = minor(i, j)
-        return if (i+j % 2 == 0) m else -m
+        return if ((i + j) % 2 == 0) m else -m
     }
 
     fun isInvertible(): Boolean = determinant() != 0.0
+
+    fun inverse(): Matrix {
+        val det = determinant()
+        assert(det != 0.0)
+        val result = Matrix(n)
+
+        for (i in 0 until n) {
+            for (j in 0 until n) {
+                val c = cofactor(i, j)
+                result[j, i] = c / det
+            }
+        }
+        return result
+    }
 
     override fun equals(other: Any?): Boolean {
         if (null == other || other !is Matrix) {
             return false
         } else {
             loop { i: Int, j: Int ->
-                if (this[i, j] != other[i, j]) {
+                if (!isDifferenceSmall(this[i, j], other[i, j])) {
                     return false
                 }
             }
@@ -124,7 +133,6 @@ class Matrix(val n: Int) {
 
     override fun toString() = buildString {
         fun line(l: Int): String {
-            var sep = ""
             return buildString {
                 for (i in 0 until n) {
                     append("${m[index(i, l)]} ")

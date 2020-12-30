@@ -1,6 +1,6 @@
 package net.dinkla.raytracerchallenge.math
 
-import net.dinkla.raytracerchallenge.math.Approx.compare
+import net.dinkla.raytracerchallenge.math.Approx.isDifferenceSmall
 import java.util.Objects
 import kotlin.math.sqrt
 
@@ -49,7 +49,7 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
     override fun equals(other: Any?): Boolean {
         val p: Tuple = other as? Tuple ?: return false
-        return compare(x, p.x) && compare(y, p.y) && compare(z, p.z) && w == p.w
+        return isDifferenceSmall(x, p.x) && isDifferenceSmall(y, p.y) && isDifferenceSmall(z, p.z) && w == p.w
     }
 
     override fun hashCode(): Int = Objects.hash(x, y, z, w)
