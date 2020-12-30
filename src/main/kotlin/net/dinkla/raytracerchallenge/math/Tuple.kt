@@ -63,7 +63,7 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 fun tuple(x: Int, y: Int, z: Int, w: Int) = Tuple(x.toDouble(), y.toDouble(), z.toDouble(), w.toDouble())
 
 fun point(x: Int, y: Int, z: Int) = Tuple(x.toDouble(), y.toDouble(), z.toDouble(), 1.0)
-// fun point(x: Double, y: Double, z: Double) = tuple(x, y, z, 1.0)
+fun point(x: Double, y: Double, z: Double) = Tuple(x, y, z, 1.0)
 
 fun vector(x: Int, y: Int, z: Int) = Tuple(x.toDouble(), y.toDouble(), z.toDouble(), 0.0)
 fun vector(x: Double, y: Double, z: Double) = Tuple(x, y, z, 0.0)
