@@ -12,7 +12,7 @@ class SpheresStepDefinitions {
     lateinit var xs: List<Double>
 
     @Given("s ← sphere\\({string})")
-    fun s_sphere(string: String?) {
+    fun s_sphere(ignored: String?) {
         s = Sphere()
     }
 
@@ -30,6 +30,5 @@ class SpheresStepDefinitions {
     fun xs(int1: Int?, double1: Double?) {
         assertEquals(xs[int1!!], double1!!, EPSILON)
     }
-
 
 }

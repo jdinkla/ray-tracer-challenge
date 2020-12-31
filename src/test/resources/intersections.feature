@@ -7,8 +7,10 @@ Scenario: An intersection encapsulates t and object
     And i.object = s
 
 #Scenario: Precomputing the state of an intersection
-#  Given r ← ray(point(0, 0, -5), vector(0, 0, 1))
-#    And shape ← sphere()
+#  Given origin ← point(0, 0, -5)
+#  And direction ← vector(0, 0, 1)
+#  And r ← ray(origin, direction)
+#    And shape ← sphere("dummy")
 #    And i ← intersection(4, shape)
 #  When comps ← prepare_computations(i, r)
 #  Then comps.t = i.t
@@ -16,7 +18,7 @@ Scenario: An intersection encapsulates t and object
 #    And comps.point = point(0, 0, -1)
 #    And comps.eyev = vector(0, 0, -1)
 #    And comps.normalv = vector(0, 0, -1)
-#
+
 #Scenario: Precomputing the reflection vector
 #  Given shape ← plane()
 #    And r ← ray(point(0, 1, -1), vector(0, -√2/2, √2/2))
@@ -60,16 +62,16 @@ Scenario: An intersection encapsulates t and object
 #  When comps ← prepare_computations(i, r, xs)
 #  Then comps.under_point.z > EPSILON/2
 #    And comps.point.z < comps.under_point.z
-#
-#Scenario: Aggregating intersections
-#  Given s ← sphere()
-#    And i1 ← intersection(1, s)
-#    And i2 ← intersection(2, s)
-#  When xs ← intersections(i1, i2)
-#  Then xs.count = 2
-#    And xs[0].t = 1
-#    And xs[1].t = 2
-#
+
+Scenario: Aggregating intersections
+  Given s ← sphere("dummy")
+    And i1 ← intersection(1, s)
+    And i2 ← intersection(2, s)
+  When is ← intersections(i1, i2)
+  Then is.count = 2
+    And is[0].t = 1
+    And is[1].t = 2
+
 #Scenario: The hit, when all intersections have positive t
 #  Given s ← sphere()
 #    And i1 ← intersection(1, s)
