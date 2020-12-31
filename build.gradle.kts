@@ -1,15 +1,17 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+group = "dinkla.net"
+version = "0.1-SNAPSHOT"
+
 val junitVersion = "5.6.2"
 val cucumberVersion = "6.9.1"
+val cucumberReport = "pretty"
+// val cucumberReport = "html:build/cucumber-report.html"
 
 plugins {
     kotlin("jvm") version "1.4.21"
     id("io.gitlab.arturbosch.detekt").version("1.15.0")
 }
-
-group = "dinkla.net"
-version = "0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -45,7 +47,7 @@ task("cucumber") {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
-            args = listOf("--plugin", "pretty", "--glue", "net.dinkla.raytracerchallenge.stepdefs", "src/test/resources")
+            args = listOf("--plugin", cucumberReport, "--glue", "net.dinkla.raytracerchallenge.stepdefs", "src/test/resources")
             jvmArgs = listOf( "-Dfile.encoding=utf-8", "-ea")
         }
     }
