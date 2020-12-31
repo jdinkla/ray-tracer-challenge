@@ -1,5 +1,6 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
+import net.dinkla.raytracerchallenge.Intersections
 import net.dinkla.raytracerchallenge.Ray
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Point
@@ -21,3 +22,4 @@ lateinit var r: Ray
 
 lateinit var s: Sphere
 
+lateinit var xs: Intersections

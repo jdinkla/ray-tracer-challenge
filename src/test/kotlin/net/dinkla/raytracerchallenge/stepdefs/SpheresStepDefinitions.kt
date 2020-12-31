@@ -1,5 +1,6 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
+import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -8,8 +9,6 @@ import net.dinkla.raytracerchallenge.objects.Sphere
 import org.junit.jupiter.api.Assertions.assertEquals
 
 class SpheresStepDefinitions {
-
-    lateinit var xs: List<Double>
 
     @Given("s ← sphere\\({string})")
     fun s_sphere(ignored: String?) {
@@ -23,12 +22,17 @@ class SpheresStepDefinitions {
 
     @Then("xs.count = {int}")
     fun xs_count(int1: Int?) {
-        assertEquals(int1!!, xs.size)
+        assertEquals(int1!!, xs.count())
     }
 
-    @Then("xs[{int}] = {double}")
-    fun xs(int1: Int?, double1: Double?) {
-        assertEquals(xs[int1!!], double1!!, EPSILON)
+    @Then("xs[{int}].t = {double}")
+    fun xs_t(int1: Int?, double1: Double?) {
+        assertEquals(xs[int1!!].t, double1!!, EPSILON)
+    }
+
+    @Then("xs[{int}].object = s")
+    fun xs_object_s(int1: Int?) {
+        assertEquals(xs[int1!!].`object`, s)
     }
 
 }

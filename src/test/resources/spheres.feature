@@ -1,14 +1,16 @@
 Feature: Spheres
 
-Scenario: A ray intersects a sphere at two points
+Scenario: A ray intersects a sphere at two points and returns the objects
   Given origin ← point(0, 0, -5)
     And direction ← vector(0, 0, 1)
     And r ← ray(origin, direction)
     And s ← sphere("dummy")
   When xs ← intersect(s, r)
   Then xs.count = 2
-    And xs[0] = 4.0
-    And xs[1] = 6.0
+    And xs[0].t = 4.0
+    And xs[1].t = 6.0
+    And xs[0].object = s
+    And xs[1].object = s
 
 Scenario: A ray intersects a sphere at a tangent
   Given origin ← point(0, 1, -5)
@@ -17,8 +19,8 @@ Scenario: A ray intersects a sphere at a tangent
     And s ← sphere("dummy")
   When xs ← intersect(s, r)
   Then xs.count = 2
-    And xs[0] = 5.0
-    And xs[1] = 5.0
+    And xs[0].t = 5.0
+    And xs[1].t = 5.0
 
 Scenario: A ray misses a sphere
   Given origin ← point(0, 2, -5)
@@ -35,8 +37,8 @@ Scenario: A ray originates inside a sphere
     And s ← sphere("dummy")
   When xs ← intersect(s, r)
   Then xs.count = 2
-    And xs[0] = -1.0
-    And xs[1] = 1.0
+    And xs[0].t = -1.0
+    And xs[1].t = 1.0
 
 Scenario: A sphere is behind a ray
   Given origin ← point(0, 0, 5)
@@ -45,8 +47,8 @@ Scenario: A sphere is behind a ray
     And s ← sphere("dummy")
   When xs ← intersect(s, r)
   Then xs.count = 2
-    And xs[0] = -6.0
-    And xs[1] = -4.0
+    And xs[0].t = -6.0
+    And xs[1].t = -4.0
 
 #Scenario: Intersect sets the object on the intersection
 #  Given origin ← point(0, 0, -5)
