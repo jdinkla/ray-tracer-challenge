@@ -1,19 +1,24 @@
 package net.dinkla.raytracerchallenge
 
-import net.dinkla.raytracerchallenge.examples.clock
-import net.dinkla.raytracerchallenge.examples.ellipsis
-import net.dinkla.raytracerchallenge.examples.projectiles
-import net.dinkla.raytracerchallenge.examples.sphere
+import net.dinkla.raytracerchallenge.examples.*
 
 fun main(args: Array<String>) {
     val action = if (args.size == 1) args[0] else ""
     when (action) {
-        "P" -> projectiles("projectile_ppm_example")
-        "C" -> clock("clock.png")
+        "P" -> projectiles(prefix("projectile_ppm_example"))
+        "C" -> clock(prefix("clock.png"))
+        "F" -> {
+            flatSphere(prefix("sphere.png"))
+            flatEllipsis(prefix("ellipsis.png"))
+        }
         "S" -> {
-            sphere("sphere.png")
-            ellipsis("ellipsis.png")
+            sphere(prefix("sphere.png"))
+        }
+        "SPHERES" -> {
+            spheres()
         }
         else -> println("Missing argument")
     }
 }
+
+private fun prefix(fileName: String) = "../" + addTimeStamp(fileName)

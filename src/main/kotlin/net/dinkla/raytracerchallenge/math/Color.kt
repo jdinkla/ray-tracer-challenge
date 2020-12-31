@@ -45,5 +45,18 @@ data class Color(val red: Double, val green: Double, val blue: Double) {
         val GREEN = Color(0.0, 1.0, 0.0)
         val BLUE = Color(0.0, 0.0, 1.0)
         val WHITE = Color(1.0)
+
+        fun fromString(rgb: String) : Color {
+            fun convert(s: Int): Double {
+                val hex = rgb.substring(s, s + 2)
+                val dec= Integer.valueOf(hex, 16)
+                return dec / 255.0
+            }
+            val rf = convert(0)
+            val gf = convert(2)
+            val bf = convert(4)
+            return Color(rf, gf, bf)
+        }
+
     }
 }

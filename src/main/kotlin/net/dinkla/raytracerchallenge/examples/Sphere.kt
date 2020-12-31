@@ -1,49 +1,62 @@
 package net.dinkla.raytracerchallenge.examples
 
-import net.dinkla.raytracerchallenge.Canvas
-import net.dinkla.raytracerchallenge.PNG
-import net.dinkla.raytracerchallenge.Ray
+import net.dinkla.raytracerchallenge.*
 import net.dinkla.raytracerchallenge.math.Color
-import net.dinkla.raytracerchallenge.math.Transformation.rotationZ
-import net.dinkla.raytracerchallenge.math.Transformation.scaling
-import net.dinkla.raytracerchallenge.math.Transformation.shearing
-import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
-import net.dinkla.raytracerchallenge.math.vector
 import net.dinkla.raytracerchallenge.objects.Sphere
-import java.io.File
-import javax.imageio.ImageIO
-
-const val offsetInPixel = 100
-val direction = vector(0, 0, 1)
-const val pixel = 1080
-const val scaling = 2.0/(pixel - offsetInPixel)
-const val offsetInObjectModel = offsetInPixel.toDouble() / pixel
-const val translate = -1.0 - offsetInObjectModel
-val transform = translation(translate, translate, 0.0) * scaling(scaling, scaling, 0.0)
 
 fun sphere(fileName: String) {
     val s = Sphere()
+    s.material.color = Color(1.0, 0.2, 1.0)
     rayTrace(s, fileName)
 }
 
-fun ellipsis(fileName: String) {
+fun spheres() {
     val s = Sphere()
-    s.transform = rotationZ(-Math.PI / 4.0) * shearing(0.15, 0.0, 0.0, 0.0, 0.0, 0.0)
-    rayTrace(s, fileName)
+    s.material.color = Color(1.0, 0.2, 1.0)
+
+    val diffuses = generateSequence(0.1) { it + 0.1 }.take(10)
+    val speculars = generateSequence(0.1) { it + 0.1 }.take(10)
+
+    for (diffuse in diffuses) {
+        s.material.diffuse = diffuse
+        for (specular in speculars) {
+            s.material.specular = specular
+            val fileName ="../" + addTimeStamp("spheres_${String.format("%.2f", diffuse)}_${String.format("%.2f", specular)}.png")
+            println(fileName)
+            rayTrace(s, fileName)
+        }
+    }
 }
 
-private fun rayTrace(s: Sphere, fileName: String) {
-    val canvas = Canvas(pixel, pixel)
+private fun rayTrace(shape: Sphere, fileName: String) {
+    val rayOrigin = point(0, 0, -5)
+    val wallZ = 10.0
+    val wallSize = 7.0
+    val canvasPixels = 1000
+    val pixelSize = wallSize / canvasPixels
+    val half = wallSize / 2.0
+    val canvas = Canvas(canvasPixels, canvasPixels)
+
+    val lightPosition = point(-10, 10, -10)
+    val light = PointLight(lightPosition, Color(1, 1, 1))
+
     canvas.loop { x: Int, y: Int ->
-        val p = transform * point(x, y, -3)
-        val r = Ray(p, direction)
-        val xs = s.intersect(r)
-        if (xs.hit() != null) {
-            Color.RED
+        val worldY = half - pixelSize * y
+        val worldX = -half + pixelSize * x
+        val position = point(worldX, worldY, wallZ)
+        val ray = Ray(rayOrigin, (position - rayOrigin).normalize())
+        val xs = shape.intersect(ray)
+        val hit = xs.hit()
+        if (hit != null) {
+            val point = ray.position(hit.t)
+            val normal = hit.`object`.normal(point)
+            val eye = -ray.direction
+            val material = hit.`object`.material
+            lighting(material, light, point, eye, normal)
         } else {
             Color.BLACK
         }
     }
-    ImageIO.write(PNG.create(canvas), "png", File(fileName))
+    PNG.save(canvas, fileName)
 }

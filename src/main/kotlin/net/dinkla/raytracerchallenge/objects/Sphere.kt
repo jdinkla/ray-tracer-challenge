@@ -1,16 +1,13 @@
 package net.dinkla.raytracerchallenge.objects
 
 import net.dinkla.raytracerchallenge.Intersections
-import net.dinkla.raytracerchallenge.Material
 import net.dinkla.raytracerchallenge.Ray
 import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Vector
 import kotlin.math.sqrt
 
-class Sphere : GeometricObject {
-
-    var material: Material = Material()
+class Sphere : GeometricObject() {
 
     var transform: Matrix = Matrix.identity4
         set(t) {

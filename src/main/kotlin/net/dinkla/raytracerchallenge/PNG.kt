@@ -1,6 +1,8 @@
 package net.dinkla.raytracerchallenge
 
 import java.awt.image.BufferedImage
+import java.io.File
+import javax.imageio.ImageIO
 
 object PNG {
     fun create(canvas: Canvas): BufferedImage {
@@ -13,4 +15,11 @@ object PNG {
         }
         return img
     }
+
+    fun save(canvas: Canvas, fileName: String) {
+        ImageIO.write(create(canvas), "png", File(fileName))
+    }
+
+
+
 }

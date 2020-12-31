@@ -17,4 +17,8 @@ internal class ColorTest {
         assertEquals(Triple(255, 255, 255), WHITE.toInt())
     }
 
+    @Test
+    fun `fromString()`() {
+        assertEquals(Color(53.0 / 255.0, 40.0 / 255.0, 30.0 / 255.0), Color.fromString("35281E"))
+    }
 }
