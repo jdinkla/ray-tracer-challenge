@@ -7,6 +7,8 @@
 
 - fluent api, see p55
 
+val b = 2 * (ray.direction dot sphereToRay) needs parenthesis
+
 ## Questions
 
 - Why is unaryMinus() negating w, so (- tuple(1, 2, 3, 4)).z == -4

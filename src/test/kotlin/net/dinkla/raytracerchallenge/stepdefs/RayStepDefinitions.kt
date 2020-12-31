@@ -28,8 +28,6 @@ class RayStepDefinitions {
         direction = vector(int1!!, int2!!, int3!!)
     }
 
-    lateinit var r: Ray
-
     @When("r ← ray\\(origin, direction)")
     fun r_ray_origin_direction() {
         r = Ray(origin, direction)
