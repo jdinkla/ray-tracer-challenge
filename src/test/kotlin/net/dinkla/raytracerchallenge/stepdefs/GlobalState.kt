@@ -2,10 +2,7 @@ package net.dinkla.raytracerchallenge.stepdefs
 
 import net.dinkla.raytracerchallenge.Intersections
 import net.dinkla.raytracerchallenge.Ray
-import net.dinkla.raytracerchallenge.math.Color
-import net.dinkla.raytracerchallenge.math.Point
-import net.dinkla.raytracerchallenge.math.Tuple
-import net.dinkla.raytracerchallenge.math.Vector
+import net.dinkla.raytracerchallenge.math.*
 import net.dinkla.raytracerchallenge.objects.Sphere
 
 lateinit var c1: Color
@@ -23,3 +20,5 @@ lateinit var r: Ray
 lateinit var s: Sphere
 
 lateinit var xs: Intersections
+
+lateinit var transform : Matrix

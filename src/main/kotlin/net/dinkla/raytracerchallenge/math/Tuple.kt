@@ -58,6 +58,15 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         assert(false)
         return n
     }
+
+    fun toVector(): Vector {
+        assert(isPoint())
+        return Tuple(x, y, z, 0.0)
+    }
+
+    companion object {
+        val ORIGIN = point(0, 0, 0)
+    }
 }
 
 fun tuple(x: Int, y: Int, z: Int, w: Int) = Tuple(x.toDouble(), y.toDouble(), z.toDouble(), w.toDouble())

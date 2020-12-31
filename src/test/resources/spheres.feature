@@ -60,32 +60,36 @@ Scenario: A sphere is behind a ray
 #    And xs[0].object = s
 #    And xs[1].object = s
 
-#Scenario: A sphere's default transformation
-#  Given s ← sphere()
-#  Then s.transform = identity_matrix
-#
-#Scenario: Changing a sphere's transformation
-#  Given s ← sphere()
-#    And t ← translation(2, 3, 4)
-#  When set_transform(s, t)
-#  Then s.transform = t
-#
-#Scenario: Intersecting a scaled sphere with a ray
-#  Given r ← ray(point(0, 0, -5), vector(0, 0, 1))
-#    And s ← sphere()
-#  When set_transform(s, scaling(2, 2, 2))
-#    And xs ← intersect(s, r)
-#  Then xs.count = 2
-#    And xs[0].t = 3
-#    And xs[1].t = 7
-#
-#Scenario: Intersecting a translated sphere with a ray
-#  Given r ← ray(point(0, 0, -5), vector(0, 0, 1))
-#    And s ← sphere()
-#  When set_transform(s, translation(5, 0, 0))
-#    And xs ← intersect(s, r)
-#  Then xs.count = 0
-#
+Scenario: A sphere's default transformation
+  Given s ← sphere("dummy")
+  Then s.transform = identity_matrix
+
+Scenario: Changing a sphere's transformation
+  Given s ← sphere("dummy")
+    And t ← translation(2, 3, 4)
+  When setTransform(s, t)
+  Then s.transform = t
+
+Scenario: Intersecting a scaled sphere with a ray
+  Given origin ← point(0, 0, -5)
+    And direction ← vector(0, 0, 1)
+    And r ← ray(origin, direction)
+    And t ← scaling(2, 2, 2)
+  When setTransform(s, t)
+    And xs ← intersect(s, r)
+  Then xs.count = 2
+    And xs[0].t = 3
+    And xs[1].t = 7
+
+Scenario: Intersecting a translated sphere with a ray
+  Given origin ← point(0, 0, -5)
+    And direction ← vector(0, 0, 1)
+    And r ← ray(origin, direction)
+    And t ← translation(5, 0, 0)
+  When setTransform(s, t)
+    And xs ← intersect(s, r)
+  Then xs.count = 0
+
 #Scenario: The normal on a sphere at a point on the x axis
 #  Given s ← sphere()
 #  When n ← normal_at(s, point(1, 0, 0))

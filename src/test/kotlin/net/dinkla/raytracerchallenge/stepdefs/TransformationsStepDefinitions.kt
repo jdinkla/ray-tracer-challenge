@@ -17,8 +17,6 @@ import kotlin.test.assertEquals
 
 class TransformationsStepDefinitions {
 
-    lateinit var transform : Matrix
-
     @Given("transform ← translation\\({int}, {int}, {int})")
     fun transform_translation(int1: Int?, int2: Int?, int3: Int?) {
         transform = translation(int1!!, int2!!, int3!!)
