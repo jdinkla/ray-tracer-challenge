@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val junitVersion = "5.6.2"
+val cucumberVersion = "6.9.1"
 
 plugins {
     kotlin("jvm") version "1.4.21"
@@ -20,8 +21,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
-    testImplementation("io.cucumber:cucumber-java:6.8.1")
-    testImplementation("io.cucumber:cucumber-junit:6.8.1")
+    testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
+    testImplementation("io.cucumber:cucumber-junit:$cucumberVersion")
 }
 
 tasks.test {
