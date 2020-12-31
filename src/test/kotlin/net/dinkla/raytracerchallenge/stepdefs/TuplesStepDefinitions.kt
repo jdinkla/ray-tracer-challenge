@@ -63,11 +63,6 @@ class TuplesStepDefinitions {
         assertTrue(a_tuple.isVector())
     }
 
-    @Given("p ← point\\({int}, {int}, {int})")
-    fun p_point(int1: Int?, int2: Int?, int3: Int?) {
-        p = point(int1!!, int2!!, int3!!)
-    }
-
     @Then("p = tuple\\({int}, {int}, {int}, {int})")
     fun p_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
         assertEquals(p, tuple(int1!!, int2!!, int3!!, int4!!))

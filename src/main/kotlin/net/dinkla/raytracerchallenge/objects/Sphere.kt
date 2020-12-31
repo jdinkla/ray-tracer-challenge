@@ -3,6 +3,8 @@ package net.dinkla.raytracerchallenge.objects
 import net.dinkla.raytracerchallenge.Intersections
 import net.dinkla.raytracerchallenge.Ray
 import net.dinkla.raytracerchallenge.math.Matrix
+import net.dinkla.raytracerchallenge.math.Point
+import net.dinkla.raytracerchallenge.math.Vector
 import kotlin.math.sqrt
 
 class Sphere : GeometricObject {
@@ -11,9 +13,11 @@ class Sphere : GeometricObject {
         set(t) {
             field = t
             inverse = t.inverse()
+            inverseTranspose = inverse.transpose()
         }
 
     private var inverse: Matrix = Matrix.identity4
+    private var inverseTranspose: Matrix = Matrix.identity4
 
     override fun intersect(ray: Ray): Intersections {
         val objectRay = ray.transform(inverse)
@@ -28,6 +32,12 @@ class Sphere : GeometricObject {
         val t1 = (-b - sqrt(discriminant)) / (2 * a)
         val t2 = (-b + sqrt(discriminant)) / (2 * a)
         return Intersections(isec(t1), isec(t2))
+    }
+
+    override fun normal(p: Point): Vector {
+        val objectNormal = (inverse * p).toVector()
+        val worldNormal = (inverseTranspose * objectNormal).toVector()
+        return worldNormal.normalize()
     }
 
 }

@@ -1,15 +1,16 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
-import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
 import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
-import net.dinkla.raytracerchallenge.math.Transformation
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Transformation.translation
+import net.dinkla.raytracerchallenge.math.Vector
+import net.dinkla.raytracerchallenge.math.point
+import net.dinkla.raytracerchallenge.math.vector
 import net.dinkla.raytracerchallenge.objects.Sphere
 import org.junit.jupiter.api.Assertions.assertEquals
 
@@ -66,4 +67,28 @@ class SpheresStepDefinitions {
     fun t_scaling(int1: Int?, int2: Int?, int3: Int?) {
         t = scaling(int1!!, int2!!, int3!!)
     }
+
+    lateinit var n: Vector
+
+    @When("n ← normalAt\\(s, p)")
+    fun n_normal_at_s_p() {
+        n = s.normal(p)
+    }
+
+    @Given("p ← point\\({double}, {double}, {double})")
+    fun p_point(double1: Double?, double2: Double?, double3: Double?) {
+        p = point(double1!!, double2!!, double3!!)
+    }
+
+    @Then("n = vector\\({double}, {double}, {double})")
+    fun n_vector(double1: Double?, double2: Double?, double3: Double?) {
+        val expected = vector(double1!!, double2!!, double3!!)
+        assertEquals(expected, n)
+    }
+
+    @Then("n = normalize\\(n)")
+    fun n_normalize_n() {
+        assertEquals(n, n.normalize())
+    }
+
 }
