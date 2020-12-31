@@ -243,7 +243,7 @@ class TuplesStepDefinitions {
 
     @Then("r = vector\\({int}, {int}, {int})")
     fun r_vector(int1: Int?, int2: Int?, int3: Int?) {
-        assertEquals(r, vector(int1!!, int2!!, int3!!))
+        assertEquals(vector(int1!!, int2!!, int3!!), r)
     }
 
 }

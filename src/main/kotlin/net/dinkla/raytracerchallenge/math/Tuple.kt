@@ -54,10 +54,7 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
     override fun hashCode(): Int = Objects.hash(x, y, z, w)
 
-    fun reflect(n: Tuple): Tuple {
-        assert(false)
-        return n
-    }
+    fun reflect(normal: Tuple): Tuple = this - (normal * 2.0 * (this dot normal))
 
     fun toVector(): Vector = Tuple(x, y, z, 0.0)
 

@@ -37,3 +37,24 @@ public void s_sphere() {
 // Write code here that turns the phrase above into concrete actions
 throw new io.cucumber.java.PendingException();
 }
+
+# the following scenario does not work with cucumber JVM
+#
+# Scenario: Reflecting a vector off a slanted surface
+#  Given v ← vector(0, -1, 0)
+#    And n ← vector(√2/2, √2/2, 0.0)
+#  When r ← reflect(v, n)
+#  Then r = vector(1, 0, 0)
+#
+#Exception in thread "main" io.cucumber.core.exception.CompositeCucumberException: There were 30 exceptions:
+#java.util.regex.PatternSyntaxException(Unclosed group near index 171
+#^n �? vector(√((?:-?\d+)|(?:\d+))/((?:-?\d+)|(?:\d+)), √((?:-?\d+)|(?:\d+))/((?:-?\d+)|(?:\d+)), ((?=.*\d.*)[-+]?(?:\d+(?:[,]?\d+)*)*(?:[.](?=\d.*))?\d*(?:\d+[E]-?\d+)?)\)$)
+#
+# So i hardcoded sqrt(2)/2
+#Scenario: Reflecting a vector off a slanted surface
+#  Given v ← vector(0, -1, 0)
+#    And n ← vector(0.70710678118, 0.70710678118, 0.0)
+#  When r ← reflect(v, n)
+#  Then r = vector(1, 0, 0)
+
+
