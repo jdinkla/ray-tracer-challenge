@@ -5,15 +5,10 @@ import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.PointLight
 import net.dinkla.raytracerchallenge.math.Color
-import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.point
 import kotlin.test.assertEquals
 
 class LightsStepDefinitions {
-
-    lateinit var intensity: Color
-    lateinit var position: Point
-    lateinit var light: PointLight
 
     @Given("intensity ← color\\({int}, {int}, {int})")
     fun intensity_color(int1: Int?, int2: Int?, int3: Int?) {

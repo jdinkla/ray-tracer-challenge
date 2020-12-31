@@ -3,6 +3,7 @@ package net.dinkla.raytracerchallenge.stepdefs
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
+import net.dinkla.raytracerchallenge.Material
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
 import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
@@ -16,8 +17,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 
 class SpheresStepDefinitions {
 
-    @Given("s ← sphere\\({string})")
-    fun s_sphere(ignored: String?) {
+    @Given("s ← sphere")
+    fun s_sphere() {
         s = Sphere()
     }
 
@@ -89,6 +90,31 @@ class SpheresStepDefinitions {
     @Then("n = normalize\\(n)")
     fun n_normalize_n() {
         assertEquals(n, n.normalize())
+    }
+
+    @When("m ← s.material")
+    fun m_s_material() {
+        m = s.material
+    }
+
+    @Then("m = material")
+    fun m_eq_material() {
+        assertEquals(Material(), m)
+    }
+
+    @Given("m.ambient ← {int}")
+    fun m_ambient(int1: Int?) {
+        m.ambient = int1!!.toDouble()
+    }
+
+    @When("s.material ← m")
+    fun s_material_m() {
+        s.material = m
+    }
+
+    @Then("s.material = m")
+    fun s_eq_material_m() {
+        assertEquals(m, s.material)
     }
 
 }
