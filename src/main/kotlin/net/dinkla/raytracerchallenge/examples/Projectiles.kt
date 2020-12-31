@@ -4,10 +4,7 @@ import net.dinkla.raytracerchallenge.Canvas
 import net.dinkla.raytracerchallenge.PNG
 import net.dinkla.raytracerchallenge.PPM
 import net.dinkla.raytracerchallenge.math.*
-import java.awt.image.BufferedImage
-import java.awt.image.BufferedImage.TYPE_INT_RGB
 import java.io.File
-import java.io.IOException
 import javax.imageio.ImageIO
 
 data class Projectile(val position: Point, val velocity: Vector) {
@@ -64,19 +61,19 @@ private fun simulate(): Canvas {
     return canvas
 }
 
-fun save_as_ppm(canvas: Canvas) {
+fun save_as_ppm(canvas: Canvas, fileName: String) {
     val ppm = PPM.create(canvas)
-    File("projectile_ppm_example.ppm").writeText(ppm.contents)
+    File(fileName).writeText(ppm.contents)
 }
 
-fun save_as_png(canvas: Canvas) {
-    val file = File("projectile_ppm_example.png")
+fun save_as_png(canvas: Canvas, fileName: String) {
+    val file = File(fileName)
     val img = PNG.create(canvas)
     ImageIO.write(img,"png", file)
 }
 
-fun main() {
+fun projectiles(fileName: String) {
     val canvas = simulate()
-    save_as_ppm(canvas)
-    save_as_png(canvas)
+    save_as_ppm(canvas, "$fileName.ppm")
+    save_as_png(canvas, "$fileName.png")
 }
