@@ -1,18 +1,19 @@
-package net.dinkla.raytracerchallenge.examples
+package net.dinkla.raytracerchallenge.examples.chapter4
 
 import net.dinkla.raytracerchallenge.Canvas
-import net.dinkla.raytracerchallenge.PNG
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Transformation.rotationZ
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
+import net.dinkla.raytracerchallenge.prefixFileName
+import net.dinkla.raytracerchallenge.ui.PNG
 import java.io.File
 import javax.imageio.ImageIO
 
 fun clock(fileName: String) {
     val canvas = Canvas(1080, 1080)
 
-    canvas.loop { i: Int, j: Int ->
+    canvas.loop { _: Int, _: Int ->
         Color.WHITE
     }
 
@@ -41,4 +42,8 @@ fun clock(fileName: String) {
     }
 
     ImageIO.write(PNG.create(canvas), "png", File(fileName))
+}
+
+fun main(args: Array<String>) {
+    clock(prefixFileName("clock.png"))
 }

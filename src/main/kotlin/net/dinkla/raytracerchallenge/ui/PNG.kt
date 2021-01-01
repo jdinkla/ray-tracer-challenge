@@ -1,5 +1,6 @@
-package net.dinkla.raytracerchallenge
+package net.dinkla.raytracerchallenge.ui
 
+import net.dinkla.raytracerchallenge.Canvas
 import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO

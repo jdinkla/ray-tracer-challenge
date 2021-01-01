@@ -9,3 +9,4 @@ fun getTimeStamp(): String = df.format(Date())
 
 fun addTimeStamp(fileName: String) = "${getTimeStamp()}_${fileName}"
 
+fun prefixFileName(fileName: String) = "../" + addTimeStamp(fileName)

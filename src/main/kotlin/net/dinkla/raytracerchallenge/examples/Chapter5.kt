@@ -1,7 +1,6 @@
-package net.dinkla.raytracerchallenge.examples
+package net.dinkla.raytracerchallenge.examples.chapter5
 
 import net.dinkla.raytracerchallenge.Canvas
-import net.dinkla.raytracerchallenge.PNG
 import net.dinkla.raytracerchallenge.Ray
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Transformation.rotationZ
@@ -11,6 +10,8 @@ import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
 import net.dinkla.raytracerchallenge.objects.Sphere
+import net.dinkla.raytracerchallenge.prefixFileName
+import net.dinkla.raytracerchallenge.ui.PNG
 import java.io.File
 import javax.imageio.ImageIO
 
@@ -47,3 +48,9 @@ private fun rayTrace(s: Sphere, fileName: String) {
     }
     ImageIO.write(PNG.create(canvas), "png", File(fileName))
 }
+
+fun main(args: Array<String>) {
+    flatSphere(prefixFileName("sphere.png"))
+    flatEllipsis(prefixFileName("ellipsis.png"))
+}
+

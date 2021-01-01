@@ -1,4 +1,6 @@
-package net.dinkla.raytracerchallenge
+package net.dinkla.raytracerchallenge.ui
+
+import net.dinkla.raytracerchallenge.Canvas
 
 class PPM private constructor(val contents: String) {
 

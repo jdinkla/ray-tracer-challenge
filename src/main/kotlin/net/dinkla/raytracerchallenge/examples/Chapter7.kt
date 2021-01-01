@@ -1,7 +1,6 @@
-package net.dinkla.raytracerchallenge.examples
+package net.dinkla.raytracerchallenge.examples.chapter7
 
 import net.dinkla.raytracerchallenge.*
-import net.dinkla.raytracerchallenge.World.Companion.defaultWorld
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Transformation.rotationX
 import net.dinkla.raytracerchallenge.math.Transformation.rotationY
@@ -9,30 +8,8 @@ import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.objects.Sphere
+import net.dinkla.raytracerchallenge.ui.PNG
 import kotlin.system.measureTimeMillis
-
-fun firstRender(fileName: String) {
-    val w = defaultWorld()
-    val c = Camera(3840, 2160, 1.57079632679 / 3)
-    val from = point(-2, 0, -4)
-    val to = point(0, 0, 0)
-    c.transform = viewTransform(from, to)
-    val canvas = w.render(c)
-    PNG.save(canvas, fileName)
-}
-
-fun chapter7(fileName: String) {
-    val w = exampleWorld()
-    val c = Camera(3840, 2160, Math.PI / 3.0).apply {
-        transform = viewTransform(point(0.0, 1.5, -5.0), point(0, 1, 0))
-    }
-    lateinit var canvas: Canvas
-    val timeInMillis = measureTimeMillis {
-        canvas = w.render(c)
-    }
-    PNG.save(canvas, fileName)
-    println("rendering took: ${timeInMillis / 1000.0} seconds")
-}
 
 private fun exampleWorld(): World {
     val w = World()
@@ -95,6 +72,23 @@ private fun exampleWorld(): World {
     w.objects.addAll(listOf(floor, leftWall, rightWall, middle, right, left))
     w.light = PointLight(point(-10, 10, -10), Color.WHITE)
     return w
+}
+
+fun render(fileName: String) {
+    val w = exampleWorld()
+    val c = Camera(3840, 2160, Math.PI / 3.0).apply {
+        transform = viewTransform(point(0.0, 1.5, -5.0), point(0, 1, 0))
+    }
+    lateinit var canvas: Canvas
+    val timeInMillis = measureTimeMillis {
+        canvas = w.render(c)
+    }
+    PNG.save(canvas, fileName)
+    println("rendering took: ${timeInMillis / 1000.0} seconds")
+}
+
+fun main(args: Array<String>) {
+    render(prefixFileName("chapter7.png"))
 }
 
 

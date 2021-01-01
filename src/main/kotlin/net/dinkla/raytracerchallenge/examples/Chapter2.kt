@@ -1,31 +1,14 @@
-package net.dinkla.raytracerchallenge.examples
+package net.dinkla.raytracerchallenge.examples.chapter2
 
 import net.dinkla.raytracerchallenge.Canvas
-import net.dinkla.raytracerchallenge.PNG
-import net.dinkla.raytracerchallenge.PPM
+import net.dinkla.raytracerchallenge.examples.chapter1.Environment
+import net.dinkla.raytracerchallenge.examples.chapter1.Projectile
 import net.dinkla.raytracerchallenge.math.*
+import net.dinkla.raytracerchallenge.prefixFileName
+import net.dinkla.raytracerchallenge.ui.PNG
+import net.dinkla.raytracerchallenge.ui.PPM
 import java.io.File
 import javax.imageio.ImageIO
-
-data class Projectile(val position: Point, val velocity: Vector) {
-    fun tick(env: Environment, speed: Double): Projectile {
-        val position = position + velocity * speed
-        val velocity = velocity + (env.gravity + env.wind) * speed
-        return Projectile(position, velocity)
-    }
-}
-
-data class Environment(val gravity: Vector, val wind: Vector)
-
-fun projectile_example() {
-    var p = Projectile(point(0, 1, 0), vector(1, 1, 0).normalize())
-    val e = Environment(vector(0.0, -0.1, 0.0), vector(-0.01, 0.0, 0.0))
-
-    while (p.position.y >= 0) {
-        println(p.position)
-        p = p.tick(e, 1.0)
-    }
-}
 
 private fun max(p: Projectile, e: Environment, speed: Double): Pair<Double, Double> {
     var p1 = p
@@ -61,19 +44,20 @@ private fun simulate(): Canvas {
     return canvas
 }
 
-fun save_as_ppm(canvas: Canvas, fileName: String) {
+fun saveAsPpm(canvas: Canvas, fileName: String) {
     val ppm = PPM.create(canvas)
     File(fileName).writeText(ppm.contents)
 }
 
-fun save_as_png(canvas: Canvas, fileName: String) {
+fun saveAsPng(canvas: Canvas, fileName: String) {
     val file = File(fileName)
     val img = PNG.create(canvas)
     ImageIO.write(img,"png", file)
 }
 
-fun projectiles(fileName: String) {
+fun main(args: Array<String>) {
+    val fileName = "projectile_ppm_example"
     val canvas = simulate()
-    save_as_ppm(canvas, "$fileName.ppm")
-    save_as_png(canvas, "$fileName.png")
+    saveAsPpm(canvas, prefixFileName("$fileName.ppm"))
+    saveAsPng(canvas, prefixFileName("$fileName.png"))
 }

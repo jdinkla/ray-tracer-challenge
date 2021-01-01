@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.Canvas
-import net.dinkla.raytracerchallenge.PPM
+import net.dinkla.raytracerchallenge.ui.PPM
 import net.dinkla.raytracerchallenge.math.Color
 import org.junit.jupiter.api.Assertions.assertEquals
 
