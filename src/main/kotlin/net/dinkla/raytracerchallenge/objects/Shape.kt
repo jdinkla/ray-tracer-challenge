@@ -22,8 +22,8 @@ abstract class Shape {
     private var inverse: Matrix = Matrix.identity4
     private var inverseTranspose: Matrix = Matrix.identity4
 
-    protected abstract fun intersectInObjectSpace(ray: Ray): Intersections
-    protected abstract fun normalInObjectSpace(point: Point): Vector
+    abstract fun intersectInObjectSpace(ray: Ray): Intersections
+    abstract fun normalInObjectSpace(point: Point): Vector
 
     fun intersect(ray: Ray): Intersections {
         val objectRay = ray.transform(inverse)
