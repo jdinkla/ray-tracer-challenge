@@ -5,6 +5,7 @@ import net.dinkla.raytracerchallenge.Ray
 import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Vector
+import java.util.Objects
 import kotlin.math.sqrt
 
 class Sphere : GeometricObject() {
@@ -39,5 +40,15 @@ class Sphere : GeometricObject() {
         val worldNormal = (inverseTranspose * objectNormal).toVector()
         return worldNormal.normalize()
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (null == other || other !is Sphere) {
+            return false
+        } else {
+            return material == other.material && transform == other.transform
+        }
+    }
+
+    override fun hashCode(): Int = Objects.hash(material, transform)
 
 }
