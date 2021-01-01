@@ -7,7 +7,7 @@ import net.dinkla.raytracerchallenge.Material
 import net.dinkla.raytracerchallenge.PointLight
 import net.dinkla.raytracerchallenge.lighting
 import net.dinkla.raytracerchallenge.math.*
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class MaterialsStepDefinitions {
 

@@ -6,7 +6,7 @@ import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.PointLight
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.point
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class LightsStepDefinitions {
 

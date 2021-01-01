@@ -10,7 +10,7 @@ import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class RayStepDefinitions {
 

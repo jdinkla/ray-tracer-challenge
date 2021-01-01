@@ -1,13 +1,12 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
-import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.Canvas
 import net.dinkla.raytracerchallenge.PPM
 import net.dinkla.raytracerchallenge.math.Color
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class CanvasStepDefinitions {
 

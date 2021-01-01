@@ -7,10 +7,10 @@ import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
 import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.math.tuple
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.assertTrue
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 
 class MatrixStepDefinitions {
 

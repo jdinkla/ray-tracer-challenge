@@ -13,7 +13,7 @@ import net.dinkla.raytracerchallenge.math.Transformation.shearing
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class TransformationsStepDefinitions {
 

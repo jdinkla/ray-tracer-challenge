@@ -1,13 +1,16 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
-import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
+import net.dinkla.raytracerchallenge.Computations
 import net.dinkla.raytracerchallenge.Intersection
 import net.dinkla.raytracerchallenge.Intersections
+import net.dinkla.raytracerchallenge.math.point
+import net.dinkla.raytracerchallenge.math.vector
+import net.dinkla.raytracerchallenge.objects.Sphere
 import org.junit.jupiter.api.Assertions.assertEquals
-import kotlin.test.assertNull
+import org.junit.jupiter.api.Assertions.assertNull
 
 class IntersectionsStepDefinitions {
 
@@ -94,6 +97,53 @@ class IntersectionsStepDefinitions {
     @Then("i = i4")
     fun i_i4() {
         assertEquals(i4, i)
+    }
+
+    lateinit var shape: Sphere
+
+    @Given("shape ← sphere")
+    fun shape_sphere() {
+        shape = Sphere()
+    }
+
+    @Given("i ← intersection\\({int}, shape)")
+    fun i_intersection_shape(int1: Int?) {
+        i = Intersection(int1!!.toDouble(), shape)
+    }
+
+    lateinit var comps: Computations
+
+    @When("comps ← prepare_computations\\(i, r)")
+    fun comps_prepare_computations_i_r() {
+        comps = Computations.prepare(i!!, r)
+    }
+
+    @Then("comps.t = i.t")
+    fun comps_t_i_t() {
+        assertEquals(i!!.t, comps.t)
+    }
+
+    @Then("comps.object = i.object")
+    fun comps_object_i_object() {
+        assertEquals(i!!.`object`, comps.`object`)
+    }
+
+    @Then("comps.point = point\\({int}, {int}, {int})")
+    fun comps_point_point(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = point(int1!!, int2!!, int3!!)
+        assertEquals(expected, comps.point)
+    }
+
+    @Then("comps.eyev = vector\\({int}, {int}, {int})")
+    fun comps_eyev_vector(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = vector(int1!!, int2!!, int3!!)
+        assertEquals(expected, comps.eyeV)
+    }
+
+    @Then("comps.normalv = vector\\({int}, {int}, {int})")
+    fun comps_normalv_vector(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = vector(int1!!, int2!!, int3!!)
+        assertEquals(expected, comps.normalV)
     }
 
 }

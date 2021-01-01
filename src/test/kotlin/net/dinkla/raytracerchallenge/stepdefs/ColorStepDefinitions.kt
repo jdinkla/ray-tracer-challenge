@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
 import net.dinkla.raytracerchallenge.math.Color
-import org.junit.Assert.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class ColorStepDefinitions {
 
