@@ -143,4 +143,38 @@ class WorldStepDefinitions {
         i = Intersection(double1!!, shape)
     }
 
+    @When("c ← color_at\\(w, r)")
+    fun c_color_at_w_r() {
+        c = w.colorAt(r)
+    }
+
+    lateinit var outer: GeometricObject
+
+    @Given("outer ← the first object in w")
+    fun outer_the_first_object_in_w() {
+        outer = w.objects[0]
+    }
+
+    @Given("outer.material.ambient ← {int}")
+    fun outer_material_ambient(int1: Int?) {
+        outer.material.ambient = int1!!.toDouble()
+    }
+
+    lateinit var inner: GeometricObject
+
+    @Given("inner ← the second object in w")
+    fun inner_the_second_object_in_w() {
+        inner = w.objects[1]
+    }
+
+    @Given("inner.material.ambient ← {int}")
+    fun inner_material_ambient(int1: Int?) {
+        inner.material.ambient = int1!!.toDouble()
+    }
+
+    @Then("c = inner.material.color")
+    fun c_inner_material_color() {
+        assertEquals(inner.material.color, c)
+    }
+
 }

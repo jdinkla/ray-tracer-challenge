@@ -16,9 +16,9 @@ class RayStepDefinitions {
 
     lateinit var origin: Point
 
-    @Given("origin ← point\\({int}, {int}, {int})")
-    fun origin_point(int1: Int?, int2: Int?, int3: Int?) {
-       origin = point(int1!!, int2!!, int3!!)
+    @Given("origin ← point\\({double}, {double}, {double})")
+    fun origin_point(double1: Double?, double2: Double?, double3: Double?) {
+       origin = point(double1!!, double2!!, double3!!)
     }
 
     lateinit var direction: Point
@@ -79,6 +79,4 @@ class RayStepDefinitions {
     fun m_scaling(int1: Int?, int2: Int?, int3: Int?) {
         m = scaling(int1!!, int2!!, int3!!)
     }
-
-
 }

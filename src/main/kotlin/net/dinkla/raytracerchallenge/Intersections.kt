@@ -1,6 +1,6 @@
 package net.dinkla.raytracerchallenge
 
-class Intersections(private vararg val intersections: Intersection) {
+class Intersections(vararg val intersections: Intersection) {
 
     fun count(): Int = intersections.size
 

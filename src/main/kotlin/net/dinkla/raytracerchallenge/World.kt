@@ -18,6 +18,17 @@ class World {
 
     fun shadeHit(comps: Computations): Color = lighting(light, comps)
 
+    fun colorAt(ray: Ray): Color {
+        val xs = intersect(ray)
+        val filtered = xs.intersections.filter { it.t >= 0.0 }
+        if (filtered.size == 0) {
+            return Color.BLACK
+        } else {
+            val comps = Computations.prepare(filtered[0], ray)
+            return shadeHit(comps)
+        }
+    }
+
     companion object {
         fun defaultWorld(): World {
             val w = World()
