@@ -1,15 +1,21 @@
 package net.dinkla.raytracerchallenge
 
 import net.dinkla.raytracerchallenge.math.Matrix
-import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.point
 import kotlin.math.tan
 
 data class Camera(val hSize: Int, val vSize: Int, val fieldOfView: Double) {
 
-    var transform: Matrix = identity(4)
     var pixelSize: Double
+
+    var transform: Matrix = Matrix.identity4
+        set(t) {
+            field = t
+            inverse = t.inverse()
+        }
+
+    private var inverse: Matrix = Matrix.identity4
 
     private var halfWidth: Double
     private var halfHeight: Double
@@ -36,8 +42,8 @@ data class Camera(val hSize: Int, val vSize: Int, val fieldOfView: Double) {
         val yOffset = (y.toDouble() + 0.5) * pixelSize
         val worldX = halfWidth - xOffset
         val worldY = halfHeight - yOffset
-        val pixel = transform.inverse() * point(worldX, worldY, -1.0)
-        val origin = transform.inverse() * Point.ORIGIN
+        val pixel = inverse * point(worldX, worldY, -1.0)
+        val origin = inverse * Point.ORIGIN
         val direction = (pixel - origin).normalize()
         return Ray(origin, direction)
     }
