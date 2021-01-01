@@ -17,7 +17,7 @@ lateinit var v: Vector
 
 lateinit var r: Ray
 
-lateinit var s: Sphere
+lateinit var s: Shape
 
 lateinit var xs: Intersections
 
@@ -41,4 +41,4 @@ lateinit var from: Point
 lateinit var to: Point
 lateinit var up: Vector
 
-
+lateinit var n: Vector

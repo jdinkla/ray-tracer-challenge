@@ -69,8 +69,6 @@ class SpheresStepDefinitions {
         t = scaling(int1!!, int2!!, int3!!)
     }
 
-    lateinit var n: Vector
-
     @When("n ← normalAt\\(s, p)")
     fun n_normal_at_s_p() {
         n = s.normal(p)

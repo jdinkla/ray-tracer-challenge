@@ -31,9 +31,10 @@ abstract class Shape {
     }
 
     fun normal(point: Point): Vector {
-        val worldNormal = normalInObjectSpace(inverse * point)
-        val objectNormal = (inverseTranspose * worldNormal).toVector()
-        return objectNormal.normalize()
+        val objectPoint = inverse * point
+        val objectNormal = normalInObjectSpace(objectPoint)
+        val worldNormal = (inverseTranspose * objectNormal).toVector()
+        return worldNormal.normalize()
     }
 
     fun isec(t: Double) = Intersection(t, this)
