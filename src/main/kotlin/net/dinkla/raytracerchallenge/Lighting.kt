@@ -6,20 +6,23 @@ import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Vector
 import kotlin.math.pow
 
-fun lighting(light: PointLight, comps: Computations): Color {
+fun lighting(light: PointLight, comps: Computations, inShadow: Boolean = false): Color {
     val material = comps.`object`.material
-    val point = comps.point
+    val point = comps.overPoint
     val normalV = comps.normalV
     val eyeV = comps.eyeV
-    return lighting(material, light, point, eyeV, normalV)
+    return lighting(material, light, point, eyeV, normalV, inShadow)
 }
 
-fun lighting(material: Material, light: PointLight, point: Point, eyeV: Vector, normalV: Vector): Color {
+fun lighting(material: Material, light: PointLight, point: Point, eyeV: Vector, normalV: Vector, inShadow: Boolean = false): Color {
+    val effectiveColor = material.color * light.intensity
+    val ambient = effectiveColor * material.ambient
+    if (inShadow) {
+        return ambient
+    }
     var diffuse: Color = BLACK
     var specular: Color = BLACK
-    val effectiveColor = material.color * light.intensity
     val lightV = (light.position - point).normalize()
-    val ambient = effectiveColor * material.ambient
     val lightDotNormal = lightV dot normalV
     if (lightDotNormal >= 0.0) {
         diffuse = effectiveColor * material.diffuse * lightDotNormal

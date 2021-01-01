@@ -1,5 +1,6 @@
 package net.dinkla.raytracerchallenge
 
+import net.dinkla.raytracerchallenge.math.Approx.EPSILON
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Vector
 import net.dinkla.raytracerchallenge.objects.GeometricObject
@@ -13,6 +14,12 @@ class Computations(
     val normalV: Vector,
     val inside: Boolean = false
 ) : Intersection(t, `object`) {
+
+    val overPoint: Point
+
+    init {
+        overPoint = point + normalV * EPSILON
+    }
 
     companion object {
         fun prepare(i: Intersection, ray: Ray): Computations {

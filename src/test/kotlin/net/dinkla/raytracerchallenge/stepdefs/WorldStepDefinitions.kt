@@ -8,12 +8,13 @@ import net.dinkla.raytracerchallenge.PointLight
 import net.dinkla.raytracerchallenge.World
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Matrix
-import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
+import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.objects.GeometricObject
 import net.dinkla.raytracerchallenge.objects.Sphere
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 
 fun tupleWith(s: String): Tuple {
@@ -35,7 +36,11 @@ fun transformWith(s: String): Matrix {
             val t = tupleWith("(" + parts[1])
             scaling(t.x, t.y, t.z)
         }
-        else -> identity4
+        "translation" -> {
+            val t = tupleWith("(" + parts[1])
+            translation(t.x, t.y, t.z)
+        }
+        else -> throw IllegalArgumentException()
     }
 }
 
@@ -46,6 +51,7 @@ fun Sphere.with(dataTable: List<List<String>>) {
             "material.diffuse" -> material.diffuse = line[1].toDouble()
             "material.specular" -> material.specular = line[1].toDouble()
             "transform" -> transform = transformWith(line[1])
+            else -> throw IllegalArgumentException()
         }
     }
 }
@@ -173,6 +179,36 @@ class WorldStepDefinitions {
     @Then("c = inner.material.color")
     fun c_inner_material_color() {
         assertEquals(inner.material.color, c)
+    }
+
+    @Then("is_shadowed\\(w, p) is false")
+    fun is_shadowed_w_p_is_false() {
+        assertFalse(w.isShadowed(p))
+    }
+
+    @Then("is_shadowed\\(w, p) is true")
+    fun is_shadowed_w_p_is_true() {
+        assertTrue(w.isShadowed(p))
+    }
+
+    @Given("s1 ← sphere")
+    fun s1_sphere() {
+        s1 = Sphere()
+    }
+
+    @Given("s1 is added to w")
+    fun s1_is_added_to_w() {
+        w.objects.add(s1)
+    }
+
+    @Given("s2 is added to w")
+    fun s2_is_added_to_w() {
+        w.objects.add(s2)
+    }
+
+    @Given("i ← intersection\\({int}, s2)")
+    fun i_intersection_s2(int1: Int?) {
+       i = Intersection(int1!!.toDouble(), s2)
     }
 
 }

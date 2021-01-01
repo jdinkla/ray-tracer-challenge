@@ -1,6 +1,7 @@
 package net.dinkla.raytracerchallenge
 
 import net.dinkla.raytracerchallenge.math.Color
+import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.objects.GeometricObject
@@ -16,7 +17,7 @@ class World {
         return Intersections.combine(xss)
     }
 
-    fun shadeHit(comps: Computations): Color = lighting(light, comps)
+    fun shadeHit(comps: Computations): Color = lighting(light, comps, isShadowed(comps.overPoint))
 
     fun colorAt(ray: Ray): Color {
         val xs = intersect(ray)
@@ -29,13 +30,20 @@ class World {
         }
     }
 
-    fun render(c: Camera): Canvas {
-        val canvas = Canvas(c.hSize, c.vSize)
+    fun render(camera: Camera): Canvas {
+        val canvas = Canvas(camera.hSize, camera.vSize)
         canvas.loop { x: Int, y: Int ->
-            val ray = c.rayForPixel(x, y)
+            val ray = camera.rayForPixel(x, y)
             colorAt(ray)
         }
         return canvas
+    }
+
+    fun isShadowed(point: Point): Boolean {
+        val v = light.position - point
+        val ray = Ray(point, v.normalize())
+        val hit = intersect(ray).hit()
+        return hit != null && hit.t < v.magnitude()
     }
 
     companion object {

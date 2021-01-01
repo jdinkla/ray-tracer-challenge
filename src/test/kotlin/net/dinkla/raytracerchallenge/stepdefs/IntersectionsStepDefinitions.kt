@@ -6,6 +6,7 @@ import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.Computations
 import net.dinkla.raytracerchallenge.Intersection
 import net.dinkla.raytracerchallenge.Intersections
+import net.dinkla.raytracerchallenge.math.Approx.EPSILON
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
 import net.dinkla.raytracerchallenge.objects.Sphere
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 
 class IntersectionsStepDefinitions {
-
 
     @When("i ← intersection\\({double}, s)")
     fun i_intersection_s(double1: Double?) {
@@ -149,5 +149,21 @@ class IntersectionsStepDefinitions {
         assertTrue(comps.inside)
     }
 
+    @Given("shape ← sphere with:")
+    fun shape_sphere_with(dataTable: List<List<String>>) {
+        val s = Sphere()
+        s.with(dataTable)
+        shape = s
+    }
+
+    @Then("comps.over_point.z < -EPSILON\\/{int}")
+    fun comps_over_point_z_epsilon(int1: Int?) {
+        assertTrue(comps.overPoint.z < -EPSILON / int1!!.toDouble())
+    }
+
+    @Then("comps.point.z > comps.over_point.z")
+    fun comps_point_z_comps_over_point_z() {
+        assertTrue(comps.point.z > comps.overPoint.z)
+    }
 
 }

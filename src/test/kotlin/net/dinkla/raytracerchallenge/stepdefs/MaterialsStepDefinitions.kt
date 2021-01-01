@@ -80,4 +80,17 @@ class MaterialsStepDefinitions {
         assertEquals(expected, result)
     }
 
+    var inShadow: Boolean = false
+
+    @Given("in_shadow ← true")
+    fun in_shadow_true() {
+        inShadow = true
+    }
+
+    @When("result ← lighting\\(m, light, position, eyev, normalv, in_shadow)")
+    fun result_lighting_m_light_position_eyev_normalv_in_shadow() {
+        result = lighting(m, light, position, eyev, normalv, inShadow)
+    }
+
+
 }
