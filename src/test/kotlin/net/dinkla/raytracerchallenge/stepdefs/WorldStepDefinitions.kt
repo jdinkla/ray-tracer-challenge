@@ -102,4 +102,9 @@ class WorldStepDefinitions {
         assertTrue(s1 in w.objects)
     }
 
+    @When("xs ← intersect_world\\(w, r)")
+    fun xs_intersect_world_w_r() {
+        xs = w.intersect(r)
+    }
+
 }

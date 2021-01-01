@@ -11,6 +11,10 @@ class World {
     val objects: MutableList<GeometricObject> = mutableListOf()
     val lights: MutableList<PointLight> = mutableListOf()
 
+    fun intersect(ray: Ray): Intersections {
+        val xss = objects.map { it.intersect(ray) }
+        return Intersections.combine(xss)
+    }
 
     companion object {
         fun defaultWorld(): World {

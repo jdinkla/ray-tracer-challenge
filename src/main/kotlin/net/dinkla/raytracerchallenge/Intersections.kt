@@ -10,4 +10,13 @@ class Intersections(private vararg val intersections: Intersection) {
         return intersections.filter { it.t > 0.0 }.minByOrNull { it.t }
     }
 
+    companion object {
+
+        fun combine(intersections: List<Intersections>): Intersections {
+            val all = intersections.flatMap { it.intersections.asList() }
+            val sorted = all.sortedBy { it.t }
+            return Intersections(*sorted.toTypedArray())
+        }
+
+    }
 }
