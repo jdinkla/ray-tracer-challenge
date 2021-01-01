@@ -25,6 +25,6 @@ fun projectileExample() {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     projectileExample()
 }

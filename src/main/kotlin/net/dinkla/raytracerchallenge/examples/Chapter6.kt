@@ -44,6 +44,6 @@ private fun rayTrace(shape: Sphere, fileName: String) {
     PNG.save(canvas, fileName)
 }
 
-fun main(args: Array<String>) {
+fun main() {
     sphere(prefixFileName("sphere.png"))
 }

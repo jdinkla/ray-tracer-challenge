@@ -4,12 +4,12 @@ import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.point
-import net.dinkla.raytracerchallenge.objects.GeometricObject
+import net.dinkla.raytracerchallenge.objects.Shape
 import net.dinkla.raytracerchallenge.objects.Sphere
 
 class World {
 
-    val objects: MutableList<GeometricObject> = mutableListOf()
+    val objects: MutableList<Shape> = mutableListOf()
     var light: PointLight = PointLight()
 
     fun intersect(ray: Ray): Intersections {

@@ -2,7 +2,7 @@ package net.dinkla.raytracerchallenge.stepdefs
 
 import net.dinkla.raytracerchallenge.*
 import net.dinkla.raytracerchallenge.math.*
-import net.dinkla.raytracerchallenge.objects.GeometricObject
+import net.dinkla.raytracerchallenge.objects.Shape
 import net.dinkla.raytracerchallenge.objects.Sphere
 
 lateinit var c1: Color
@@ -33,7 +33,7 @@ var i: Intersection? = null
 
 lateinit var comps: Computations
 
-lateinit var shape: GeometricObject
+lateinit var shape: Shape
 
 lateinit var w: World
 

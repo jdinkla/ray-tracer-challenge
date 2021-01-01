@@ -3,12 +3,12 @@ package net.dinkla.raytracerchallenge
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Vector
-import net.dinkla.raytracerchallenge.objects.GeometricObject
+import net.dinkla.raytracerchallenge.objects.Shape
 
 @Suppress("UnusedPrivateMember")
 class Computations(
     t: Double,
-    `object`: GeometricObject,
+    `object`: Shape,
     val point: Point,
     val eyeV: Vector,
     val normalV: Vector,

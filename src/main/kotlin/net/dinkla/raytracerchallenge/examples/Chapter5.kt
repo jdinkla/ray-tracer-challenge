@@ -49,7 +49,7 @@ private fun rayTrace(s: Sphere, fileName: String) {
     ImageIO.write(PNG.create(canvas), "png", File(fileName))
 }
 
-fun main(args: Array<String>) {
+fun main() {
     flatSphere(prefixFileName("sphere.png"))
     flatEllipsis(prefixFileName("ellipsis.png"))
 }

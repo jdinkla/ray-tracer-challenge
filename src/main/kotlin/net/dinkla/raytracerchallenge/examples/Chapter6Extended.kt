@@ -10,8 +10,9 @@ fun spheres() {
     val s = Sphere()
     s.material.color = Color(1.0, 0.2, 1.0)
 
-    val diffuses = generateSequence(0.1) { it + 0.1 }.take(10)
-    val speculars = generateSequence(0.1) { it + 0.1 }.take(10)
+    fun mkSeq() = generateSequence(0.1) { it + 0.1 }.take(10)
+    val diffuses = mkSeq()
+    val speculars = mkSeq()
 
     for (diffuse in diffuses) {
         s.material.diffuse = diffuse
@@ -56,6 +57,6 @@ private fun rayTrace(shape: Sphere, fileName: String) {
     PNG.save(canvas, fileName)
 }
 
-fun main(args: Array<String>) {
+fun main() {
     spheres()
 }

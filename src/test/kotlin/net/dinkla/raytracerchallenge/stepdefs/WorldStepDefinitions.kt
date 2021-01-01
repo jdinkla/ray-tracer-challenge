@@ -11,7 +11,7 @@ import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.Tuple
-import net.dinkla.raytracerchallenge.objects.GeometricObject
+import net.dinkla.raytracerchallenge.objects.Shape
 import net.dinkla.raytracerchallenge.objects.Sphere
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -152,7 +152,7 @@ class WorldStepDefinitions {
         c = w.colorAt(r)
     }
 
-    lateinit var outer: GeometricObject
+    lateinit var outer: Shape
 
     @Given("outer ← the first object in w")
     fun outer_the_first_object_in_w() {
@@ -164,7 +164,7 @@ class WorldStepDefinitions {
         outer.material.ambient = int1!!.toDouble()
     }
 
-    lateinit var inner: GeometricObject
+    lateinit var inner: Shape
 
     @Given("inner ← the second object in w")
     fun inner_the_second_object_in_w() {

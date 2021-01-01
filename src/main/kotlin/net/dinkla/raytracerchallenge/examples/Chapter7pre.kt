@@ -17,7 +17,7 @@ fun firstRender(fileName: String) {
     PNG.save(canvas, fileName)
 }
 
-fun main(args: Array<String>) {
+fun main() {
     firstRender(prefixFileName("first.png"))
 }
 

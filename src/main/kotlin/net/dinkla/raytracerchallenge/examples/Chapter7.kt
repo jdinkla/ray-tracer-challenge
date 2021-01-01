@@ -87,7 +87,7 @@ fun render(fileName: String) {
     println("rendering took: ${timeInMillis / 1000.0} seconds")
 }
 
-fun main(args: Array<String>) {
+fun main() {
     render(prefixFileName("chapter7.png"))
 }
 

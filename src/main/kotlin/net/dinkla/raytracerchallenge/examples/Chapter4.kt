@@ -44,6 +44,6 @@ fun clock(fileName: String) {
     ImageIO.write(PNG.create(canvas), "png", File(fileName))
 }
 
-fun main(args: Array<String>) {
+fun main() {
     clock(prefixFileName("clock.png"))
 }
