@@ -10,7 +10,8 @@ class Computations(
     `object`: GeometricObject,
     val point: Point,
     val eyeV: Vector,
-    val normalV: Vector
+    val normalV: Vector,
+    val inside: Boolean = false
 ) : Intersection(t, `object`) {
 
     companion object {
@@ -18,7 +19,10 @@ class Computations(
             val point = ray.position(i.t)
             val eyeV = -ray.direction
             val normalV = i.`object`.normal(point)
-            return Computations(i.t, i.`object`, point, eyeV, normalV)
+            if (normalV dot eyeV < 0.0) {
+                return Computations(i.t, i.`object`, point, eyeV, -normalV, true)
+            }
+            return Computations(i.t, i.`object`, point, eyeV, normalV, false)
         }
     }
 }

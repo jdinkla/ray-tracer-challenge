@@ -10,7 +10,9 @@ import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
 import net.dinkla.raytracerchallenge.objects.Sphere
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
 
 class IntersectionsStepDefinitions {
 
@@ -145,5 +147,17 @@ class IntersectionsStepDefinitions {
         val expected = vector(int1!!, int2!!, int3!!)
         assertEquals(expected, comps.normalV)
     }
+
+
+    @Then("comps.inside = false")
+    fun comps_inside_false() {
+        assertFalse(comps.inside)
+    }
+
+    @Then("comps.inside = true")
+    fun comps_inside_true() {
+        assertTrue(comps.inside)
+    }
+
 
 }
