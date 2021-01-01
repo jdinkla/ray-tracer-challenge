@@ -58,3 +58,8 @@ detekt {
     config = files("detekt-config.yml")
 }
 
+task("pre_commit") {
+    dependsOn("test")
+    dependsOn("cucumber")
+    dependsOn("detekt")
+}
