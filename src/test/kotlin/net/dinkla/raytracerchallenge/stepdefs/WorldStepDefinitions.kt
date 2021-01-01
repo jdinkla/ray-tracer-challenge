@@ -3,12 +3,15 @@ package net.dinkla.raytracerchallenge.stepdefs
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
+import net.dinkla.raytracerchallenge.Intersection
+import net.dinkla.raytracerchallenge.PointLight
 import net.dinkla.raytracerchallenge.World
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Tuple
+import net.dinkla.raytracerchallenge.objects.GeometricObject
 import net.dinkla.raytracerchallenge.objects.Sphere
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -89,7 +92,7 @@ class WorldStepDefinitions {
 
     @Then("w.light = light")
     fun w_light_light() {
-       assertEquals(light, w.lights[0])
+       assertEquals(light, w.light)
     }
 
     @Then("w contains s1")
@@ -105,6 +108,39 @@ class WorldStepDefinitions {
     @When("xs ← intersect_world\\(w, r)")
     fun xs_intersect_world_w_r() {
         xs = w.intersect(r)
+    }
+
+    @Given("shape ← the first object in w")
+    fun shape_the_first_object_in_w() {
+       shape = w.objects[0]
+    }
+
+    lateinit var c: Color
+
+    @When("c ← shade_hit\\(w, comps)")
+    fun c_shade_hit_w_comps() {
+        c = w.shadeHit(comps)
+    }
+
+    @Then("c = color\\({double}, {double}, {double})")
+    fun c_color(double1: Double?, double2: Double?, double3: Double?) {
+        val expected = Color(double1!!, double2!!, double3!!)
+        assertEquals(expected, c)
+    }
+
+    @Given("w.light ← point_light\\(position, intensity)")
+    fun w_light_point_light_pos_intensity() {
+        w.light = PointLight(position, intensity)
+    }
+
+    @Given("shape ← the second object in w")
+    fun shape_the_second_object_in_w() {
+       shape = w.objects[1]
+    }
+
+    @Given("i ← intersection\\({double}, shape)")
+    fun i_intersection_shape(double1: Double?) {
+        i = Intersection(double1!!, shape)
     }
 
 }

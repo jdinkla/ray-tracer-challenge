@@ -15,9 +15,9 @@ class LightsStepDefinitions {
         intensity = Color(int1!!, int2!!, int3!!)
     }
 
-    @Given("position ← point\\({int}, {int}, {int})")
-    fun position_point(int1: Int?, int2: Int?, int3: Int?) {
-        position = point(int1!!, int2!!, int3!!)
+    @Given("position ← point\\({double}, {double}, {double})")
+    fun position_point(double1: Double?, double2: Double?, double3: Double?) {
+        position = point(double1!!, double2!!, double3!!)
     }
 
     @When("light ← point_light\\(position, intensity)")

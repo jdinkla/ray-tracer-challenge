@@ -9,20 +9,21 @@ import net.dinkla.raytracerchallenge.objects.Sphere
 class World {
 
     val objects: MutableList<GeometricObject> = mutableListOf()
-    val lights: MutableList<PointLight> = mutableListOf()
+    var light: PointLight = PointLight()
 
     fun intersect(ray: Ray): Intersections {
         val xss = objects.map { it.intersect(ray) }
         return Intersections.combine(xss)
     }
 
+    fun shadeHit(comps: Computations): Color = lighting(light, comps)
+
     companion object {
         fun defaultWorld(): World {
             val w = World()
             val position = point(-10, 10, -10)
             val intensity = Color.WHITE
-            val light = PointLight(position, intensity)
-            w.lights.add(light)
+            w.light = PointLight(position, intensity)
 
             val s1 = Sphere()
             s1.material.color = Color(0.8, 1.0, 0.6)

@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 
 class IntersectionsStepDefinitions {
 
-    var i: Intersection? = null
 
     @When("i ← intersection\\({double}, s)")
     fun i_intersection_s(double1: Double?) {
@@ -101,19 +100,10 @@ class IntersectionsStepDefinitions {
         assertEquals(i4, i)
     }
 
-    lateinit var shape: Sphere
-
     @Given("shape ← sphere")
     fun shape_sphere() {
         shape = Sphere()
     }
-
-    @Given("i ← intersection\\({int}, shape)")
-    fun i_intersection_shape(int1: Int?) {
-        i = Intersection(int1!!.toDouble(), shape)
-    }
-
-    lateinit var comps: Computations
 
     @When("comps ← prepare_computations\\(i, r)")
     fun comps_prepare_computations_i_r() {

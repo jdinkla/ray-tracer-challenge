@@ -1,10 +1,8 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
-import net.dinkla.raytracerchallenge.Intersections
-import net.dinkla.raytracerchallenge.Material
-import net.dinkla.raytracerchallenge.PointLight
-import net.dinkla.raytracerchallenge.Ray
+import net.dinkla.raytracerchallenge.*
 import net.dinkla.raytracerchallenge.math.*
+import net.dinkla.raytracerchallenge.objects.GeometricObject
 import net.dinkla.raytracerchallenge.objects.Sphere
 
 lateinit var c1: Color
@@ -31,3 +29,8 @@ lateinit var light: PointLight
 lateinit var intensity: Color
 lateinit var position: Point
 
+var i: Intersection? = null
+
+lateinit var comps: Computations
+
+lateinit var shape: GeometricObject

@@ -32,27 +32,31 @@ Scenario: Intersect a world with a ray
     And xs[2].t = 5.5
     And xs[3].t = 6
 
-#Scenario: Shading an intersection
-#  Given w ← defaultWorld
-#    And origin ← point(0, 0, -5)
-#    And direction ← vector(0, 0, 1)
-#    And r ← ray(origin, direction)
-#    And shape ← the first object in w
-#    And i ← intersection(4, shape)
-#  When comps ← prepare_computations(i, r)
-#    And c ← shade_hit(w, comps)
-#  Then c = color(0.38066, 0.47583, 0.2855)
+Scenario: Shading an intersection
+  Given w ← defaultWorld
+    And origin ← point(0, 0, -5)
+    And direction ← vector(0, 0, 1)
+    And r ← ray(origin, direction)
+    And shape ← the first object in w
+    And i ← intersection(4, shape)
+  When comps ← prepare_computations(i, r)
+    And c ← shade_hit(w, comps)
+  Then c = color(0.38066, 0.47583, 0.2855)
 
-#Scenario: Shading an intersection from the inside
-#  Given w ← defaultWorld
-#    And w.light ← point_light(point(0, 0.25, 0), color(1, 1, 1))
-#    And r ← ray(point(0, 0, 0), vector(0, 0, 1))
-#    And shape ← the second object in w
-#    And i ← intersection(0.5, shape)
-#  When comps ← prepare_computations(i, r)
-#    And c ← shade_hit(w, comps)
-#  Then c = color(0.90498, 0.90498, 0.90498)
-#
+Scenario: Shading an intersection from the inside
+  Given w ← defaultWorld
+    And position ← point(0.0, 0.25, 0.0)
+    And intensity ← color(1, 1, 1)
+    And w.light ← point_light(position, intensity)
+    And origin ← point(0, 0, 0)
+    And direction ← vector(0, 0, 1)
+    And r ← ray(origin, direction)
+    And shape ← the second object in w
+    And i ← intersection(0.5, shape)
+  When comps ← prepare_computations(i, r)
+    And c ← shade_hit(w, comps)
+  Then c = color(0.90498, 0.90498, 0.90498)
+
 #Scenario: The color when a ray misses
 #  Given w ← defaultWorld
 #    And r ← ray(point(0, 0, -5), vector(0, 1, 0))
