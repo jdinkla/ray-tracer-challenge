@@ -3,6 +3,25 @@
 - √2/2 was bugged in JVM cucumber, replaced it with 0.7071
 
 
+
+Beispiel auf S. 97
+
+Der umständlich zu lesende Text entspricht
+
+```kotlin
+fun colorAt(ray: Ray): Color {
+    val xs = intersect(ray)
+    val hit = xs.hit()
+    if (hit == null) {
+        return Color.BLACK
+    } else {
+        val comps = Computations.prepare(hit, ray)
+        return shadeHit(comps)
+    }
+}
+```
+
+
 ## Todo
 
 - fluent api, see p55

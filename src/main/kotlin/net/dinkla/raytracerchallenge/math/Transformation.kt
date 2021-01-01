@@ -16,6 +16,8 @@ object Transformation {
 
     fun translation(x: Int, y: Int, z: Int): Matrix = translation(x.toDouble(), y.toDouble(), z.toDouble())
 
+    fun translation(t: Tuple): Matrix = translation(t.x, t.y, t.z)
+
     fun scaling(x: Double, y: Double, z: Double): Matrix {
         val m = identity(4)
         m[0, 0] = x

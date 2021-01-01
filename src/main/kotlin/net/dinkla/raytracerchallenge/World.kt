@@ -20,11 +20,11 @@ class World {
 
     fun colorAt(ray: Ray): Color {
         val xs = intersect(ray)
-        val filtered = xs.intersections.filter { it.t >= 0.0 }
-        if (filtered.size == 0) {
+        val hit = xs.hit()
+        if (hit == null) {
             return Color.BLACK
         } else {
-            val comps = Computations.prepare(filtered[0], ray)
+            val comps = Computations.prepare(hit, ray)
             return shadeHit(comps)
         }
     }

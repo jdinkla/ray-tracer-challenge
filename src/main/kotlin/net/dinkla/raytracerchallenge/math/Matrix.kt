@@ -12,7 +12,6 @@ class Matrix(val n: Int) {
     private var m: DoubleArray = DoubleArray(n * n)
     private var isChangeable = true
 
-
     operator fun get(i: Int, j: Int) = m[index(i, j)]
 
     operator fun set(i: Int, j: Int, value: Double) {
@@ -156,6 +155,21 @@ class Matrix(val n: Int) {
         }
 
         val identity4 = identity(4).apply { isChangeable = false }
+
+        fun matrix(vararg values: Double): Matrix {
+            val n = values.size
+            assert(n == 4 || n == 9 || n == 16)
+            val m = when(n) {
+                4 -> Matrix(2)
+                9 -> Matrix(3)
+                else -> Matrix(4)
+            }
+            var idx = 0
+            for (value in values) {
+                m[idx++] = value
+            }
+            return m
+        }
     }
 
 }
