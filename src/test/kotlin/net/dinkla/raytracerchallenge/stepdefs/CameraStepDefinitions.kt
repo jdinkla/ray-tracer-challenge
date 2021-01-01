@@ -4,12 +4,15 @@ import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.Camera
+import net.dinkla.raytracerchallenge.Canvas
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
+import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
 import net.dinkla.raytracerchallenge.math.Transformation.rotationY
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
+import net.dinkla.raytracerchallenge.viewTransform
 import org.junit.jupiter.api.Assertions.assertEquals
 
 class CameraStepDefinitions {
@@ -102,6 +105,24 @@ class CameraStepDefinitions {
     @When("c.transform ← rotation_y\\({double}) * translation\\({int}, {int}, {int})")
     fun c_transform_rotation_y_translation(double1: Double?, int1: Int?, int2: Int?, int3: Int?) {
         c.transform = rotationY(double1!!) * translation(int1!!, int2!!, int3!!)
+    }
+
+    lateinit var image: Canvas
+
+    @When("image ← render\\(c, w)")
+    fun image_render_c_w() {
+        image = w.render(c)
+    }
+
+    @Then("pixel_at\\(image, {int}, {int}) = color\\({double}, {double}, {double})")
+    fun pixel_at_image_color(int1: Int?, int2: Int?, double1: Double?, double2: Double?, double3: Double?) {
+        val expected  = Color(double1!!, double2!!, double3!!)
+        assertEquals(expected, image[int1!!, int2!!])
+    }
+
+    @Given("c.transform ← view_transform\\(from, to, up)")
+    fun c_transform_view_transform_from_to_up() {
+        c.transform = viewTransform(from, to, up)
     }
 
 }

@@ -10,21 +10,15 @@ import org.junit.jupiter.api.Assertions.assertEquals
 
 class ViewTransformationsStepDefinitions {
 
-    lateinit var from: Point
-
     @Given("from ← point\\({int}, {int}, {int})")
     fun from_point(int1: Int?, int2: Int?, int3: Int?) {
         from = point(int1!!, int2!!, int3!!)
     }
 
-    lateinit var to: Point
-
     @Given("to ← point\\({int}, {int}, {int})")
     fun to_point(int1: Int?, int2: Int?, int3: Int?) {
         to = point(int1!!, int2!!, int3!!)
     }
-
-    lateinit var up: Vector
 
     @Given("up ← vector\\({int}, {int}, {int})")
     fun up_vector(int1: Int?, int2: Int?, int3: Int?) {

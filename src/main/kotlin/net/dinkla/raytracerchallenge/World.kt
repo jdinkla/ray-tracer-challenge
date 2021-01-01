@@ -29,6 +29,15 @@ class World {
         }
     }
 
+    fun render(c: Camera): Canvas {
+        val canvas = Canvas(c.hSize, c.vSize)
+        canvas.loop { x: Int, y: Int ->
+            val ray = c.rayForPixel(x, y)
+            colorAt(ray)
+        }
+        return canvas
+    }
+
     companion object {
         fun defaultWorld(): World {
             val w = World()

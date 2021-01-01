@@ -5,18 +5,19 @@ import net.dinkla.raytracerchallenge.examples.*
 fun main(args: Array<String>) {
     val action = if (args.size == 1) args[0] else ""
     when (action) {
-        "P" -> projectiles(prefix("projectile_ppm_example"))
-        "C" -> clock(prefix("clock.png"))
-        "F" -> {
+        "PROJECTILE" -> projectiles(prefix("projectile_ppm_example"))
+        "CLOCK" -> clock(prefix("clock.png"))
+        "FLAT" -> {
             flatSphere(prefix("sphere.png"))
             flatEllipsis(prefix("ellipsis.png"))
         }
-        "S" -> {
+        "SPHERE" -> {
             sphere(prefix("sphere.png"))
         }
         "SPHERES" -> {
             spheres()
         }
+        "FIRST" -> firstRender(prefix("first.png"))
         else -> println("Missing argument")
     }
 }

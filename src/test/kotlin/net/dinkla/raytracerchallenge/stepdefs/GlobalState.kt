@@ -34,3 +34,11 @@ var i: Intersection? = null
 lateinit var comps: Computations
 
 lateinit var shape: GeometricObject
+
+lateinit var w: World
+
+lateinit var from: Point
+lateinit var to: Point
+lateinit var up: Vector
+
+

@@ -52,8 +52,6 @@ fun Sphere.with(dataTable: List<List<String>>) {
 
 class WorldStepDefinitions {
 
-    lateinit var w: World
-
     @Given("w ← world")
     fun w_world() {
         w = World()
