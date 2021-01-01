@@ -18,6 +18,7 @@ fun main(args: Array<String>) {
             spheres()
         }
         "FIRST" -> firstRender(prefix("first.png"))
+        "CHAPTER7" -> chapter7(prefix("chapter7.png"))
         else -> println("Missing argument")
     }
 }

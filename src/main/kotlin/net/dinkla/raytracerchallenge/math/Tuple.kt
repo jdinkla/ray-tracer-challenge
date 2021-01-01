@@ -60,6 +60,7 @@ data class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
     companion object {
         val ORIGIN = point(0, 0, 0)
+        val UP = vector(0, 1, 0)
     }
 }
 

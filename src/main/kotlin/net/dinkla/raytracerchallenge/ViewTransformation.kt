@@ -6,7 +6,7 @@ import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.Vector
 
-fun viewTransform(from: Point, to: Point, up: Vector): Matrix {
+fun viewTransform(from: Point, to: Point, up: Vector = Vector.UP): Matrix {
     val forward = (to - from).normalize()
     val upNorm = up.normalize()
     val left = forward cross upNorm
