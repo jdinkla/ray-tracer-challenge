@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.Material
 import net.dinkla.raytracerchallenge.PointLight
+import net.dinkla.raytracerchallenge.StripePattern
 import net.dinkla.raytracerchallenge.lighting
 import net.dinkla.raytracerchallenge.math.*
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -22,17 +23,17 @@ class MaterialsStepDefinitions {
     }
 
     @Then("m.ambient = {double}")
-    fun m_ambient(double1: Double?) {
+    fun m_ambient_eq(double1: Double?) {
         assertEquals(double1!!, m.ambient)
     }
 
     @Then("m.diffuse = {double}")
-    fun m_diffuse(double1: Double?) {
+    fun m_diffuse_eq(double1: Double?) {
         assertEquals(double1!!, m.diffuse)
     }
 
     @Then("m.specular = {double}")
-    fun m_specular(double1: Double?) {
+    fun m_specular_eq(double1: Double?) {
         assertEquals(double1!!, m.specular)
     }
 
@@ -90,6 +91,53 @@ class MaterialsStepDefinitions {
     @When("result ← lighting\\(m, light, position, eyev, normalv, in_shadow)")
     fun result_lighting_m_light_position_eyev_normalv_in_shadow() {
         result = lighting(m, light, position, eyev, normalv, inShadow)
+    }
+
+    @Given("m.pattern ← stripe_pattern\\(white, black)")
+    fun m_pattern_stripe_pattern_black_white() {
+        m.pattern = StripePattern(white, black)
+    }
+
+    @Given("m.ambient ← {double}")
+    fun m_ambient(double1: Double?) {
+        m.ambient = double1!!
+    }
+
+    @Given("m.diffuse ← {double}")
+    fun m_diffuse(double1: Double?) {
+        m.diffuse = double1!!
+    }
+
+    @Given("m.specular ← {double}")
+    fun m_specular(double1: Double?) {
+        m.specular = double1!!
+    }
+
+    @Given("p1 ← point\\({double}, {double}, {double})")
+    fun p1_point(double1: Double?, double2: Double?, double3: Double?) {
+        p1 = point(double1!!, double2!!, double3!!)
+    }
+
+    @When("c1 ← lighting\\(m, light, p1, eyev, normalv, false)")
+    fun c1_lighting_m_light_p1_eyev_normalv_false() {
+       c1 = lighting(m, light, p1, eyev, normalv, false)
+    }
+
+    @When("c2 ← lighting\\(m, light, p2, eyev, normalv, false)")
+    fun c2_lighting_m_light_p2_eyev_normalv_false() {
+        c2 = lighting(m, light, p2, eyev, normalv, false)
+    }
+
+    @Then("c1 = color\\({int}, {int}, {int})")
+    fun c1_color(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = Color(int1!!, int2!!, int3!!)
+        assertEquals(expected, c1)
+    }
+
+    @Then("c2 = color\\({int}, {int}, {int})")
+    fun c2_color(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = Color(int1!!, int2!!, int3!!)
+        assertEquals(expected, c2)
     }
 
 

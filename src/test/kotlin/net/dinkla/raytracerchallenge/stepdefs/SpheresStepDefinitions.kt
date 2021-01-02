@@ -9,7 +9,6 @@ import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Transformation.translation
-import net.dinkla.raytracerchallenge.math.Vector
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
 import net.dinkla.raytracerchallenge.objects.Sphere
@@ -98,11 +97,6 @@ class SpheresStepDefinitions {
     @Then("m = material")
     fun m_eq_material() {
         assertEquals(Material(), m)
-    }
-
-    @Given("m.ambient ← {int}")
-    fun m_ambient(int1: Int?) {
-        m.ambient = int1!!.toDouble()
     }
 
     @When("s.material ← m")

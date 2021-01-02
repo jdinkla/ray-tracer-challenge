@@ -1,4 +1,4 @@
-package net.dinkla.raytracerchallenge.examples.chapter8
+package net.dinkla.raytracerchallenge.examples.chapter9
 
 import net.dinkla.raytracerchallenge.*
 import net.dinkla.raytracerchallenge.math.Color
@@ -81,7 +81,7 @@ fun render(fileName: String) {
 }
 
 fun main() {
-    render(prefixFileName("chapter8.png"))
+    render(prefixFileName("chapter9.png"))
 }
 
 

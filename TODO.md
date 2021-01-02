@@ -22,6 +22,14 @@ fun colorAt(ray: Ray): Color {
 ```
 
 
+S.130
+
+Warum soll lighting zwischen hat ein pattern und keins unterscheiden?
+
+Dass weiss das Material doch besser.
+
+Man erkennt das daran, dass in der if-Anweisung drei mal material vorkommt
+
 ## Todo
 
 - fluent api, see p55

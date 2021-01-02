@@ -10,14 +10,10 @@ import kotlin.test.assertEquals
 
 class PatternsStepDefinitions {
 
-    lateinit var black: Color
-
     @Given("black ← color\\({int}, {int}, {int})")
     fun black_color(int1: Int?, int2: Int?, int3: Int?) {
         black = Color(int1!!, int2!!, int3!!)
     }
-
-    lateinit var white: Color
 
     @Given("white ← color\\({int}, {int}, {int})")
     fun white_color(int1: Int?, int2: Int?, int3: Int?) {

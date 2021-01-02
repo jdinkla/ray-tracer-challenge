@@ -9,6 +9,8 @@ lateinit var c2: Color
 lateinit var c3: Color
 lateinit var c4: Color
 lateinit var intensity: Color
+lateinit var black: Color
+lateinit var white: Color
 
 lateinit var a_tuple: Tuple
 lateinit var p1: Tuple
@@ -19,6 +21,7 @@ lateinit var p: Point
 lateinit var position: Point
 lateinit var from: Point
 lateinit var to: Point
+lateinit var origin: Point
 
 lateinit var v: Vector
 lateinit var up: Vector

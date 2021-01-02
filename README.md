@@ -2,7 +2,8 @@
 
 
 The book
-- https://pragprog.com/titles/jbtracer/the-ray-tracer-challenge/
+- [Book hompage](https://pragprog.com/titles/jbtracer/the-ray-tracer-challenge)
+- [Book at devtalk](https://devtalk.com/books/the-ray-tracer-challenge)
 - https://learning.oreilly.com/library/view/the-ray-tracer/9781680506778/
 - http://www.raytracerchallenge.com/
 

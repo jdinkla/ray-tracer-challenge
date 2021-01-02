@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test
 
 internal class TupleTest {
 
-    val p = point(1, 2, 3)
-    val v = vector(1, 2, 3)
+    private val p = point(1, 2, 3)
+    private val v = vector(1, 2, 3)
 
     @Test
     fun `adding to points is impossible`() {

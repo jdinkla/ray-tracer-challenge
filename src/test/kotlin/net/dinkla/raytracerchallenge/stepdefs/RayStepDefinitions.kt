@@ -14,8 +14,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 
 class RayStepDefinitions {
 
-    lateinit var origin: Point
-
     @Given("origin ← point\\({double}, {double}, {double})")
     fun origin_point(double1: Double?, double2: Double?, double3: Double?) {
        origin = point(double1!!, double2!!, double3!!)
