@@ -10,6 +10,7 @@ import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.objects.Sphere
+import net.dinkla.raytracerchallenge.patterns.*
 import kotlin.test.assertEquals
 
 class PatternsStepDefinitions {
@@ -205,4 +206,13 @@ class PatternsStepDefinitions {
         assertEquals(black, pattern.at(p4))
     }
 
+    @Given("pattern ← checkers_pattern\\(white, black)")
+    fun pattern_checkers_pattern_white_black() {
+       pattern = CheckersPattern(white, black)
+    }
+
+    @Then("pattern_at\\(pattern, p2) = white")
+    fun pattern_at_pattern_p2_white() {
+        assertEquals(white, pattern.at(p2))
+    }
 }

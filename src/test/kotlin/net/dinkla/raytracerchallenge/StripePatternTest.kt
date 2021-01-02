@@ -3,6 +3,7 @@ package net.dinkla.raytracerchallenge
 import net.dinkla.raytracerchallenge.math.Color.Companion.BLACK
 import net.dinkla.raytracerchallenge.math.Color.Companion.WHITE
 import net.dinkla.raytracerchallenge.math.point
+import net.dinkla.raytracerchallenge.patterns.StripePattern
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

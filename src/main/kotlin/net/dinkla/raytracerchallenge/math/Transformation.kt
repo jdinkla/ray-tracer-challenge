@@ -27,6 +27,8 @@ object Transformation {
     }
 
     fun scaling(x: Int, y: Int, z: Int): Matrix = scaling(x.toDouble(), y.toDouble(), z.toDouble())
+    fun scaling(xyz: Double) = scaling(xyz, xyz, xyz)
+    fun scaling(xyz: Int): Matrix = scaling(xyz.toDouble())
 
     fun rotationX(d: Double) : Matrix {
         val m = identity(4)

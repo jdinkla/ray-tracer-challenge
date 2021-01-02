@@ -5,7 +5,7 @@ import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.Material
 import net.dinkla.raytracerchallenge.PointLight
-import net.dinkla.raytracerchallenge.StripePattern
+import net.dinkla.raytracerchallenge.patterns.StripePattern
 import net.dinkla.raytracerchallenge.lighting
 import net.dinkla.raytracerchallenge.math.*
 import org.junit.jupiter.api.Assertions.assertEquals

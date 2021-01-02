@@ -1,7 +1,6 @@
 package net.dinkla.raytracerchallenge.examples.chapter10
 
 import net.dinkla.raytracerchallenge.PointLight
-import net.dinkla.raytracerchallenge.StripePattern
 import net.dinkla.raytracerchallenge.World
 import net.dinkla.raytracerchallenge.examples.chapter7.getLeft
 import net.dinkla.raytracerchallenge.examples.chapter7.getMiddle
@@ -12,6 +11,7 @@ import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Transformation.rotationZ
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.point
+import net.dinkla.raytracerchallenge.patterns.StripePattern
 import net.dinkla.raytracerchallenge.prefixFileName
 
 private fun exampleWorldWithStripedSpheres(): World {

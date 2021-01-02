@@ -1,4 +1,4 @@
-package net.dinkla.raytracerchallenge
+package net.dinkla.raytracerchallenge.patterns
 
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Matrix

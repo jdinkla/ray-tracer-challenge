@@ -11,6 +11,10 @@ import net.dinkla.raytracerchallenge.math.Transformation.rotationZ
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
+import net.dinkla.raytracerchallenge.patterns.CheckersPattern
+import net.dinkla.raytracerchallenge.patterns.GradientPattern
+import net.dinkla.raytracerchallenge.patterns.RingPattern
+import net.dinkla.raytracerchallenge.patterns.StripePattern
 import net.dinkla.raytracerchallenge.ui.PNG
 import kotlin.system.measureTimeMillis
 
@@ -42,8 +46,8 @@ private fun exampleWorldWithAllPatterns(): World {
     }
 
     val left = getLeft().apply {
-        material.pattern = StripePattern(material.color, material.color * 0.8).apply {
-            transform = rotationZ(-Math.PI / 9.0) * scaling(0.1, 1.0, 1.0)
+        material.pattern = CheckersPattern(material.color, material.color * 0.8).apply {
+            transform = rotationZ(-Math.PI / 9.0) * scaling(0.25)
         }
     }
 
@@ -51,7 +55,6 @@ private fun exampleWorldWithAllPatterns(): World {
     w.light = PointLight(point(-10, 10, -10), Color.WHITE)
     return w
 }
-
 
 fun render(fileName: String, w: World) {
     val c = Camera(3840, 2160, Math.PI / 3.0).apply {
@@ -66,5 +69,5 @@ fun render(fileName: String, w: World) {
 }
 
 fun main() {
-    render(prefixFileName("chapter10_patterms.png"), exampleWorldWithAllPatterns())
+    render(prefixFileName("chapter10.png"), exampleWorldWithAllPatterns())
 }

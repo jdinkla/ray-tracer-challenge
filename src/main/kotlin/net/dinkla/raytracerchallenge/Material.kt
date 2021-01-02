@@ -3,6 +3,7 @@ package net.dinkla.raytracerchallenge
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.objects.Shape
+import net.dinkla.raytracerchallenge.patterns.Pattern
 
 data class Material(
     var ambient: Double = 0.1,
