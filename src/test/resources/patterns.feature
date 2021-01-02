@@ -1,35 +1,47 @@
-#Feature: Patterns
-#
-#Background:
-#  Given black ← color(0, 0, 0)
-#    And white ← color(1, 1, 1)
-#
-#Scenario: Creating a stripe pattern
-#  Given pattern ← stripe_pattern(white, black)
-#  Then pattern.a = white
-#    And pattern.b = black
-#
-#Scenario: A stripe pattern is constant in y
-#  Given pattern ← stripe_pattern(white, black)
-#  Then stripe_at(pattern, point(0, 0, 0)) = white
-#    And stripe_at(pattern, point(0, 1, 0)) = white
-#    And stripe_at(pattern, point(0, 2, 0)) = white
-#
-#Scenario: A stripe pattern is constant in z
-#  Given pattern ← stripe_pattern(white, black)
-#  Then stripe_at(pattern, point(0, 0, 0)) = white
-#    And stripe_at(pattern, point(0, 0, 1)) = white
-#    And stripe_at(pattern, point(0, 0, 2)) = white
-#
-#Scenario: A stripe pattern alternates in x
-#  Given pattern ← stripe_pattern(white, black)
-#  Then stripe_at(pattern, point(0, 0, 0)) = white
-#    And stripe_at(pattern, point(0.9, 0, 0)) = white
-#    And stripe_at(pattern, point(1, 0, 0)) = black
-#    And stripe_at(pattern, point(-0.1, 0, 0)) = black
-#    And stripe_at(pattern, point(-1, 0, 0)) = black
-#    And stripe_at(pattern, point(-1.1, 0, 0)) = white
-#
+Feature: Patterns
+
+Background:
+  Given black ← color(0, 0, 0)
+    And white ← color(1, 1, 1)
+
+Scenario: Creating a stripe pattern
+  Given pattern ← stripe_pattern(white, black)
+  Then pattern.a = white
+    And pattern.b = black
+
+Scenario: A stripe pattern is constant in y
+  Given pattern ← stripe_pattern(white, black)
+    And p1 ← point(0, 0, 0)
+    And p2 ← point(0, 1, 0)
+    And p3 ← point(0, 2, 0)
+  Then stripe_at(pattern, p1) = white
+    And stripe_at(pattern, p2) = white
+    And stripe_at(pattern, p3) = white
+
+Scenario: A stripe pattern is constant in z
+  Given pattern ← stripe_pattern(white, black)
+    And p1 ← point(0, 0, 0)
+    And p2 ← point(0, 0, 1)
+    And p3 ← point(0, 0, 2)
+  Then stripe_at(pattern, p1) = white
+    And stripe_at(pattern, p2) = white
+    And stripe_at(pattern, p3) = white
+
+Scenario: A stripe pattern alternates in x
+  Given pattern ← stripe_pattern(white, black)
+    And p1 ← point(0, 0, 0)
+    And p2 ← point(0.9, 0.0, 0.0)
+    And p3 ← point(1, 0, 0)
+    And p4 ← point(-0.1, 0.0, 0.0)
+    And p5 ← point(-1, 0, 0)
+    And p6 ← point(-1.1, 0.0, 0.0)
+  Then stripe_at(pattern, p1) = white
+    And stripe_at(pattern, p2) = white
+    And stripe_at(pattern, p3) = black
+    And stripe_at(pattern, p4) = black
+    And stripe_at(pattern, p5) = black
+    And stripe_at(pattern, p6) = white
+
 #Scenario: Stripes with an object transformation
 #  Given object ← sphere()
 #    And set_transform(object, scaling(2, 2, 2))

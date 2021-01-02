@@ -93,17 +93,9 @@ class TuplesStepDefinitions {
         assertEquals(a1 + a2, tuple(int1!!, int2!!, int3!!, int4!!))
      }
 
-    lateinit var p1: Tuple
-    lateinit var p2: Tuple
-
     @Given("p1 ← point\\({int}, {int}, {int})")
     fun p1_point(int1: Int?, int2: Int?, int3: Int?) {
         p1 = point(int1!!, int2!!, int3!!)
-    }
-
-    @Given("p2 ← point\\({int}, {int}, {int})")
-    fun p2_point(int1: Int?, int2: Int?, int3: Int?) {
-        p2 = point(int1!!, int2!!, int3!!)
     }
 
     @Then("p1 - p2 = vector\\({int}, {int}, {int})")
