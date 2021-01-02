@@ -3,9 +3,7 @@ package net.dinkla.raytracerchallenge.stepdefs
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
-import net.dinkla.raytracerchallenge.Pattern
-import net.dinkla.raytracerchallenge.StripePattern
-import net.dinkla.raytracerchallenge.TestPattern
+import net.dinkla.raytracerchallenge.*
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
 import net.dinkla.raytracerchallenge.math.Transformation.translation
@@ -43,11 +41,6 @@ class PatternsStepDefinitions {
         assertEquals(black, (pattern as StripePattern).b)
     }
 
-    @Given("p3 ← point\\({int}, {int}, {int})")
-    fun p3_point(int1: Int?, int2: Int?, int3: Int?) {
-        p3 = point(int1!!, int2!!, int3!!)
-    }
-
     @Then("stripe_at\\(pattern, p1) = white")
     fun stripe_at_pattern_p1_white() {
         assertEquals(white, pattern.at(p1))
@@ -61,11 +54,6 @@ class PatternsStepDefinitions {
     @Then("stripe_at\\(pattern, p3) = white")
     fun stripe_at_pattern_p3_white() {
         assertEquals(white, pattern.at(p3))
-    }
-
-    @Given("p2 ← point\\({double}, {double}, {double})")
-    fun p2_point(double1: Double?, double2: Double?, double3: Double?) {
-        p2 = point(double1!!, double2!!, double3!!)
     }
 
     lateinit var p4: Tuple
@@ -167,6 +155,54 @@ class PatternsStepDefinitions {
     @When("c ← pattern_at_shape\\(pattern, shape, p1)")
     fun c_pattern_at_shape_pattern_shape_p1() {
         c = pattern.at(shape, p1)
+    }
+
+    @Given("pattern ← gradient_pattern\\(white, black)")
+    fun pattern_gradient_pattern_white_black() {
+       pattern = GradientPattern(white, black)
+    }
+
+    @Then("pattern_at\\(pattern, p1) = white")
+    fun pattern_at_pattern_p1_white() {
+       assertEquals(white, pattern.at(p1))
+    }
+
+    @Then("pattern_at\\(pattern, p2) = color\\({double}, {double}, {double})")
+    fun pattern_at_pattern_p2_color(double1: Double?, double2: Double?, double3: Double?) {
+        val expected = Color(double1!!, double2!!, double3!!)
+        assertEquals(expected, pattern.at(p2))
+    }
+
+    @Then("pattern_at\\(pattern, p3) = color\\({double}, {double}, {double})")
+    fun pattern_at_pattern_p3_color(double1: Double?, double2: Double?, double3: Double?) {
+        val expected = Color(double1!!, double2!!, double3!!)
+        assertEquals(expected, pattern.at(p3))
+    }
+
+    @Then("pattern_at\\(pattern, p4) = color\\({double}, {double}, {double})")
+    fun pattern_at_pattern_p4_color(double1: Double?, double2: Double?, double3: Double?) {
+        val expected = Color(double1!!, double2!!, double3!!)
+        assertEquals(expected, pattern.at(p4))
+    }
+
+    @Given("pattern ← ring_pattern\\(white, black)")
+    fun pattern_ring_pattern_white_black() {
+        pattern = RingPattern(white, black)
+    }
+
+    @Then("pattern_at\\(pattern, p2) = black")
+    fun pattern_at_pattern_p2_black() {
+       assertEquals(black, pattern.at(p2))
+    }
+
+    @Then("pattern_at\\(pattern, p3) = black")
+    fun pattern_at_pattern_p3_black() {
+        assertEquals(black, pattern.at(p3))
+    }
+
+    @Then("pattern_at\\(pattern, p4) = black")
+    fun pattern_at_pattern_p4_black() {
+        assertEquals(black, pattern.at(p4))
     }
 
 }

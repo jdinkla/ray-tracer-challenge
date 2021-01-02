@@ -110,21 +110,29 @@ Scenario: A pattern with both an object and a pattern transformation
   When c ← pattern_at_shape(pattern, shape, p1)
   Then c = color(0.75, 0.5, 0.25)
 
-#Scenario: A gradient linearly interpolates between colors
-#  Given pattern ← gradient_pattern(white, black)
-#  Then pattern_at(pattern, point(0, 0, 0)) = white
-#    And pattern_at(pattern, point(0.25, 0, 0)) = color(0.75, 0.75, 0.75)
-#    And pattern_at(pattern, point(0.5, 0, 0)) = color(0.5, 0.5, 0.5)
-#    And pattern_at(pattern, point(0.75, 0, 0)) = color(0.25, 0.25, 0.25)
-#
-#Scenario: A ring should extend in both x and z
-#  Given pattern ← ring_pattern(white, black)
-#  Then pattern_at(pattern, point(0, 0, 0)) = white
-#    And pattern_at(pattern, point(1, 0, 0)) = black
-#    And pattern_at(pattern, point(0, 0, 1)) = black
-#    # 0.708 = just slightly more than √2/2
-#    And pattern_at(pattern, point(0.708, 0, 0.708)) = black
-#
+Scenario: A gradient linearly interpolates between colors
+  Given pattern ← gradient_pattern(white, black)
+    And p1 ← point(0, 0, 0)
+    And p2 ← point(0.25, 0.0, 0.0)
+    And p3 ← point(0.5, 0.0, 0.0)
+    And p4 ← point(0.75, 0.0, 0.0)
+  Then pattern_at(pattern, p1) = white
+    And pattern_at(pattern, p2) = color(0.75, 0.75, 0.75)
+    And pattern_at(pattern, p3) = color(0.5, 0.5, 0.5)
+    And pattern_at(pattern, p4) = color(0.25, 0.25, 0.25)
+
+Scenario: A ring should extend in both x and z
+  Given pattern ← ring_pattern(white, black)
+  And p1 ← point(0, 0, 0)
+  And p2 ← point(1, 0, 0)
+  And p3 ← point(0, 0, 1)
+  And p4 ← point(0.708, 0, 0.708)
+  Then pattern_at(pattern, p1) = white
+    And pattern_at(pattern, p2) = black
+    And pattern_at(pattern, p3) = black
+    # 0.708 = just slightly more than √2/2
+    And pattern_at(pattern, p4) = black
+
 #Scenario: Checkers should repeat in x
 #  Given pattern ← checkers_pattern(white, black)
 #  Then pattern_at(pattern, point(0, 0, 0)) = white

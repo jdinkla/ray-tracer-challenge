@@ -113,11 +113,6 @@ class MaterialsStepDefinitions {
         m.specular = double1!!
     }
 
-    @Given("p1 ← point\\({double}, {double}, {double})")
-    fun p1_point(double1: Double?, double2: Double?, double3: Double?) {
-        p1 = point(double1!!, double2!!, double3!!)
-    }
-
     @When("c1 ← lighting\\(m, light, p1, eyev, normalv, false)")
     fun c1_lighting_m_light_p1_eyev_normalv_false() {
        c1 = lighting(m, light, p1, eyev, normalv, false, shape = null)
