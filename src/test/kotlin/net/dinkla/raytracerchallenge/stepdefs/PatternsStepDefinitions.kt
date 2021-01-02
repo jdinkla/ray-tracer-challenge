@@ -2,10 +2,13 @@ package net.dinkla.raytracerchallenge.stepdefs
 
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
+import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.StripePattern
 import net.dinkla.raytracerchallenge.math.Color
+import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.math.point
+import net.dinkla.raytracerchallenge.objects.Sphere
 import kotlin.test.assertEquals
 
 class PatternsStepDefinitions {
@@ -100,4 +103,44 @@ class PatternsStepDefinitions {
     fun stripe_at_pattern_p6_white() {
         assertEquals(white, pattern.at(p6))
     }
+
+    lateinit var theObject: Sphere
+
+    @Given("object ← sphere")
+    fun object_sphere() {
+        theObject = Sphere()
+    }
+
+    @Given("set_transform\\(object, transform)")
+    fun set_transform_object_transform() {
+        theObject.transform = transform
+    }
+
+    lateinit var c: Color
+
+    @When("c ← stripe_at_object\\(pattern, object, p1)")
+    fun c_stripe_at_object_pattern_object_p1() {
+        c = pattern.at(theObject, p1)
+    }
+
+    @Then("c = white")
+    fun c_white() {
+        assertEquals(white, c)
+    }
+
+    @Given("set_pattern_transform\\(pattern, transform)")
+    fun set_pattern_transform_pattern_transform() {
+        pattern.transform = transform
+    }
+
+    @Given("set_pattern_transform\\(pattern, t)")
+    fun set_pattern_transform_pattern_t() {
+        pattern.transform = t
+    }
+
+    @Given("t ← translation\\({double}, {double}, {double})")
+    fun t_translation(double1: Double?, double2: Double?, double3: Double?) {
+        t = translation(double1!!, double2!!, double3!!)
+    }
+
 }

@@ -36,6 +36,7 @@ lateinit var xs: Intersections
 var i: Intersection? = null
 
 lateinit var transform : Matrix
+lateinit var t: Matrix
 
 lateinit var m: Material
 

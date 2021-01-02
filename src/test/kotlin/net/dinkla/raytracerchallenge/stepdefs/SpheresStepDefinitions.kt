@@ -5,10 +5,8 @@ import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.Material
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
-import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
-import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
 import net.dinkla.raytracerchallenge.objects.Sphere
@@ -44,13 +42,6 @@ class SpheresStepDefinitions {
     @Then("s.transform = identity_matrix")
     fun s_transform_identity_matrix() {
         assertEquals(identity4, s.transform)
-    }
-
-    lateinit var t: Matrix
-
-    @Given("t ← translation\\({int}, {int}, {int})")
-    fun t_translation(int1: Int?, int2: Int?, int3: Int?) {
-        t = translation(int1!!, int2!!, int3!!)
     }
 
     @Then("s.transform = t")

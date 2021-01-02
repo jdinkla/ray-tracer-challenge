@@ -140,8 +140,6 @@ class TransformationsStepDefinitions {
         c = translation(int1!!, int2!!, int3!!)
     }
 
-    lateinit var p2: Point
-
     @When("p2 ← A * p")
     fun p2_a_p() {
         p2 = a * p
@@ -152,8 +150,6 @@ class TransformationsStepDefinitions {
         val expected = point(int1!!, int2!!, int3!!)
         assertEquals(expected, p2)
     }
-
-    lateinit var p3: Point
 
     @When("p3 ← B * p2")
     fun p3_b_p2() {
@@ -178,8 +174,6 @@ class TransformationsStepDefinitions {
         val expected = point(int1!!, int2!!, int3!!)
         assertEquals(expected, p4)
     }
-
-    lateinit var t: Matrix
 
     @When("T ← C * B * A")
     fun t_c_b_a() {

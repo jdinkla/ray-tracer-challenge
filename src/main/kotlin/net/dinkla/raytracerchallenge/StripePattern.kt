@@ -4,8 +4,8 @@ import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Point
 import kotlin.math.floor
 
-data class StripePattern(val a: Color, val b: Color) : Pattern {
+data class StripePattern(val a: Color, val b: Color) : Pattern() {
 
-    override fun at(point: Point): Color = if (floor(point.x).toInt() % 2 == 0) a else b
+    override fun atInPatternSpace(point: Point): Color = if (floor(point.x).toInt() % 2 == 0) a else b
 
 }

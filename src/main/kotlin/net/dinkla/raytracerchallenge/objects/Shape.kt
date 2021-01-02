@@ -12,7 +12,7 @@ abstract class Shape {
 
     var material: Material = Material()
 
-    open var transform: Matrix = Matrix.identity4
+    var transform: Matrix = Matrix.identity4
         set(t) {
             field = t
             inverse = t.inverse()
