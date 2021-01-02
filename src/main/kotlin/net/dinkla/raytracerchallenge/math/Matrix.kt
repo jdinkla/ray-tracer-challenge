@@ -12,16 +12,23 @@ class Matrix(val n: Int) {
     private var m: DoubleArray = DoubleArray(n * n)
     private var isChangeable = true
 
+    private var inverse: Matrix? = null
+    private var inverseTransposed: Matrix? = null
+
     operator fun get(i: Int, j: Int) = m[index(i, j)]
 
     operator fun set(i: Int, j: Int, value: Double) {
         assert(isChangeable)
         m[index(i, j)] = value
+        inverse = null
+        inverseTransposed = null
     }
 
     operator fun set(i: Int, value: Double) {
         assert(isChangeable)
         m[i] = value
+        inverse = null
+        inverseTransposed = null
     }
 
     operator fun times(matrix: Matrix): Matrix {
@@ -71,6 +78,8 @@ class Matrix(val n: Int) {
                 m[idx++] = i
             }
         }
+        inverse = null
+        inverseTransposed = null
     }
 
     fun determinant(): Double {
@@ -106,17 +115,26 @@ class Matrix(val n: Int) {
     fun isInvertible(): Boolean = determinant() != 0.0
 
     fun inverse(): Matrix {
-        val det = determinant()
-        assert(det != 0.0)
-        val result = Matrix(n)
-
-        for (i in 0 until n) {
-            for (j in 0 until n) {
-                val c = cofactor(i, j)
-                result[j, i] = c / det
+        if (inverse == null) {
+            val det = determinant()
+            assert(det != 0.0)
+            val result = Matrix(n)
+            for (i in 0 until n) {
+                for (j in 0 until n) {
+                    val c = cofactor(i, j)
+                    result[j, i] = c / det
+                }
             }
+            inverse = result
         }
-        return result
+        return inverse!!
+    }
+
+    fun inverseTranspose(): Matrix {
+        if (inverseTransposed == null) {
+            inverseTransposed = inverse().transpose()
+        }
+        return inverseTransposed!!
     }
 
     override fun equals(other: Any?): Boolean {
@@ -159,7 +177,7 @@ class Matrix(val n: Int) {
         fun matrix(vararg values: Double): Matrix {
             val n = values.size
             assert(n == 4 || n == 9 || n == 16)
-            val m = when(n) {
+            val m = when (n) {
                 4 -> Matrix(2)
                 9 -> Matrix(3)
                 else -> Matrix(4)

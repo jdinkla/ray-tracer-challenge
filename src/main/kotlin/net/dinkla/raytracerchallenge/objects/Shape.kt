@@ -13,27 +13,19 @@ abstract class Shape {
     var material: Material = Material()
 
     var transform: Matrix = Matrix.identity4
-        set(t) {
-            field = t
-            inverse = t.inverse()
-            inverseTranspose = inverse.transpose()
-        }
-
-    private var inverse: Matrix = Matrix.identity4
-    private var inverseTranspose: Matrix = Matrix.identity4
 
     abstract fun intersectInObjectSpace(ray: Ray): Intersections
     abstract fun normalInObjectSpace(point: Point): Vector
 
     fun intersect(ray: Ray): Intersections {
-        val objectRay = ray.transform(inverse)
+        val objectRay = ray.transform(transform.inverse())
         return intersectInObjectSpace(objectRay)
     }
 
     fun normal(point: Point): Vector {
-        val objectPoint = inverse * point
+        val objectPoint = transform.inverse() * point
         val objectNormal = normalInObjectSpace(objectPoint)
-        val worldNormal = (inverseTranspose * objectNormal).toVector()
+        val worldNormal = (transform.inverseTranspose() * objectNormal).toVector()
         return worldNormal.normalize()
     }
 
