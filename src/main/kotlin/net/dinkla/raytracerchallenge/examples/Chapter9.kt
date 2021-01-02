@@ -1,70 +1,47 @@
 package net.dinkla.raytracerchallenge.examples.chapter9
 
 import net.dinkla.raytracerchallenge.*
+import net.dinkla.raytracerchallenge.examples.chapter7.getLeft
+import net.dinkla.raytracerchallenge.examples.chapter7.getMiddle
+import net.dinkla.raytracerchallenge.examples.chapter7.getRight
 import net.dinkla.raytracerchallenge.math.Color
-import net.dinkla.raytracerchallenge.math.Transformation.rotationX
-import net.dinkla.raytracerchallenge.math.Transformation.rotationY
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Transformation.translation
-import net.dinkla.raytracerchallenge.math.Vector
 import net.dinkla.raytracerchallenge.math.point
-import net.dinkla.raytracerchallenge.math.vector
 import net.dinkla.raytracerchallenge.objects.Plane
-import net.dinkla.raytracerchallenge.objects.Sphere
 import net.dinkla.raytracerchallenge.ui.PNG
 import kotlin.system.measureTimeMillis
 
 private fun exampleWorld(): World {
     val w = World()
 
-    val floor = Plane().apply {
-        material = Material().apply {
-            color = Color(1.0, 0.9, 0.9)
-            specular = 0.0
-        }
-    }
-
-    val sky = Plane().apply {
-        transform = translation(0, 20, 0) * scaling(1, -1, 1)
-        material = Material().apply {
-            color = Color.fromString("87CEEB")
-            diffuse = 0.9
-            specular = 0.0
-            shininess = 0.0
-            ambient = 0.8
-        }
-    }
-
-    val middle = Sphere().apply {
-        transform = translation(-0.5, 1.0, 0.5)
-        material = Material().apply {
-            color = Color(0.1, 1.0, 0.5)
-            diffuse = 0.7
-            specular = 0.3
-        }
-    }
-
-    val right = Sphere().apply {
-        transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5)
-        material = Material().apply {
-            color = Color(0.5, 1.0, 0.1)
-            diffuse = 0.7
-            specular = 0.3
-        }
-    }
-
-    val left = Sphere().apply {
-        transform = translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33)
-        material = Material().apply {
-            color = Color(1.0, 0.8, 0.1)
-            diffuse = 0.7
-            specular = 0.3
-        }
-    }
+    val floor = getFloor()
+    val sky = getSky()
+    val middle = getMiddle()
+    val right = getRight()
+    val left = getLeft()
 
     w.objects.addAll(listOf(floor, middle, right, left, sky))
     w.light = PointLight(point(-10, 10, -10), Color.WHITE)
     return w
+}
+
+fun getFloor(): Plane = Plane().apply {
+    material = Material().apply {
+        color = Color(1.0, 0.9, 0.9)
+        specular = 0.0
+    }
+}
+
+fun getSky(): Plane = Plane().apply {
+    transform = translation(0, 20, 0) * scaling(1, -1, 1)
+    material = Material().apply {
+        color = Color.fromString("87CEEB")
+        diffuse = 0.9
+        specular = 0.0
+        shininess = 0.0
+        ambient = 0.8
+    }
 }
 
 fun render(fileName: String) {
@@ -83,5 +60,3 @@ fun render(fileName: String) {
 fun main() {
     render(prefixFileName("chapter9.png"))
 }
-
-

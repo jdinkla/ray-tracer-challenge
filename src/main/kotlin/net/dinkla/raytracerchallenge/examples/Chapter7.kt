@@ -42,36 +42,40 @@ private fun exampleWorld(): World {
         material = floor.material
     }
 
-    val middle = Sphere().apply {
-        transform = translation(-0.5, 1.0, 0.5)
-        material = Material().apply {
-            color = Color(0.1, 1.0, 0.5)
-            diffuse = 0.7
-            specular = 0.3
-        }
-    }
-
-    val right = Sphere().apply {
-        transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5)
-        material = Material().apply {
-            color = Color(0.5, 1.0, 0.1)
-            diffuse = 0.7
-            specular = 0.3
-        }
-    }
-
-    val left = Sphere().apply {
-        transform = translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33)
-        material = Material().apply {
-            color = Color(1.0, 0.8, 0.1)
-            diffuse = 0.7
-            specular = 0.3
-        }
-    }
+    val middle = getMiddle()
+    val right = getRight()
+    val left = getLeft()
 
     w.objects.addAll(listOf(floor, leftWall, rightWall, middle, right, left))
     w.light = PointLight(point(-10, 10, -10), Color.WHITE)
     return w
+}
+
+fun getMiddle(): Sphere = Sphere().apply {
+    transform = translation(-0.5, 1.0, 0.5)
+    material = Material().apply {
+        color = Color(0.1, 1.0, 0.5)
+        diffuse = 0.7
+        specular = 0.3
+    }
+}
+
+fun getRight(): Sphere = Sphere().apply {
+    transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5)
+    material = Material().apply {
+        color = Color(0.5, 1.0, 0.1)
+        diffuse = 0.7
+        specular = 0.3
+    }
+}
+
+fun getLeft(): Sphere = Sphere().apply {
+    transform = translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33)
+    material = Material().apply {
+        color = Color(1.0, 0.8, 0.1)
+        diffuse = 0.7
+        specular = 0.3
+    }
 }
 
 fun render(fileName: String) {

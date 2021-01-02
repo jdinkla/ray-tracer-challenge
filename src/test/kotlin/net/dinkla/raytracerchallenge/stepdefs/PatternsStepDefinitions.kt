@@ -3,8 +3,11 @@ package net.dinkla.raytracerchallenge.stepdefs
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
+import net.dinkla.raytracerchallenge.Pattern
 import net.dinkla.raytracerchallenge.StripePattern
+import net.dinkla.raytracerchallenge.TestPattern
 import net.dinkla.raytracerchallenge.math.Color
+import net.dinkla.raytracerchallenge.math.Matrix.Companion.identity4
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.math.point
@@ -23,7 +26,7 @@ class PatternsStepDefinitions {
         white = Color(int1!!, int2!!, int3!!)
     }
 
-    lateinit var pattern: StripePattern
+    lateinit var pattern: Pattern
 
     @Given("pattern ← stripe_pattern\\(white, black)")
     fun pattern_stripe_pattern_white_black() {
@@ -32,12 +35,12 @@ class PatternsStepDefinitions {
 
     @Then("pattern.a = white")
     fun pattern_a_white() {
-        assertEquals(white, pattern.a)
+        assertEquals(white, (pattern as StripePattern).a)
     }
 
     @Then("pattern.b = black")
     fun pattern_b_black() {
-        assertEquals(black, pattern.b)
+        assertEquals(black, (pattern as StripePattern).b)
     }
 
     @Given("p3 ← point\\({int}, {int}, {int})")
@@ -116,8 +119,6 @@ class PatternsStepDefinitions {
         theObject.transform = transform
     }
 
-    lateinit var c: Color
-
     @When("c ← stripe_at_object\\(pattern, object, p1)")
     fun c_stripe_at_object_pattern_object_p1() {
         c = pattern.at(theObject, p1)
@@ -141,6 +142,31 @@ class PatternsStepDefinitions {
     @Given("t ← translation\\({double}, {double}, {double})")
     fun t_translation(double1: Double?, double2: Double?, double3: Double?) {
         t = translation(double1!!, double2!!, double3!!)
+    }
+
+    @Given("pattern ← test_pattern")
+    fun pattern_test_pattern() {
+        pattern = TestPattern()
+    }
+
+    @Then("pattern.transform = identity_matrix")
+    fun pattern_transform_identity_matrix() {
+        assertEquals(identity4, pattern.transform)
+    }
+
+    @Then("pattern.transform = transform")
+    fun pattern_transform_transform() {
+        assertEquals(transform, pattern.transform)
+    }
+
+    @Given("set_transform\\(shape, transform)")
+    fun set_transform_shape_transform() {
+        shape.transform = transform
+    }
+
+    @When("c ← pattern_at_shape\\(pattern, shape, p1)")
+    fun c_pattern_at_shape_pattern_shape_p1() {
+        c = pattern.at(shape, p1)
     }
 
 }

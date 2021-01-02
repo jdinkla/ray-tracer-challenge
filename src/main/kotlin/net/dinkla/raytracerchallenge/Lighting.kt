@@ -4,6 +4,7 @@ import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Color.Companion.BLACK
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Vector
+import net.dinkla.raytracerchallenge.objects.Shape
 import kotlin.math.pow
 
 fun lighting(light: PointLight, comps: Computations, inShadow: Boolean = false): Color {
@@ -11,11 +12,12 @@ fun lighting(light: PointLight, comps: Computations, inShadow: Boolean = false):
     val point = comps.overPoint
     val normalV = comps.normalV
     val eyeV = comps.eyeV
-    return lighting(material, light, point, eyeV, normalV, inShadow)
+    val shape = comps.`object`
+    return lighting(material, light, point, eyeV, normalV, inShadow, shape)
 }
 
-fun lighting(material: Material, light: PointLight, point: Point, eyeV: Vector, normalV: Vector, inShadow: Boolean = false): Color {
-    val color = material.color(point)
+fun lighting(material: Material, light: PointLight, point: Point, eyeV: Vector, normalV: Vector, inShadow: Boolean = false, shape: Shape?): Color {
+    val color = if (shape != null) material.color(shape!!, point) else material.color(point)
     val effectiveColor = color * light.intensity
     val ambient = effectiveColor * material.ambient
     if (inShadow) {

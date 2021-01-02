@@ -119,8 +119,6 @@ class WorldStepDefinitions {
        shape = w.objects[0]
     }
 
-    lateinit var c: Color
-
     @When("c ← shade_hit\\(w, comps)")
     fun c_shade_hit_w_comps() {
         c = w.shadeHit(comps)

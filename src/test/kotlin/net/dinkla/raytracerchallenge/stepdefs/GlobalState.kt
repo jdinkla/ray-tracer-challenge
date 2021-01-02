@@ -4,6 +4,7 @@ import net.dinkla.raytracerchallenge.*
 import net.dinkla.raytracerchallenge.math.*
 import net.dinkla.raytracerchallenge.objects.Shape
 
+lateinit var c: Color
 lateinit var c1: Color
 lateinit var c2: Color
 lateinit var c3: Color

@@ -72,7 +72,7 @@ class MaterialsStepDefinitions {
 
     @When("result ← lighting\\(m, light, position, eyev, normalv)")
     fun result_lighting_m_light_position_eyev_normalv() {
-        result = lighting(m, light, position, eyev,  normalv)
+        result = lighting(m, light, position, eyev,  normalv, shape = null)
     }
 
     @Then("result = color\\({double}, {double}, {double})")
@@ -90,7 +90,7 @@ class MaterialsStepDefinitions {
 
     @When("result ← lighting\\(m, light, position, eyev, normalv, in_shadow)")
     fun result_lighting_m_light_position_eyev_normalv_in_shadow() {
-        result = lighting(m, light, position, eyev, normalv, inShadow)
+        result = lighting(m, light, position, eyev, normalv, inShadow, shape = null)
     }
 
     @Given("m.pattern ← stripe_pattern\\(white, black)")
@@ -120,12 +120,12 @@ class MaterialsStepDefinitions {
 
     @When("c1 ← lighting\\(m, light, p1, eyev, normalv, false)")
     fun c1_lighting_m_light_p1_eyev_normalv_false() {
-       c1 = lighting(m, light, p1, eyev, normalv, false)
+       c1 = lighting(m, light, p1, eyev, normalv, false, shape = null)
     }
 
     @When("c2 ← lighting\\(m, light, p2, eyev, normalv, false)")
     fun c2_lighting_m_light_p2_eyev_normalv_false() {
-        c2 = lighting(m, light, p2, eyev, normalv, false)
+        c2 = lighting(m, light, p2, eyev, normalv, false, shape = null)
     }
 
     @Then("c1 = color\\({int}, {int}, {int})")

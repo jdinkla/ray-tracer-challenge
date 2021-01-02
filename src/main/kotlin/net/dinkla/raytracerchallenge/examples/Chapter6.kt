@@ -36,7 +36,7 @@ private fun rayTrace(shape: Sphere, fileName: String) {
             val normal = hit.`object`.normal(point)
             val eye = -ray.direction
             val material = hit.`object`.material
-            lighting(material, light, point, eye, normal)
+            lighting(material, light, point, eye, normal, shape = hit.`object`)
         } else {
             Color.BLACK
         }

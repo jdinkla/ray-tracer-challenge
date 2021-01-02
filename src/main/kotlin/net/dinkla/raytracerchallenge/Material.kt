@@ -2,6 +2,7 @@ package net.dinkla.raytracerchallenge
 
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Point
+import net.dinkla.raytracerchallenge.objects.Shape
 
 data class Material(
     var ambient: Double = 0.1,
@@ -14,5 +15,7 @@ data class Material(
     var pattern: Pattern? = null
 
     fun color(point: Point): Color = if (pattern == null) color else pattern!!.at(point)
+
+    fun color(shape: Shape, point: Point): Color = if (pattern == null) color else pattern!!.at(shape, point)
 
 }
