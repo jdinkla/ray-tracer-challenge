@@ -46,6 +46,9 @@ class World {
         return hit != null && hit.t < v.magnitude()
     }
 
+    @Suppress("UnusedPrivateMember")
+    fun reflectedColor(comps: Computations): Color = Color.BLACK
+
     companion object {
         fun defaultWorld(): World {
             val w = World()

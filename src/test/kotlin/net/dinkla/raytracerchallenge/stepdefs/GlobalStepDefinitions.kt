@@ -27,6 +27,11 @@ class GlobalStepDefinitions {
         shape = Plane()
     }
 
+    @Given("shape.material.ambient ← {int}")
+    fun shape_material_ambient(int1: Int?) {
+        shape.material.ambient = int1!!.toDouble()
+    }
+
     @Given("direction ← vector\\({double}, {double}, {double})")
     fun direction_vector(double1: Double?, double2: Double?, double3: Double?) {
         direction = vector(double1!!, double2!!, double3!!)

@@ -1,5 +1,6 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
+import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -209,4 +210,16 @@ class WorldStepDefinitions {
        i = Intersection(int1!!.toDouble(), s2)
     }
 
+    lateinit var color: Color
+
+    @When("color ← reflected_color\\(w, comps)")
+    fun color_reflected_color_w_comps() {
+       color = w.reflectedColor(comps)
+    }
+
+    @Then("color = color\\({int}, {int}, {int})")
+    fun color_color(int1: Int?, int2: Int?, int3: Int?) {
+        val expected = Color(int1!!.toDouble(), int2!!.toDouble(), int3!!.toDouble())
+        assertEquals(expected, color)
+    }
 }
