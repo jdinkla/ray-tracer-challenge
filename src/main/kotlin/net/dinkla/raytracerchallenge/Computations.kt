@@ -12,6 +12,7 @@ class Computations(
     val point: Point,
     val eyeV: Vector,
     val normalV: Vector,
+    val reflectV: Vector = Vector.ORIGIN,
     val inside: Boolean = false
 ) : Intersection(t, `object`) {
 
@@ -26,10 +27,11 @@ class Computations(
             val point = ray.position(i.t)
             val eyeV = -ray.direction
             val normalV = i.`object`.normal(point)
+            val reflectV = ray.direction.reflect(normalV)
             if (normalV dot eyeV < 0.0) {
-                return Computations(i.t, i.`object`, point, eyeV, -normalV, true)
+                return Computations(i.t, i.`object`, point, eyeV, -normalV, reflectV, inside = true)
             }
-            return Computations(i.t, i.`object`, point, eyeV, normalV, false)
+            return Computations(i.t, i.`object`, point, eyeV, normalV, reflectV, inside = false)
         }
     }
 }

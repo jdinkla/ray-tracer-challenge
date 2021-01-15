@@ -53,7 +53,6 @@ class ViewTransformationsStepDefinitions {
     fun t_is_the_following_4x4_matrix(dataTable: List<List<Double>>) {
         val expected = Matrix(4)
         expected.from(dataTable)
-
         assertEquals(expected, t)
     }
 

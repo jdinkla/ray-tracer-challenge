@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.Ray
 import net.dinkla.raytracerchallenge.math.Matrix
-import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Transformation.translation
 import net.dinkla.raytracerchallenge.math.point
@@ -17,13 +16,6 @@ class RayStepDefinitions {
     @Given("origin ← point\\({double}, {double}, {double})")
     fun origin_point(double1: Double?, double2: Double?, double3: Double?) {
        origin = point(double1!!, double2!!, double3!!)
-    }
-
-    lateinit var direction: Point
-
-    @Given("direction ← vector\\({int}, {int}, {int})")
-    fun direction_vector(int1: Int?, int2: Int?, int3: Int?) {
-        direction = vector(int1!!, int2!!, int3!!)
     }
 
     @When("r ← ray\\(origin, direction)")

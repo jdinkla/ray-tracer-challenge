@@ -24,6 +24,7 @@ lateinit var from: Point
 lateinit var to: Point
 lateinit var origin: Point
 
+lateinit var direction: Vector
 lateinit var v: Vector
 lateinit var up: Vector
 lateinit var n: Vector

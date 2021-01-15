@@ -5,9 +5,9 @@ import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import net.dinkla.raytracerchallenge.Material
 import net.dinkla.raytracerchallenge.PointLight
-import net.dinkla.raytracerchallenge.patterns.StripePattern
 import net.dinkla.raytracerchallenge.lighting
 import net.dinkla.raytracerchallenge.math.*
+import net.dinkla.raytracerchallenge.patterns.StripePattern
 import org.junit.jupiter.api.Assertions.assertEquals
 
 class MaterialsStepDefinitions {
@@ -135,5 +135,9 @@ class MaterialsStepDefinitions {
         assertEquals(expected, c2)
     }
 
+    @Then("m.reflective = {double}")
+    fun m_reflective(double1: Double?) {
+        assertEquals(double1!!, m.reflective)
+    }
 
 }

@@ -166,4 +166,9 @@ class IntersectionsStepDefinitions {
         assertTrue(comps.point.z > comps.overPoint.z)
     }
 
+    @Then("comps.reflectv = vector\\({double}, {double}, {double})")
+    fun comps_reflectv_vector(double1: Double?, double2: Double?, double3: Double?) {
+        val expected = vector(double1!!, double2!!, double3!!)
+        assertEquals(expected, comps.reflectV)
+    }
 }
