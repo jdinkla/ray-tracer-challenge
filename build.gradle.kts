@@ -3,14 +3,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 group = "dinkla.net"
 version = "0.1-SNAPSHOT"
 
-val junitVersion = "5.6.2"
-val cucumberVersion = "6.9.1"
+val junitVersion = "5.7.1"
+val cucumberVersion = "6.10.3"
 val cucumberReport = "pretty"
-// val cucumberReport = "html:build/cucumber-report.html"
 
 plugins {
-    kotlin("jvm") version "1.4.21"
-    id("io.gitlab.arturbosch.detekt").version("1.15.0")
+    kotlin("jvm") version "1.4.32"
+    id("io.gitlab.arturbosch.detekt").version("1.16.0")
 }
 
 repositories {

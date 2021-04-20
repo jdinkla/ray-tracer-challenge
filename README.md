@@ -1,7 +1,12 @@
 # README
 
+You can run the cucumber tests with:
 
-The book
+```sh
+$ gradlew cucumber
+```
+
+# The book
 - [Book hompage](https://pragprog.com/titles/jbtracer/the-ray-tracer-challenge)
 - [Book at devtalk](https://devtalk.com/books/the-ray-tracer-challenge)
 - https://learning.oreilly.com/library/view/the-ray-tracer/9781680506778/
