@@ -1,12 +1,7 @@
-package net.dinkla.raytracerchallenge.examples.chapter10
+package net.dinkla.raytracerchallenge.examples
 
 import net.dinkla.raytracerchallenge.PointLight
 import net.dinkla.raytracerchallenge.World
-import net.dinkla.raytracerchallenge.examples.chapter7.getLeft
-import net.dinkla.raytracerchallenge.examples.chapter7.getMiddle
-import net.dinkla.raytracerchallenge.examples.chapter7.getRight
-import net.dinkla.raytracerchallenge.examples.chapter9.getFloor
-import net.dinkla.raytracerchallenge.examples.chapter9.getSky
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Transformation.rotationZ
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
@@ -53,6 +48,10 @@ private fun exampleWorldWithStripedSpheres(): World {
 }
 
 fun main() {
+    chapter10striped()
+}
+
+internal fun chapter10striped() {
     render(prefixFileName("chapter10_stripes.png"), exampleWorldWithStripedSpheres())
 }
 

@@ -1,4 +1,4 @@
-package net.dinkla.raytracerchallenge.examples.chapter6
+package net.dinkla.raytracerchallenge.examples
 
 import net.dinkla.raytracerchallenge.*
 import net.dinkla.raytracerchallenge.math.Color
@@ -6,7 +6,7 @@ import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.objects.Sphere
 import net.dinkla.raytracerchallenge.ui.PNG
 
-fun sphere(fileName: String) {
+private fun sphere(fileName: String) {
     val s = Sphere()
     s.material.color = Color(1.0, 0.2, 1.0)
     rayTrace(s, fileName)
@@ -45,5 +45,9 @@ private fun rayTrace(shape: Sphere, fileName: String) {
 }
 
 fun main() {
+    chapter6()
+}
+
+internal fun chapter6() {
     sphere(prefixFileName("sphere.png"))
 }

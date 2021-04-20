@@ -1,8 +1,6 @@
-package net.dinkla.raytracerchallenge.examples.chapter2
+package net.dinkla.raytracerchallenge.examples
 
 import net.dinkla.raytracerchallenge.Canvas
-import net.dinkla.raytracerchallenge.examples.chapter1.Environment
-import net.dinkla.raytracerchallenge.examples.chapter1.Projectile
 import net.dinkla.raytracerchallenge.math.*
 import net.dinkla.raytracerchallenge.prefixFileName
 import net.dinkla.raytracerchallenge.ui.PNG

@@ -22,21 +22,19 @@ class World {
     fun colorAt(ray: Ray): Color {
         val xs = intersect(ray)
         val hit = xs.hit()
-        if (hit == null) {
-            return Color.BLACK
+        return if (hit == null) {
+            Color.BLACK
         } else {
             val comps = Computations.prepare(hit, ray)
-            return shadeHit(comps)
+            shadeHit(comps)
         }
     }
 
-    fun render(camera: Camera): Canvas {
-        val canvas = Canvas(camera.hSize, camera.vSize)
-        canvas.loop { x: Int, y: Int ->
+    fun render(camera: Camera): Canvas = Canvas(camera.hSize, camera.vSize).apply {
+        loop { x: Int, y: Int ->
             val ray = camera.rayForPixel(x, y)
             colorAt(ray)
         }
-        return canvas
     }
 
     fun isShadowed(point: Point): Boolean {
@@ -50,23 +48,20 @@ class World {
     fun reflectedColor(comps: Computations): Color = Color.BLACK
 
     companion object {
-        fun defaultWorld(): World {
-            val w = World()
+        fun defaultWorld(): World = World().apply {
             val position = point(-10, 10, -10)
             val intensity = Color.WHITE
-            w.light = PointLight(position, intensity)
+            light = PointLight(position, intensity)
 
             val s1 = Sphere()
             s1.material.color = Color(0.8, 1.0, 0.6)
             s1.material.diffuse = 0.7
             s1.material.specular = 0.2
-            w.objects.add(s1)
+            objects.add(s1)
 
             val s2 = Sphere()
             s2.transform = scaling(0.5, 0.5, 0.5)
-            w.objects.add(s2)
-
-            return w
+            objects.add(s2)
         }
     }
 }

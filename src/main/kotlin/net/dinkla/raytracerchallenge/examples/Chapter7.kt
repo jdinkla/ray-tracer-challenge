@@ -1,4 +1,4 @@
-package net.dinkla.raytracerchallenge.examples.chapter7
+package net.dinkla.raytracerchallenge.examples
 
 import net.dinkla.raytracerchallenge.*
 import net.dinkla.raytracerchallenge.math.Color
@@ -78,7 +78,7 @@ fun getLeft(): Sphere = Sphere().apply {
     }
 }
 
-fun render(fileName: String) {
+private fun render(fileName: String) {
     val w = exampleWorld()
     val c = Camera(3840, 2160, Math.PI / 3.0).apply {
         transform = viewTransform(point(0.0, 1.5, -5.0), point(0, 1, 0))
@@ -92,6 +92,10 @@ fun render(fileName: String) {
 }
 
 fun main() {
+    chapter7()
+}
+
+internal fun chapter7() {
     render(prefixFileName("chapter7.png"))
 }
 

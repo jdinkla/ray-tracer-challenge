@@ -1,4 +1,4 @@
-package net.dinkla.raytracerchallenge.examples.chapter4
+package net.dinkla.raytracerchallenge.examples
 
 import net.dinkla.raytracerchallenge.Canvas
 import net.dinkla.raytracerchallenge.math.Color
@@ -10,7 +10,7 @@ import net.dinkla.raytracerchallenge.ui.PNG
 import java.io.File
 import javax.imageio.ImageIO
 
-fun clock(fileName: String) {
+private fun clock(fileName: String) {
     val canvas = Canvas(1080, 1080)
 
     canvas.loop { _: Int, _: Int ->
@@ -24,8 +24,8 @@ fun clock(fileName: String) {
 
     val colors = listOf(Color.RED, Color.GREEN, Color.BLUE)
 
-    var xMax = 2.02
-    var yMax = 2.02
+    val xMax = 2.02
+    val yMax = 2.02
 
     var idx = 0
     for (ignored in 0..11) {

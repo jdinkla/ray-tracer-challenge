@@ -1,9 +1,6 @@
-package net.dinkla.raytracerchallenge.examples.chapter9
+package net.dinkla.raytracerchallenge.examples
 
 import net.dinkla.raytracerchallenge.*
-import net.dinkla.raytracerchallenge.examples.chapter7.getLeft
-import net.dinkla.raytracerchallenge.examples.chapter7.getMiddle
-import net.dinkla.raytracerchallenge.examples.chapter7.getRight
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.Transformation.translation
@@ -44,7 +41,7 @@ fun getSky(): Plane = Plane().apply {
     }
 }
 
-fun render(fileName: String) {
+private fun render(fileName: String) {
     val w = exampleWorld()
     val c = Camera(3840, 2160, Math.PI / 3.0).apply {
         transform = viewTransform(point(0.0, 1.5, -5.0), point(0, 1, 0))
@@ -58,5 +55,9 @@ fun render(fileName: String) {
 }
 
 fun main() {
+    chapter9()
+}
+
+internal fun chapter9() {
     render(prefixFileName("chapter9.png"))
 }

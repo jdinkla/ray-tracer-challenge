@@ -12,5 +12,4 @@ class GradientPattern(val a: Color, val b: Color) : Pattern() {
         val fraction = point.x - floor(point.x)
         return a + distance * fraction
     }
-
 }

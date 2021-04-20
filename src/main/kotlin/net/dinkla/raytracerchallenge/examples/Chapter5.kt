@@ -1,4 +1,4 @@
-package net.dinkla.raytracerchallenge.examples.chapter5
+package net.dinkla.raytracerchallenge.examples
 
 import net.dinkla.raytracerchallenge.Canvas
 import net.dinkla.raytracerchallenge.Ray

@@ -1,11 +1,6 @@
-package net.dinkla.raytracerchallenge.examples.chapter10
+package net.dinkla.raytracerchallenge.examples
 
 import net.dinkla.raytracerchallenge.*
-import net.dinkla.raytracerchallenge.examples.chapter7.getLeft
-import net.dinkla.raytracerchallenge.examples.chapter7.getMiddle
-import net.dinkla.raytracerchallenge.examples.chapter7.getRight
-import net.dinkla.raytracerchallenge.examples.chapter9.getFloor
-import net.dinkla.raytracerchallenge.examples.chapter9.getSky
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Transformation.rotationZ
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
@@ -68,6 +63,10 @@ fun render(fileName: String, w: World) {
     println("rendering took: ${timeInMillis / 1000.0} seconds")
 }
 
-fun main() {
+internal fun chapter10() {
     render(prefixFileName("chapter10.png"), exampleWorldWithAllPatterns())
+}
+
+fun main() {
+    chapter10()
 }
