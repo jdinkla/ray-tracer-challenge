@@ -5,7 +5,6 @@ import net.dinkla.raytracerchallenge.math.Point
 import kotlin.math.floor
 
 class GradientPattern(val a: Color, val b: Color) : Pattern() {
-
     private val distance = b - a
 
     override fun atInPatternSpace(point: Point): Color {

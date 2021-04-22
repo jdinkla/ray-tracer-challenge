@@ -60,9 +60,9 @@ class Matrix(val n: Int) {
         return result
     }
 
-    fun index(i: Int, j: Int) = n * i + j
+    private fun index(i: Int, j: Int) = n * i + j
 
-    inline fun loop(f: (Int, Int) -> Unit) {
+    private inline fun loop(f: (Int, Int) -> Unit) {
         for (i in 0 until n) {
             for (j in 0 until n) {
                 f(i, j)
@@ -189,5 +189,4 @@ class Matrix(val n: Int) {
             return m
         }
     }
-
 }

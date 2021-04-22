@@ -6,9 +6,7 @@ class Intersections(vararg val intersections: Intersection) {
 
     operator fun get(i: Int): Intersection = intersections[i]
 
-    fun hit(): Intersection? {
-        return intersections.filter { it.t > 0.0 }.minByOrNull { it.t }
-    }
+    fun hit(): Intersection? = intersections.filter { it.t > 0.0 }.minByOrNull { it.t }
 
     companion object {
 

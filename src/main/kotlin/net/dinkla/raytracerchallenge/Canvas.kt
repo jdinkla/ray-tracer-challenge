@@ -10,14 +10,14 @@ class Canvas(val width: Int, val height: Int) {
     }
 
     operator fun get(x: Int, y: Int): Color {
-        assert(0 <= x && x < width)
-        assert(0 <= y && y < height)
+        assert(x in 0 until width)
+        assert(y in 0 until height)
         return array[y * width + x]
     }
 
     operator fun set(x: Int, y: Int, c: Color) {
-        assert(0 <= x && x < width)
-        assert(0 <= y && y < height)
+        assert(x in 0 until width)
+        assert(y in 0 until height)
         array[index(x, y)] = c
     }
 
@@ -37,6 +37,5 @@ class Canvas(val width: Int, val height: Int) {
         }
     }
 
-    fun index(x: Int, y: Int) = y * width + x
-
+    private fun index(x: Int, y: Int) = y * width + x
 }

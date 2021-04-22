@@ -6,7 +6,6 @@ import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.objects.Shape
 
 abstract class Pattern {
-
     var transform: Matrix = Matrix.identity4
 
     abstract fun atInPatternSpace(point: Point): Color

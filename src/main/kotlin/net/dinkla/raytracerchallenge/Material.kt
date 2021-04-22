@@ -12,7 +12,6 @@ data class Material(
     var shininess: Double = 200.0,
     var reflective: Double = 0.0
 ) {
-
     var color: Color = Color.WHITE
 
     var pattern: Pattern? = null
@@ -20,5 +19,4 @@ data class Material(
     fun color(point: Point): Color = if (pattern == null) color else pattern!!.at(point)
 
     fun color(shape: Shape, point: Point): Color = if (pattern == null) color else pattern!!.at(shape, point)
-
 }

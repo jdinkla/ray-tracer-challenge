@@ -9,12 +9,12 @@ internal class ColorTest {
 
     @Test
     fun `toByte() works for BLACK`() {
-        assertEquals(Triple(0, 0, 0), BLACK.toInt())
+        assertEquals(Triple(0, 0, 0), BLACK.toRGB())
     }
 
     @Test
     fun `toByte() works for WHITE`() {
-        assertEquals(Triple(255, 255, 255), WHITE.toInt())
+        assertEquals(Triple(255, 255, 255), WHITE.toRGB())
     }
 
     @Test

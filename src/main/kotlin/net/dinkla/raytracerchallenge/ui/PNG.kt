@@ -11,7 +11,7 @@ object PNG {
 
         for (y in 0 until canvas.height) {
             for (x in 0 until canvas.width) {
-                img.setRGB(x, y, canvas[x, y].toSingleInt())
+                img.setRGB(x, y, canvas[x, y].toInt())
             }
         }
         return img
@@ -20,7 +20,4 @@ object PNG {
     fun save(canvas: Canvas, fileName: String) {
         ImageIO.write(create(canvas), "png", File(fileName))
     }
-
-
-
 }

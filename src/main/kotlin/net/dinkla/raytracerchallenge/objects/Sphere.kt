@@ -26,10 +26,10 @@ class Sphere : Shape() {
     override fun normalInObjectSpace(point: Point): Vector = point.toVector()
 
     override fun equals(other: Any?): Boolean {
-        if (null == other || other !is Sphere) {
-            return false
+        return if (null == other || other !is Sphere) {
+            false
         } else {
-            return material == other.material && transform == other.transform
+            material == other.material && transform == other.transform
         }
     }
 

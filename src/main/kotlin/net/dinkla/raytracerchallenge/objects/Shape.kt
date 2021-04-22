@@ -15,6 +15,7 @@ abstract class Shape {
     var transform: Matrix = Matrix.identity4
 
     abstract fun intersectInObjectSpace(ray: Ray): Intersections
+
     abstract fun normalInObjectSpace(point: Point): Vector
 
     fun intersect(ray: Ray): Intersections {

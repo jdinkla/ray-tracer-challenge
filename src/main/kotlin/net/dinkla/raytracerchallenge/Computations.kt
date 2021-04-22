@@ -16,11 +16,7 @@ class Computations(
     val inside: Boolean = false
 ) : Intersection(t, `object`) {
 
-    val overPoint: Point
-
-    init {
-        overPoint = point + normalV * EPSILON
-    }
+    val overPoint: Point = point + normalV * EPSILON
 
     companion object {
         fun prepare(i: Intersection, ray: Ray): Computations {

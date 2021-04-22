@@ -18,7 +18,6 @@ class PPM private constructor(val contents: String) {
     }
 
     companion object {
-
         const val maxLineLength = 70
 
         fun create(c: Canvas): PPM {
@@ -30,7 +29,7 @@ class PPM private constructor(val contents: String) {
                     var sep = ""
                     val app = Appender(this)
                     for (x in 0 until c.width) {
-                        val (r, g, b) = c[x, y].toInt()
+                        val (r, g, b) = c[x, y].toRGB()
                         app.append(sep)
                         app.append("$r ")
                         app.append("$g ")

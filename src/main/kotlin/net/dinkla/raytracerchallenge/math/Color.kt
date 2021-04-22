@@ -23,14 +23,14 @@ data class Color(val red: Double, val green: Double, val blue: Double) {
 
     override fun hashCode(): Int = Objects.hash(red, green, blue)
 
-    fun toInt(): Triple<Int, Int, Int> {
+    fun toRGB(): Triple<Int, Int, Int> {
         val r = (clamp(red) * 255).toInt()
         val g = (clamp(green) * 255).toInt()
         val b = (clamp(blue) * 255).toInt()
         return Triple(r, g, b)
     }
 
-    fun toSingleInt(): Int {
+    fun toInt(): Int {
         val r = (clamp(red) * 255).toInt()
         val g = (clamp(green) * 255).toInt()
         val b = (clamp(blue) * 255).toInt()
@@ -57,6 +57,5 @@ data class Color(val red: Double, val green: Double, val blue: Double) {
             val bf = convert(4)
             return Color(rf, gf, bf)
         }
-
     }
 }
