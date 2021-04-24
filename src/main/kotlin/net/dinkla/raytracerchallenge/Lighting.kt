@@ -17,7 +17,7 @@ fun lighting(light: PointLight, comps: Computations, inShadow: Boolean = false):
 }
 
 fun lighting(material: Material, light: PointLight, point: Point, eyeV: Vector, normalV: Vector, inShadow: Boolean = false, shape: Shape?): Color {
-    val color = if (shape != null) material.color(shape!!, point) else material.color(point)
+    val color = if (shape != null) material.color(shape, point) else material.color(point)
     val effectiveColor = color * light.intensity
     val ambient = effectiveColor * material.ambient
     if (inShadow) {
