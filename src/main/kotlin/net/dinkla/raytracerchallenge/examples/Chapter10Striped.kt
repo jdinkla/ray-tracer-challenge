@@ -47,12 +47,12 @@ private fun exampleWorldWithStripedSpheres(): World {
     return w
 }
 
-fun main() {
-    chapter10striped()
+internal fun chapter10striped() {
+    render10(prefixFileName("chapter10_stripes.png"), exampleWorldWithStripedSpheres())
 }
 
-internal fun chapter10striped() {
-    render(prefixFileName("chapter10_stripes.png"), exampleWorldWithStripedSpheres())
+fun main() {
+    chapter10striped()
 }
 
 

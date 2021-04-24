@@ -9,7 +9,7 @@ import net.dinkla.raytracerchallenge.objects.Plane
 import net.dinkla.raytracerchallenge.ui.PNG
 import kotlin.system.measureTimeMillis
 
-private fun exampleWorld(): World {
+fun exampleWorld9(): World {
     val w = World()
 
     val floor = getFloor()
@@ -42,7 +42,7 @@ fun getSky(): Plane = Plane().apply {
 }
 
 private fun render(fileName: String) {
-    val w = exampleWorld()
+    val w = exampleWorld9()
     val c = Camera(3840, 2160, Math.PI / 3.0).apply {
         transform = viewTransform(point(0.0, 1.5, -5.0), point(0, 1, 0))
     }

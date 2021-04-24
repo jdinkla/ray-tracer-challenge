@@ -51,7 +51,7 @@ private fun exampleWorldWithAllPatterns(): World {
     return w
 }
 
-fun render(fileName: String, w: World) {
+fun render10(fileName: String, w: World) {
     val c = Camera(3840, 2160, Math.PI / 3.0).apply {
         transform = viewTransform(point(0.0, 1.5, -5.0), point(0, 1, 0))
     }
@@ -64,7 +64,7 @@ fun render(fileName: String, w: World) {
 }
 
 internal fun chapter10() {
-    render(prefixFileName("chapter10.png"), exampleWorldWithAllPatterns())
+    render10(prefixFileName("chapter10.png"), exampleWorldWithAllPatterns())
 }
 
 fun main() {
