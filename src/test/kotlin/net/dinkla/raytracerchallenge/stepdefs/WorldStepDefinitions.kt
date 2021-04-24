@@ -180,6 +180,11 @@ class WorldStepDefinitions {
         color = w.shadeHit(comps)
     }
 
+    @When("color ← reflected_color\\(w, comps, {int})")
+    fun color_reflected_color_w_comps(int1: Int?) {
+        color = w.reflectedColor(comps, int1!!)
+    }
+
     @Then("color = color\\({double}, {double}, {double})")
     fun color_color(double1: Double?, double2: Double?, double3: Double?) {
         val expected = Color(double1!!, double2!!, double3!!)
@@ -196,4 +201,36 @@ class WorldStepDefinitions {
     fun shape_is_added_to_w() {
         w.objects.add(shape)
     }
+
+    lateinit var lowerPlane: Plane
+
+    @Given("lower ← plane with:")
+    fun lower_plane_with(dataTable: List<List<String>>) {
+        lowerPlane = Plane()
+        lowerPlane.with(dataTable)
+    }
+
+    @Given("lower is added to w")
+    fun lower_is_added_to_w() {
+        w.objects.add(lowerPlane)
+    }
+
+    lateinit var upperPlane: Plane
+
+    @Given("upper ← plane with:")
+    fun upper_plane_with(dataTable: List<List<String>>) {
+        upperPlane = Plane()
+        upperPlane.with(dataTable)
+    }
+
+    @Given("upper is added to w")
+    fun upper_is_added_to_w() {
+        w.objects.add(upperPlane)
+    }
+
+    @Then("color_at\\(w, r) should terminate successfully")
+    fun color_at_w_r_should_terminate_successfully() {
+        w.colorAt(r)
+    }
+
 }

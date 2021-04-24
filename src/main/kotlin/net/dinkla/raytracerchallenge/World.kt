@@ -8,6 +8,8 @@ import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.objects.Shape
 import net.dinkla.raytracerchallenge.objects.Sphere
 
+const val MAX_RECURSION = 5
+
 class World {
 
     val objects: MutableList<Shape> = mutableListOf()
@@ -18,20 +20,20 @@ class World {
         return Intersections.combine(xss)
     }
 
-    fun shadeHit(comps: Computations): Color {
+    fun shadeHit(comps: Computations, remaining: Int = MAX_RECURSION): Color {
         val surface = lighting(light, comps, isShadowed(comps.overPoint))
-        val reflected = reflectedColor(comps)
+        val reflected = reflectedColor(comps, remaining)
         return surface + reflected
     }
 
-    fun colorAt(ray: Ray): Color {
+    fun colorAt(ray: Ray, remaining: Int = MAX_RECURSION): Color {
         val xs = intersect(ray)
         val hit = xs.hit()
         return if (hit == null) {
             Color.BLACK
         } else {
             val comps = Computations.prepare(hit, ray)
-            shadeHit(comps)
+            shadeHit(comps, remaining)
         }
     }
 
@@ -49,12 +51,12 @@ class World {
         return hit != null && hit.t < v.magnitude()
     }
 
-    fun reflectedColor(comps: Computations): Color {
-        if (comps.`object`.material.reflective < Approx.EPSILON) {
+    fun reflectedColor(comps: Computations, remaining: Int = MAX_RECURSION): Color {
+        if (remaining <= 0 || comps.`object`.material.reflective < Approx.EPSILON) {
             return Color.BLACK
         }
         val reflectRay = Ray(comps.overPoint, comps.reflectV)
-        val color = colorAt(reflectRay)
+        val color = colorAt(reflectRay, remaining - 1)
         return color * comps.`object`.material.reflective
     }
 
