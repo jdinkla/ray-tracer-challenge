@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URI
 
 group = "dinkla.net"
 version = "0.1-SNAPSHOT"
@@ -6,6 +7,7 @@ version = "0.1-SNAPSHOT"
 val junitVersion = "5.7.1"
 val cucumberVersion = "6.10.3"
 val cucumberReport = "pretty"
+val kotlinxCoroutinesVersion = "1.4.2"
 
 plugins {
     kotlin("jvm") version "1.4.32"
@@ -15,9 +17,14 @@ plugins {
 repositories {
     mavenCentral()
     jcenter()
+    maven {
+        url = URI.create("https://kotlin.bintray.com/kotlinx")
+    }
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutinesVersion}")
+
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")

@@ -1,5 +1,8 @@
 package net.dinkla.raytracerchallenge
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import net.dinkla.raytracerchallenge.math.Approx
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Point
@@ -38,9 +41,19 @@ class World {
     }
 
     fun render(camera: Camera): Canvas = Canvas(camera.hSize, camera.vSize).apply {
-        loop { x: Int, y: Int ->
-            val ray = camera.rayForPixel(x, y)
-            colorAt(ray)
+        val d = 4
+        runBlocking(Dispatchers.Default) {
+            for (y in 0 until height step d) {
+                for (x in 0 until width step d) {
+                    launch {
+                        for (sy in 0 until d) {
+                            for (sx in 0 until d) {
+                                set(x+sx, y+sy, colorAt(camera.rayForPixel(x+sx, y+sy)))
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
