@@ -17,6 +17,7 @@ class World {
 
     val objects: MutableList<Shape> = mutableListOf()
     var light: PointLight = PointLight()
+    private val gridSize = 4
 
     fun intersect(ray: Ray): Intersections {
         val xss = objects.map { it.intersect(ray) }
@@ -40,14 +41,26 @@ class World {
         }
     }
 
-    fun render(camera: Camera): Canvas = Canvas(camera.hSize, camera.vSize).apply {
-        val d = 4
+    fun render(camera: Camera): Canvas = if (camera.hSize % gridSize == 0 && camera.vSize % gridSize == 0) {
+        renderInParallel(camera)
+    } else {
+        renderSequential(camera)
+    }
+
+    fun renderSequential(camera: Camera): Canvas = Canvas(camera.hSize, camera.vSize).apply {
+        loop { x: Int, y: Int ->
+            val ray = camera.rayForPixel(x, y)
+            colorAt(ray)
+        }
+    }
+
+    fun renderInParallel(camera: Camera): Canvas = Canvas(camera.hSize, camera.vSize).apply {
         runBlocking(Dispatchers.Default) {
-            for (y in 0 until height step d) {
-                for (x in 0 until width step d) {
+            for (y in 0 until height step gridSize) {
+                for (x in 0 until width step gridSize) {
                     launch {
-                        for (sy in 0 until d) {
-                            for (sx in 0 until d) {
+                        for (sy in 0 until gridSize) {
+                            for (sx in 0 until gridSize) {
                                 set(x+sx, y+sy, colorAt(camera.rayForPixel(x+sx, y+sy)))
                             }
                         }
