@@ -1,5 +1,6 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
+import io.cucumber.datatable.DataTable
 import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
@@ -8,54 +9,12 @@ import net.dinkla.raytracerchallenge.Intersection
 import net.dinkla.raytracerchallenge.PointLight
 import net.dinkla.raytracerchallenge.World
 import net.dinkla.raytracerchallenge.math.Color
-import net.dinkla.raytracerchallenge.math.Matrix
-import net.dinkla.raytracerchallenge.math.Transformation.scaling
-import net.dinkla.raytracerchallenge.math.Transformation.translation
-import net.dinkla.raytracerchallenge.math.Tuple
+import net.dinkla.raytracerchallenge.objects.Plane
 import net.dinkla.raytracerchallenge.objects.Shape
 import net.dinkla.raytracerchallenge.objects.Sphere
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
-
-fun tupleWith(s: String): Tuple {
-    val parts = s.substring(1, s.length-1).split(",")
-    val doubles = parts.map { it.toDouble() }
-    assert(doubles.size == 3)
-    return Tuple(doubles[0], doubles[1], doubles[2], 0.0)
-}
-
-fun colorWith(s: String): Color {
-    val t = tupleWith(s)
-    return Color(t.x, t.y, t.z)
-}
-
-fun transformWith(s: String): Matrix {
-    val parts = s.split("(")
-    return when (parts[0]) {
-        "scaling" -> {
-            val t = tupleWith("(" + parts[1])
-            scaling(t.x, t.y, t.z)
-        }
-        "translation" -> {
-            val t = tupleWith("(" + parts[1])
-            translation(t.x, t.y, t.z)
-        }
-        else -> throw IllegalArgumentException()
-    }
-}
-
-fun Sphere.with(dataTable: List<List<String>>) {
-    for (line in dataTable) {
-        when (line[0]) {
-            "material.color" -> material.color = colorWith(line[1])
-            "material.diffuse" -> material.diffuse = line[1].toDouble()
-            "material.specular" -> material.specular = line[1].toDouble()
-            "transform" -> transform = transformWith(line[1])
-            else -> throw IllegalArgumentException()
-        }
-    }
-}
 
 class WorldStepDefinitions {
 
@@ -217,9 +176,20 @@ class WorldStepDefinitions {
        color = w.reflectedColor(comps)
     }
 
-    @Then("color = color\\({int}, {int}, {int})")
-    fun color_color(int1: Int?, int2: Int?, int3: Int?) {
-        val expected = Color(int1!!.toDouble(), int2!!.toDouble(), int3!!.toDouble())
+    @Then("color = color\\({double}, {double}, {double})")
+    fun color_color(double1: Double?, double2: Double?, double3: Double?) {
+        val expected = Color(double1!!, double2!!, double3!!)
         assertEquals(expected, color)
+    }
+
+    @Given("shape ← plane with:")
+    fun shape_plane_with(dataTable: List<List<String>>) {
+        shape = Plane()
+        shape.with(dataTable)
+    }
+
+    @Given("shape is added to w")
+    fun shape_is_added_to_w() {
+        w.objects.add(shape)
     }
 }

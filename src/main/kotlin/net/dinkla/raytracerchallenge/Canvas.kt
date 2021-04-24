@@ -5,14 +5,14 @@ import net.dinkla.raytracerchallenge.math.Color.Companion.BLACK
 
 class Canvas(val width: Int, val height: Int) {
 
-    private val array = Array(width * height) {
+    private val array: Array<Color> = Array(width * height) {
         BLACK
     }
 
     operator fun get(x: Int, y: Int): Color {
         assert(x in 0 until width)
         assert(y in 0 until height)
-        return array[y * width + x]
+        return array[index(x, y)]
     }
 
     operator fun set(x: Int, y: Int, c: Color) {

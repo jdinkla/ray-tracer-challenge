@@ -1,5 +1,6 @@
 package net.dinkla.raytracerchallenge
 
+import net.dinkla.raytracerchallenge.math.Approx
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Transformation.scaling
@@ -44,8 +45,14 @@ class World {
         return hit != null && hit.t < v.magnitude()
     }
 
-    @Suppress("UnusedPrivateMember")
-    fun reflectedColor(comps: Computations): Color = Color.BLACK
+    fun reflectedColor(comps: Computations): Color {
+        if (comps.`object`.material.reflective < Approx.EPSILON) {
+            return Color.BLACK
+        }
+        val reflectRay = Ray(comps.overPoint, comps.reflectV)
+        val color = colorAt(reflectRay)
+        return color * comps.`object`.material.reflective
+    }
 
     companion object {
         fun defaultWorld(): World = World().apply {
