@@ -18,7 +18,11 @@ class World {
         return Intersections.combine(xss)
     }
 
-    fun shadeHit(comps: Computations): Color = lighting(light, comps, isShadowed(comps.overPoint))
+    fun shadeHit(comps: Computations): Color {
+        val surface = lighting(light, comps, isShadowed(comps.overPoint))
+        val reflected = reflectedColor(comps)
+        return surface + reflected
+    }
 
     fun colorAt(ray: Ray): Color {
         val xs = intersect(ray)

@@ -1,6 +1,5 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
-import io.cucumber.datatable.DataTable
 import io.cucumber.java.PendingException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
@@ -174,6 +173,11 @@ class WorldStepDefinitions {
     @When("color ← reflected_color\\(w, comps)")
     fun color_reflected_color_w_comps() {
        color = w.reflectedColor(comps)
+    }
+
+    @When("color ← shade_hit\\(w, comps)")
+    fun color_shade_hit_w_comps() {
+        color = w.shadeHit(comps)
     }
 
     @Then("color = color\\({double}, {double}, {double})")
