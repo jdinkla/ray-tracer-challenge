@@ -10,7 +10,7 @@ val cucumberReport = "pretty"
 val kotlinxCoroutinesVersion = "1.4.2"
 
 plugins {
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.31"
     id("io.gitlab.arturbosch.detekt").version("1.16.0")
 }
 
@@ -38,7 +38,7 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "16"
 }
 
 configurations {}
