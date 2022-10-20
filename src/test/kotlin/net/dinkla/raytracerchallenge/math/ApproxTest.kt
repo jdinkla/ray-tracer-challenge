@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Assertions.*
 internal class ApproxTest {
 
     @Test
-    fun `approx is true`() {
+    fun `isDifferenceSmall should be true`() {
         assertTrue(isDifferenceSmall(0.2672612419124244, 0.26726))
     }
 
     @Test
-    fun `approx is false`() {
+    fun `isDifferenceSmall should be false`() {
         assertFalse(isDifferenceSmall(0.2672612419124244, 0.26725))
     }
 

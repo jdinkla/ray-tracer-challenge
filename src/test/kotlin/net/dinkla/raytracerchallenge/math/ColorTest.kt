@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test
 internal class ColorTest {
 
     @Test
-    fun `toByte() works for BLACK`() {
+    fun `toRGB() works for BLACK`() {
         assertEquals(Triple(0, 0, 0), BLACK.toRGB())
     }
 
     @Test
-    fun `toByte() works for WHITE`() {
+    fun `toRGB() works for WHITE`() {
         assertEquals(Triple(255, 255, 255), WHITE.toRGB())
     }
 
