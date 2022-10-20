@@ -4,14 +4,14 @@ import java.net.URI
 group = "dinkla.net"
 version = "0.1-SNAPSHOT"
 
-val junitVersion = "5.7.1"
-val cucumberVersion = "6.10.3"
+val junitVersion = "5.9.0"
+val cucumberVersion = "7.8.1"
 val cucumberReport = "pretty"
-val kotlinxCoroutinesVersion = "1.4.2"
+val kotlinxCoroutinesVersion = "1.6.4"
 
 plugins {
-    kotlin("jvm") version "1.5.31"
-    id("io.gitlab.arturbosch.detekt").version("1.16.0")
+    kotlin("jvm") version "1.7.20"
+    id("io.gitlab.arturbosch.detekt").version("1.21.0")
 }
 
 repositories {
