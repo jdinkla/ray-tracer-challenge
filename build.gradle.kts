@@ -8,9 +8,11 @@ val junitVersion = "5.9.0"
 val cucumberVersion = "7.8.1"
 val cucumberReport = "pretty"
 val kotlinxCoroutinesVersion = "1.6.4"
+val kotestVersion = "5.5.1"
 
 plugins {
     kotlin("jvm") version "1.7.20"
+    id("io.kotest.multiplatform") version "5.4.2"
     id("io.gitlab.arturbosch.detekt").version("1.21.0")
 }
 
@@ -25,20 +27,22 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutinesVersion}")
 
-    testImplementation(kotlin("test-junit5"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
-
+    testImplementation(kotlin("test"))
+    testImplementation(kotlin("test-common"))
+    testImplementation(kotlin("test-annotations-common"))
+    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
+    testImplementation("io.kotest:kotest-framework-engine:$kotestVersion")
     testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
     testImplementation("io.cucumber:cucumber-junit:$cucumberVersion")
 }
 
-tasks.test {
+tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "16"
+    kotlinOptions.jvmTarget = "17"
 }
 
 configurations {}
