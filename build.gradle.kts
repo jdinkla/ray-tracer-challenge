@@ -7,25 +7,24 @@ version = "0.1-SNAPSHOT"
 val junitVersion = "5.9.0"
 val cucumberVersion = "7.8.1"
 val cucumberReport = "pretty"
-val kotlinxCoroutinesVersion = "1.6.4"
-val kotestVersion = "5.5.1"
+val kotlinxCoroutinesVersion = "1.7.3"
+val kotestVersion = "5.8.0"
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.9.21"
     id("io.kotest.multiplatform") version "5.4.2"
-    id("io.gitlab.arturbosch.detekt").version("1.21.0")
+    id("io.gitlab.arturbosch.detekt").version("1.23.4")
 }
 
 repositories {
     mavenCentral()
-    jcenter()
     maven {
         url = URI.create("https://kotlin.bintray.com/kotlinx")
     }
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutinesVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-common"))
@@ -41,7 +40,7 @@ tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
 }
 
@@ -55,10 +54,10 @@ task("cucumber") {
     dependsOn("assemble", "compileTestJava")
     doLast {
         javaexec {
-            main = "io.cucumber.core.cli.Main"
+            setMain("io.cucumber.core.cli.Main")
             classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
             args = listOf("--plugin", cucumberReport, "--glue", "net.dinkla.raytracerchallenge.stepdefs", "src/test/resources")
-            jvmArgs = listOf( "-Dfile.encoding=utf-8", "-ea")
+            jvmArgs = listOf("-Dfile.encoding=utf-8", "-ea")
         }
     }
 }

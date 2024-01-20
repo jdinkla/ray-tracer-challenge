@@ -6,9 +6,8 @@ import net.dinkla.raytracerchallenge.math.Transformation
 import net.dinkla.raytracerchallenge.math.Tuple
 import net.dinkla.raytracerchallenge.objects.Shape
 
-
 private fun tupleWith(s: String): Tuple {
-    val parts = s.substring(1, s.length-1).split(",")
+    val parts = s.substring(1, s.length - 1).split(",")
     val doubles = parts.map { it.toDouble() }
     assert(doubles.size == 3)
     return Tuple(doubles[0], doubles[1], doubles[2], 0.0)
@@ -30,7 +29,7 @@ private fun transformWith(s: String): Matrix {
             val t = tupleWith("(" + parts[1])
             Transformation.translation(t.x, t.y, t.z)
         }
-        else -> throw IllegalArgumentException()
+        else -> throw IllegalArgumentException("unknown transformation: ${parts[0]}")
     }
 }
 
@@ -42,7 +41,7 @@ fun Shape.with(dataTable: List<List<String>>) {
             "material.specular" -> material.specular = line[1].toDouble()
             "material.reflective" -> material.reflective = line[1].toDouble()
             "transform" -> transform = transformWith(line[1])
-            else -> throw IllegalArgumentException()
+            else -> throw IllegalArgumentException(" unknown property: ${line[0]}")
         }
     }
 }
