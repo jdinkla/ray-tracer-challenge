@@ -2,9 +2,7 @@
 
 You can run the cucumber tests with:
 
-```sh
-$ gradlew cucumber
-```
+  $ ./gradlew cucumber
 
 # The book
 - [Book hompage](https://pragprog.com/titles/jbtracer/the-ray-tracer-challenge)

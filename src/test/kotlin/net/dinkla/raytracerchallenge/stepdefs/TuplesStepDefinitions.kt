@@ -14,12 +14,16 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import kotlin.math.sqrt
 
 class TuplesStepDefinitions {
-
     lateinit var a1: Tuple
     lateinit var a2: Tuple
 
     @Given("a ← tuple\\({double}, {double}, {double}, {double})")
-    fun a_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?) {
+    fun a_tuple(
+        double1: Double?,
+        double2: Double?,
+        double3: Double?,
+        double4: Double?,
+    ) {
         a_tuple = Tuple(double1!!, double2!!, double3!!, double4!!)
     }
 
@@ -64,42 +68,79 @@ class TuplesStepDefinitions {
     }
 
     @Then("p = tuple\\({int}, {int}, {int}, {int})")
-    fun p_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+    fun p_tuple(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+        int4: Int?,
+    ) {
         assertEquals(p, tuple(int1!!, int2!!, int3!!, int4!!))
     }
 
     @Given("v ← vector\\({int}, {int}, {int})")
-    fun v_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun v_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         v = vector(int1!!, int2!!, int3!!)
     }
 
     @Then("v = tuple\\({int}, {int}, {int}, {int})")
-    fun v_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+    fun v_tuple(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+        int4: Int?,
+    ) {
         assertEquals(v, tuple(int1!!, int2!!, int3!!, int4!!))
     }
 
     @Given("a1 ← tuple\\({int}, {int}, {int}, {int})")
-    fun a1_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+    fun a1_tuple(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+        int4: Int?,
+    ) {
         a1 = tuple(int1!!, int2!!, int3!!, int4!!)
     }
 
     @Given("a2 ← tuple\\({int}, {int}, {int}, {int})")
-    fun a2_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+    fun a2_tuple(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+        int4: Int?,
+    ) {
         a2 = tuple(int1!!, int2!!, int3!!, int4!!)
     }
 
     @Then("a1 + a2 = tuple\\({int}, {int}, {int}, {int})")
-    fun a1_a2_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+    fun a1_a2_tuple(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+        int4: Int?,
+    ) {
         assertEquals(a1 + a2, tuple(int1!!, int2!!, int3!!, int4!!))
-     }
+    }
 
     @Then("p1 - p2 = vector\\({int}, {int}, {int})")
-    fun p1_p2_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun p1_p2_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         assertEquals(p1 - p2, vector(int1!!, int2!!, int3!!))
     }
 
     @Then("p - v = point\\({int}, {int}, {int})")
-    fun p_v_point(int1: Int?, int2: Int?, int3: Int?) {
+    fun p_v_point(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         assertEquals(p - v, point(int1!!, int2!!, int3!!))
     }
 
@@ -107,52 +148,94 @@ class TuplesStepDefinitions {
     lateinit var v2: Tuple
 
     @Given("v1 ← vector\\({int}, {int}, {int})")
-    fun v1_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun v1_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         v1 = vector(int1!!, int2!!, int3!!)
     }
 
     @Given("v2 ← vector\\({int}, {int}, {int})")
-    fun v2_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun v2_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         v2 = vector(int1!!, int2!!, int3!!)
     }
 
     @Then("v1 - v2 = vector\\({int}, {int}, {int})")
-    fun v1_v2_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun v1_v2_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         assertEquals(v1 - v2, vector(int1!!, int2!!, int3!!))
     }
 
     lateinit var zero: Tuple
 
     @Given("zero ← vector\\({int}, {int}, {int})")
-    fun zero_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun zero_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         zero = vector(int1!!, int2!!, int3!!)
     }
 
     @Then("zero - v = vector\\({int}, {int}, {int})")
-    fun zero_v_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun zero_v_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         assertEquals(zero - v, vector(int1!!, int2!!, int3!!))
     }
 
     @Then("-a = tuple\\({int}, {int}, {int}, {int})")
-    fun a_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+    fun a_tuple(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+        int4: Int?,
+    ) {
         assertEquals(-a_tuple, tuple(int1!!, int2!!, int3!!, int4!!))
     }
 
     @Then("a * {double} = tuple\\({double}, {double}, {double}, {double})")
-    fun a_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?, double5: Double?) {
-        assertEquals(a_tuple*double1!!, Tuple(double2!!, double3!!, double4!!, double5!!))
+    fun a_tuple(
+        double1: Double?,
+        double2: Double?,
+        double3: Double?,
+        double4: Double?,
+        double5: Double?,
+    ) {
+        assertEquals(a_tuple * double1!!, Tuple(double2!!, double3!!, double4!!, double5!!))
     }
 
     lateinit var ad: Tuple
 
     @Given("ad ← tuple\\({int}, {int}, {int}, {int})")
-    fun ad_tuple(int1: Int?, int2: Int?, int3: Int?, int4: Int?) {
+    fun ad_tuple(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+        int4: Int?,
+    ) {
         ad = tuple(int1!!, int2!!, int3!!, int4!!)
     }
 
-    @Then("ad / {double} = tuple\\({double}, {double}, {double}, {double})")
-    fun ad_tuple(double1: Double?, double2: Double?, double3: Double?, double4: Double?, double5: Double?) {
-        assertEquals(ad/double1!!, Tuple(double2!!, double3!!, double4!!, double5!!))
+    @Then("ad \\/ {double} = tuple\\({double}, {double}, {double}, {double})")
+    fun ad_tuple(
+        double1: Double?,
+        double2: Double?,
+        double3: Double?,
+        double4: Double?,
+        double5: Double?,
+    ) {
+        assertEquals(ad / double1!!, Tuple(double2!!, double3!!, double4!!, double5!!))
     }
 
     @Then("magnitude\\(v2) = {int}")
@@ -166,14 +249,22 @@ class TuplesStepDefinitions {
     }
 
     @Given("a ← vector\\({int}, {int}, {int})")
-    fun a_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun a_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         a_tuple = vector(int1!!, int2!!, int3!!)
     }
 
     lateinit var b: Tuple
 
     @Given("b ← vector\\({int}, {int}, {int})")
-    fun b_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun b_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         b = vector(int1!!, int2!!, int3!!)
     }
 
@@ -183,27 +274,44 @@ class TuplesStepDefinitions {
     }
 
     @Then("cross\\(a, b) = vector\\({int}, {int}, {int})")
-    fun cross_a_b_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun cross_a_b_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         assertEquals(a_tuple cross b, vector(int1!!, int2!!, int3!!))
     }
 
     @Then("cross\\(b, a) = vector\\({int}, {int}, {int})")
-    fun cross_b_a_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun cross_b_a_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         assertEquals(b cross a_tuple, vector(int1!!, int2!!, int3!!))
     }
 
     @Then("normalize\\(v) = vector\\({int}, {int}, {int})")
-    fun normalize_v_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun normalize_v_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         assertEquals(v.normalize(), vector(int1!!, int2!!, int3!!))
     }
 
     @Then("normalize\\(v) = approximately vector\\({double}, {double}, {double})")
-    fun normalize_v_approximately_vector(double1: Double?, double2: Double?, double3: Double?) {
+    fun normalize_v_approximately_vector(
+        double1: Double?,
+        double2: Double?,
+        double3: Double?,
+    ) {
         print(v.normalize())
         assertTrue(v.normalize().equals(vector(double1!!, double2!!, double3!!)))
     }
 
     lateinit var norm: Tuple
+
     @When("norm ← normalize\\(v)")
     fun norm_normalize_v() {
         norm = v.normalize()
@@ -217,7 +325,11 @@ class TuplesStepDefinitions {
     lateinit var n: Tuple
 
     @Given("n ← vector\\({double}, {double}, {double})")
-    fun n_vector(double1: Double?, double2: Double?, double3: Double?) {
+    fun n_vector(
+        double1: Double?,
+        double2: Double?,
+        double3: Double?,
+    ) {
         n = vector(double1!!, double2!!, double3!!)
     }
 
@@ -229,8 +341,11 @@ class TuplesStepDefinitions {
     }
 
     @Then("r = vector\\({int}, {int}, {int})")
-    fun r_vector(int1: Int?, int2: Int?, int3: Int?) {
+    fun r_vector(
+        int1: Int?,
+        int2: Int?,
+        int3: Int?,
+    ) {
         assertEquals(vector(int1!!, int2!!, int3!!), r)
     }
-
 }

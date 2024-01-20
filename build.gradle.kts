@@ -70,7 +70,7 @@ task("cucumber") {
 }
 
 detekt {
-    input = files("src/main/kotlin", "src/test/kotlin")
+    source = files("src/main/kotlin", "src/test/kotlin")
     config = files("detekt-config.yml")
 }
 
