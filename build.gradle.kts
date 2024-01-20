@@ -54,9 +54,16 @@ task("cucumber") {
     dependsOn("assemble", "compileTestJava")
     doLast {
         javaexec {
-            setMain("io.cucumber.core.cli.Main")
+            mainClass = "io.cucumber.core.cli.Main"
             classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
-            args = listOf("--plugin", cucumberReport, "--glue", "net.dinkla.raytracerchallenge.stepdefs", "src/test/resources")
+            args =
+                listOf(
+                    "--plugin",
+                    cucumberReport,
+                    "--glue",
+                    "net.dinkla.raytracerchallenge.stepdefs",
+                    "src/test/resources",
+                )
             jvmArgs = listOf("-Dfile.encoding=utf-8", "-ea")
         }
     }
