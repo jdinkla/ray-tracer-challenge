@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import kotlin.math.sqrt
 
+@Suppress("unused")
 class TuplesStepDefinitions {
     lateinit var a1: Tuple
     lateinit var a2: Tuple
