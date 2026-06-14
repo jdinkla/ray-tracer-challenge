@@ -60,6 +60,15 @@ tasks.register<JavaExec>("cucumber") {
     jvmArgs = listOf("-Dfile.encoding=utf-8", "-ea")
 }
 
+tasks.register<JavaExec>("render") {
+    group = "application"
+    description = "Render an example, e.g. ./gradlew render -Pchapter=Chapter7 (default: All)"
+    dependsOn("classes")
+    classpath = sourceSets.main.get().runtimeClasspath
+    val chapter = (project.findProperty("chapter") as String?) ?: "All"
+    mainClass = "net.dinkla.raytracerchallenge.examples.${chapter}Kt"
+}
+
 detekt {
     source.setFrom("src/main/kotlin", "src/test/kotlin")
     config.setFrom("detekt-config.yml")

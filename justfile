@@ -37,6 +37,11 @@ build:
 clean:
     ./gradlew clean
 
+[group('build')]
+[doc("Render an example to PNG, e.g. `just render Chapter7` (default: All)")]
+render CHAPTER="All":
+    ./gradlew render -Pchapter={{CHAPTER}}
+
 # --- Test ---
 
 [group('test')]
