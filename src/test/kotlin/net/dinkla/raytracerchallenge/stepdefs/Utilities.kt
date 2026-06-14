@@ -1,5 +1,6 @@
 package net.dinkla.raytracerchallenge.stepdefs
 
+import net.dinkla.raytracerchallenge.TestPattern
 import net.dinkla.raytracerchallenge.math.Color
 import net.dinkla.raytracerchallenge.math.Matrix
 import net.dinkla.raytracerchallenge.math.Transformation
@@ -33,13 +34,22 @@ private fun transformWith(s: String): Matrix {
     }
 }
 
+private fun patternWith(s: String): TestPattern = when (s) {
+    "test_pattern()" -> TestPattern()
+    else -> throw IllegalArgumentException("unknown pattern: $s")
+}
+
 fun Shape.with(dataTable: List<List<String>>) {
     for (line in dataTable) {
         when (line[0]) {
             "material.color" -> material.color = colorWith(line[1])
+            "material.ambient" -> material.ambient = line[1].toDouble()
             "material.diffuse" -> material.diffuse = line[1].toDouble()
             "material.specular" -> material.specular = line[1].toDouble()
             "material.reflective" -> material.reflective = line[1].toDouble()
+            "material.transparency" -> material.transparency = line[1].toDouble()
+            "material.refractive_index" -> material.refractiveIndex = line[1].toDouble()
+            "material.pattern" -> material.pattern = patternWith(line[1])
             "transform" -> transform = transformWith(line[1])
             else -> throw IllegalArgumentException(" unknown property: ${line[0]}")
         }

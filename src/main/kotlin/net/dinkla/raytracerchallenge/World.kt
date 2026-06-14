@@ -10,6 +10,7 @@ import net.dinkla.raytracerchallenge.math.Transformation.scaling
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.objects.Shape
 import net.dinkla.raytracerchallenge.objects.Sphere
+import kotlin.math.sqrt
 
 const val MAX_RECURSION = 5
 
@@ -25,9 +26,16 @@ class World {
     }
 
     fun shadeHit(comps: Computations, remaining: Int = MAX_RECURSION): Color {
+        val material = comps.`object`.material
         val surface = lighting(light, comps, isShadowed(comps.overPoint))
         val reflected = reflectedColor(comps, remaining)
-        return surface + reflected
+        val refracted = refractedColor(comps, remaining)
+        return if (material.reflective > 0.0 && material.transparency > 0.0) {
+            val reflectance = schlick(comps)
+            surface + reflected * reflectance + refracted * (1.0 - reflectance)
+        } else {
+            surface + reflected + refracted
+        }
     }
 
     fun colorAt(ray: Ray, remaining: Int = MAX_RECURSION): Color {
@@ -36,7 +44,7 @@ class World {
         return if (hit == null) {
             Color.BLACK
         } else {
-            val comps = Computations.prepare(hit, ray)
+            val comps = Computations.prepare(hit, ray, xs)
             shadeHit(comps, remaining)
         }
     }
@@ -84,6 +92,23 @@ class World {
         val reflectRay = Ray(comps.overPoint, comps.reflectV)
         val color = colorAt(reflectRay, remaining - 1)
         return color * comps.`object`.material.reflective
+    }
+
+    fun refractedColor(comps: Computations, remaining: Int = MAX_RECURSION): Color {
+        if (remaining <= 0 || comps.`object`.material.transparency < Approx.EPSILON) {
+            return Color.BLACK
+        }
+        // Snell's law: find the refracted ray direction, or detect total internal reflection.
+        val nRatio = comps.n1 / comps.n2
+        val cosI = comps.eyeV dot comps.normalV
+        val sin2t = nRatio * nRatio * (1.0 - cosI * cosI)
+        if (sin2t > 1.0) {
+            return Color.BLACK
+        }
+        val cosT = sqrt(1.0 - sin2t)
+        val direction = comps.normalV * (nRatio * cosI - cosT) - comps.eyeV * nRatio
+        val refractRay = Ray(comps.underPoint, direction)
+        return colorAt(refractRay, remaining - 1) * comps.`object`.material.transparency
     }
 
     companion object {

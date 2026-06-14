@@ -49,3 +49,6 @@ lateinit var comps: Computations
 lateinit var shape: Shape
 
 lateinit var w: World
+
+// Registry for scenarios that refer to shapes by ad-hoc names (A, B, C, floor, ball, ...).
+val namedShapes: MutableMap<String, Shape> = mutableMapOf()

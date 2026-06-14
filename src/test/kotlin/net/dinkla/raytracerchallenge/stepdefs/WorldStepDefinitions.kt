@@ -233,4 +233,63 @@ class WorldStepDefinitions {
         w.colorAt(r)
     }
 
+    @When("c ← refractedColor\\(w, comps, {int})")
+    fun c_refracted_color(int1: Int?) {
+        c = w.refractedColor(comps, int1!!)
+    }
+
+    @When("color ← shade_hit\\(w, comps, {int})")
+    fun color_shade_hit_remaining(int1: Int?) {
+        color = w.shadeHit(comps, int1!!)
+    }
+
+    @Given("A ← the first object in w")
+    fun a_first_object_in_w() {
+        namedShapes["A"] = w.objects[0]
+    }
+
+    @Given("B ← the second object in w")
+    fun b_second_object_in_w() {
+        namedShapes["B"] = w.objects[1]
+    }
+
+    @Given("shape has:")
+    fun shape_has(dataTable: List<List<String>>) {
+        shape.with(dataTable)
+    }
+
+    @Given("A has:")
+    fun a_has(dataTable: List<List<String>>) {
+        namedShapes.getValue("A").with(dataTable)
+    }
+
+    @Given("B has:")
+    fun b_has(dataTable: List<List<String>>) {
+        namedShapes.getValue("B").with(dataTable)
+    }
+
+    @Given("floor ← plane\\() with:")
+    fun floor_plane_with(dataTable: List<List<String>>) {
+        val floor = Plane()
+        floor.with(dataTable)
+        namedShapes["floor"] = floor
+    }
+
+    @Given("floor is added to w")
+    fun floor_is_added_to_w() {
+        w.objects.add(namedShapes.getValue("floor"))
+    }
+
+    @Given("ball ← sphere with:")
+    fun ball_sphere_with(dataTable: List<List<String>>) {
+        val ball = Sphere()
+        ball.with(dataTable)
+        namedShapes["ball"] = ball
+    }
+
+    @Given("ball is added to w")
+    fun ball_is_added_to_w() {
+        w.objects.add(namedShapes.getValue("ball"))
+    }
+
 }

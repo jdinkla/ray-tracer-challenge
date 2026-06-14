@@ -140,4 +140,14 @@ class MaterialsStepDefinitions {
         assertEquals(double1!!, m.reflective)
     }
 
+    @Then("m.transparency = {double}")
+    fun m_transparency(double1: Double?) {
+        assertEquals(double1!!, m.transparency)
+    }
+
+    @Then("m.refractive_index = {double}")
+    fun m_refractive_index(double1: Double?) {
+        assertEquals(double1!!, m.refractiveIndex)
+    }
+
 }

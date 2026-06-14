@@ -35,4 +35,11 @@ class Sphere : Shape() {
 
     override fun hashCode(): Int = Objects.hash(material, transform)
 
+    companion object {
+        fun glass(): Sphere = Sphere().apply {
+            material.transparency = 1.0
+            material.refractiveIndex = 1.5
+        }
+    }
+
 }

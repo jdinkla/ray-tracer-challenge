@@ -100,4 +100,19 @@ class SpheresStepDefinitions {
         assertEquals(m, s.material)
     }
 
+    @Given("s ← glass_sphere\\()")
+    fun s_glass_sphere() {
+        s = Sphere.glass()
+    }
+
+    @Then("s.material.transparency = {double}")
+    fun s_material_transparency(double1: Double?) {
+        assertEquals(double1!!, s.material.transparency)
+    }
+
+    @Then("s.material.refractive_index = {double}")
+    fun s_material_refractive_index(double1: Double?) {
+        assertEquals(double1!!, s.material.refractiveIndex)
+    }
+
 }
