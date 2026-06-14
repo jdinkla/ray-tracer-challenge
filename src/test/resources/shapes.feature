@@ -60,37 +60,41 @@ Scenario: Computing the normal on a transformed shape
     And n ← normal_at(s, p)
   Then n = vector(0.0, 0.97014, -0.24254)
 
-#Scenario: A shape has a parent attribute
-#  Given s ← test_shape
-#  Then s.parent is nothing
-#
-#Scenario: Converting a point from world to object space
-#  Given g1 ← group()
-#    And set_transform(g1, rotation_y(π/2))
-#    And g2 ← group()
-#    And set_transform(g2, scaling(2, 2, 2))
-#    And add_child(g1, g2)
-#    And s ← sphere()
-#    And set_transform(s, translation(5, 0, 0))
-#    And add_child(g2, s)
-#  When p ← world_to_object(s, point(-2, 0, -10))
-#  Then p = point(0, 0, -1)
-#
+Scenario: A shape has a parent attribute
+  Given s ← test_shape
+  Then s.parent is nothing
+
+Scenario: Converting a point from world to object space
+  Given g1 ← group()
+    And set_transform(g1, rotation_y(1.5707963267948966))
+    And g2 ← group()
+    And set_transform(g2, scaling(2, 2, 2))
+    And add_child(g1, g2)
+    And s ← sphere()
+    And set_transform(s, translation(5, 0, 0))
+    And add_child(g2, s)
+  When p ← world_to_object(s, point(-2, 0, -10))
+  Then p = point(0, 0, -1)
+
+# DISABLED: the book's expected normal (0.2857, 0.4286, -0.8571) is rounded to 4 decimals (= 2/7,
+# 3/7, -6/7) and is unsatisfiable at this repo's 1e-5 compare — the correct value 0.285714... is
+# 1.4e-5 away. ApproxTest deliberately pins EPSILON at 1e-5, so the compare can't be relaxed.
+# GroupSpec verifies normalToWorld and the child normal at the book's 1e-4 tolerance instead.
 #Scenario: Converting a normal from object to world space
 #  Given g1 ← group()
-#    And set_transform(g1, rotation_y(π/2))
+#    And set_transform(g1, rotation_y(1.5707963267948966))
 #    And g2 ← group()
 #    And set_transform(g2, scaling(1, 2, 3))
 #    And add_child(g1, g2)
 #    And s ← sphere()
 #    And set_transform(s, translation(5, 0, 0))
 #    And add_child(g2, s)
-#  When n ← normal_to_world(s, vector(√3/3, √3/3, √3/3))
+#  When n ← normal_to_world(s, vector(0.57735026919, 0.57735026919, 0.57735026919))
 #  Then n = vector(0.2857, 0.4286, -0.8571)
 #
 #Scenario: Finding the normal on a child object
 #  Given g1 ← group()
-#    And set_transform(g1, rotation_y(π/2))
+#    And set_transform(g1, rotation_y(1.5707963267948966))
 #    And g2 ← group()
 #    And set_transform(g2, scaling(1, 2, 3))
 #    And add_child(g1, g2)
