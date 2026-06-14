@@ -27,7 +27,7 @@ class Computations(
         fun prepare(hit: Intersection, ray: Ray, xs: Intersections = Intersections(hit)): Computations {
             val point = ray.position(hit.t)
             val eyeV = -ray.direction
-            val rawNormal = hit.`object`.normal(point)
+            val rawNormal = hit.`object`.normal(point, hit)
             val inside = rawNormal dot eyeV < 0.0
             val normalV = if (inside) -rawNormal else rawNormal
             val reflectV = ray.direction.reflect(normalV)

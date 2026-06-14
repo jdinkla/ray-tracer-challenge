@@ -21,14 +21,17 @@ abstract class Shape {
 
     abstract fun normalInObjectSpace(point: Point): Vector
 
+    // Hit-aware variant; only smooth shapes need the hit's u/v. Defaults to ignoring it.
+    open fun normalInObjectSpace(point: Point, hit: Intersection?): Vector = normalInObjectSpace(point)
+
     fun intersect(ray: Ray): Intersections {
         val objectRay = ray.transform(transform.inverse())
         return intersectInObjectSpace(objectRay)
     }
 
-    fun normal(point: Point): Vector {
+    fun normal(point: Point, hit: Intersection? = null): Vector {
         val objectPoint = worldToObject(point)
-        val objectNormal = normalInObjectSpace(objectPoint)
+        val objectNormal = normalInObjectSpace(objectPoint, hit)
         return normalToWorld(objectNormal)
     }
 

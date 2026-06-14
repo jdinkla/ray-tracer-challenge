@@ -10,6 +10,7 @@ import net.dinkla.raytracerchallenge.math.Approx.EPSILON
 import net.dinkla.raytracerchallenge.math.point
 import net.dinkla.raytracerchallenge.math.vector
 import net.dinkla.raytracerchallenge.objects.Sphere
+import net.dinkla.raytracerchallenge.objects.Triangle
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNull
@@ -132,10 +133,34 @@ class IntersectionsStepDefinitions {
         assertEquals(expected, comps.eyeV)
     }
 
-    @Then("comps.normalv = vector\\({int}, {int}, {int})")
-    fun comps_normalv_vector(int1: Int?, int2: Int?, int3: Int?) {
-        val expected = vector(int1!!, int2!!, int3!!)
+    @Then("comps.normalv = vector\\({double}, {double}, {double})")
+    fun comps_normalv_vector(double1: Double?, double2: Double?, double3: Double?) {
+        val expected = vector(double1!!, double2!!, double3!!)
         assertEquals(expected, comps.normalV)
+    }
+
+    @Given("s ← triangle\\(point\\({int}, {int}, {int}), point\\({int}, {int}, {int}), point\\({int}, {int}, {int}))")
+    fun s_triangle_inline(
+        a1: Int?, a2: Int?, a3: Int?,
+        b1: Int?, b2: Int?, b3: Int?,
+        c1: Int?, c2: Int?, c3: Int?,
+    ) {
+        s = Triangle(point(a1!!, a2!!, a3!!), point(b1!!, b2!!, b3!!), point(c1!!, c2!!, c3!!))
+    }
+
+    @When("i ← intersection_with_uv\\({double}, s, {double}, {double})")
+    fun i_intersection_with_uv(t: Double?, u: Double?, v: Double?) {
+        i = Intersection(t!!, s, u!!, v!!)
+    }
+
+    @Then("i.u = {double}")
+    fun i_u(double1: Double?) {
+        assertEquals(double1!!, i!!.u)
+    }
+
+    @Then("i.v = {double}")
+    fun i_v(double1: Double?) {
+        assertEquals(double1!!, i!!.v)
     }
 
 

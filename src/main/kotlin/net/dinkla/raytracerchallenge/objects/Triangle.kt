@@ -1,5 +1,6 @@
 package net.dinkla.raytracerchallenge.objects
 
+import net.dinkla.raytracerchallenge.Intersection
 import net.dinkla.raytracerchallenge.Intersections
 import net.dinkla.raytracerchallenge.Ray
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
@@ -32,8 +33,11 @@ open class Triangle(val p1: Point, val p2: Point, val p3: Point) : Shape() {
             return Intersections()
         }
         val t = f * (e2 dot originCrossE1)
-        return Intersections(isec(t))
+        return Intersections(intersectionAt(t, u, v))
     }
+
+    // Hook so SmoothTriangle can record the barycentric u/v on the intersection.
+    protected open fun intersectionAt(t: Double, u: Double, v: Double): Intersection = isec(t)
 
     override fun normalInObjectSpace(point: Point): Vector = normal
 }
