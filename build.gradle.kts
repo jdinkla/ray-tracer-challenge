@@ -1,26 +1,20 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.net.URI
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 group = "dinkla.net"
 version = "0.1-SNAPSHOT"
 
-val junitVersion = "5.9.0"
-val cucumberVersion = "7.8.1"
+val cucumberVersion = "7.22.1"
 val cucumberReport = "pretty"
-val kotlinxCoroutinesVersion = "1.7.3"
-val kotestVersion = "5.8.0"
+val kotlinxCoroutinesVersion = "1.11.0"
+val kotestVersion = "5.9.1"
 
 plugins {
-    kotlin("jvm") version "1.9.21"
-    id("io.kotest.multiplatform") version "5.4.2"
-    id("io.gitlab.arturbosch.detekt").version("1.23.4")
+    kotlin("jvm") version "2.4.0"
+    id("dev.detekt").version("2.0.0-alpha.4")
 }
 
 repositories {
     mavenCentral()
-    maven {
-        url = URI.create("https://kotlin.bintray.com/kotlinx")
-    }
 }
 
 dependencies {
@@ -36,45 +30,42 @@ dependencies {
     testImplementation("io.cucumber:cucumber-junit:$cucumberVersion")
 }
 
+kotlin {
+    jvmToolchain(25)
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_25)
+    }
+}
+
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
-}
-
-configurations {}
 
 val cucumberRuntime by configurations.creating {
     extendsFrom(configurations["testImplementation"])
 }
 
-task("cucumber") {
+tasks.register<JavaExec>("cucumber") {
     dependsOn("assemble", "compileTestJava")
-    doLast {
-        javaexec {
-            mainClass = "io.cucumber.core.cli.Main"
-            classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
-            args =
-                listOf(
-                    "--plugin",
-                    cucumberReport,
-                    "--glue",
-                    "net.dinkla.raytracerchallenge.stepdefs",
-                    "src/test/resources",
-                )
-            jvmArgs = listOf("-Dfile.encoding=utf-8", "-ea")
-        }
-    }
+    mainClass = "io.cucumber.core.cli.Main"
+    classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
+    args =
+        listOf(
+            "--plugin",
+            cucumberReport,
+            "--glue",
+            "net.dinkla.raytracerchallenge.stepdefs",
+            "src/test/resources",
+        )
+    jvmArgs = listOf("-Dfile.encoding=utf-8", "-ea")
 }
 
 detekt {
-    source = files("src/main/kotlin", "src/test/kotlin")
-    config = files("detekt-config.yml")
+    source.setFrom("src/main/kotlin", "src/test/kotlin")
+    config.setFrom("detekt-config.yml")
 }
 
-task("pre_commit") {
+tasks.register("pre_commit") {
     dependsOn("test")
     dependsOn("cucumber")
     dependsOn("detekt")
