@@ -69,4 +69,15 @@ class RayStepDefinitions {
     fun m_scaling(int1: Int?, int2: Int?, int3: Int?) {
         m = scaling(int1!!, int2!!, int3!!)
     }
+
+    // Shared by the cylinder/cone scenarios: a normalized direction and a ray from an inline point.
+    @Given("direction ← normalize\\(vector\\({double}, {double}, {double}))")
+    fun direction_normalize_vector(double1: Double?, double2: Double?, double3: Double?) {
+        direction = vector(double1!!, double2!!, double3!!).normalize()
+    }
+
+    @Given("r ← ray\\(point\\({double}, {double}, {double}), direction)")
+    fun r_ray_point_direction(double1: Double?, double2: Double?, double3: Double?) {
+        r = Ray(point(double1!!, double2!!, double3!!), direction)
+    }
 }
