@@ -47,5 +47,9 @@ abstract class Shape {
         return parent?.normalToWorld(worldNormal) ?: worldNormal
     }
 
+    // Whether this shape (or, for containers, one of its descendants) is the given shape. Used by
+    // CSG to decide which operand an intersection belongs to.
+    open fun includes(other: Shape): Boolean = this === other
+
     fun isec(t: Double) = Intersection(t, this)
 }

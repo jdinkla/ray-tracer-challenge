@@ -26,4 +26,6 @@ class Group : Shape() {
     override fun normalInObjectSpace(point: Point): Vector {
         throw UnsupportedOperationException("a group has no local normal; query its children instead")
     }
+
+    override fun includes(other: Shape): Boolean = children.any { it.includes(other) }
 }

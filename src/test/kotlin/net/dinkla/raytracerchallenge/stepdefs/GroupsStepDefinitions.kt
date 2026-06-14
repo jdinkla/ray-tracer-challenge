@@ -22,9 +22,6 @@ class GroupsStepDefinitions {
     private lateinit var g: Group
     private lateinit var g1: Group
     private lateinit var g2: Group
-    private lateinit var s1: Sphere
-    private lateinit var s2: Sphere
-    private lateinit var s3: Sphere
 
     @Given("g ← group\\()")
     fun g_group() {
@@ -78,52 +75,52 @@ class GroupsStepDefinitions {
 
     @Given("s1 ← sphere\\()")
     fun s1_sphere() {
-        s1 = Sphere()
+        namedShapes["s1"] = Sphere()
     }
 
     @Given("s2 ← sphere\\()")
     fun s2_sphere() {
-        s2 = Sphere()
+        namedShapes["s2"] = Sphere()
     }
 
     @Given("s3 ← sphere\\()")
     fun s3_sphere() {
-        s3 = Sphere()
+        namedShapes["s3"] = Sphere()
     }
 
-    @Given("set_transform\\(s2, translation\\({int}, {int}, {int}))")
-    fun set_transform_s2(int1: Int?, int2: Int?, int3: Int?) {
-        s2.transform = translation(int1!!, int2!!, int3!!)
+    @Given("set_transform\\(s2, translation\\({double}, {double}, {double}))")
+    fun set_transform_s2(double1: Double?, double2: Double?, double3: Double?) {
+        namedShapes.getValue("s2").transform = translation(double1!!, double2!!, double3!!)
     }
 
     @Given("set_transform\\(s3, translation\\({int}, {int}, {int}))")
     fun set_transform_s3(int1: Int?, int2: Int?, int3: Int?) {
-        s3.transform = translation(int1!!, int2!!, int3!!)
+        namedShapes.getValue("s3").transform = translation(int1!!, int2!!, int3!!)
     }
 
     @Given("add_child\\(g, s1)")
     fun add_child_g_s1() {
-        g.addChild(s1)
+        g.addChild(namedShapes.getValue("s1"))
     }
 
     @Given("add_child\\(g, s2)")
     fun add_child_g_s2() {
-        g.addChild(s2)
+        g.addChild(namedShapes.getValue("s2"))
     }
 
     @Given("add_child\\(g, s3)")
     fun add_child_g_s3() {
-        g.addChild(s3)
+        g.addChild(namedShapes.getValue("s3"))
     }
 
     @Then("xs[{int}].object = s1")
     fun xs_object_s1(int1: Int?) {
-        assertEquals(s1, xs[int1!!].`object`)
+        assertEquals(namedShapes.getValue("s1"), xs[int1!!].`object`)
     }
 
     @Then("xs[{int}].object = s2")
     fun xs_object_s2(int1: Int?) {
-        assertEquals(s2, xs[int1!!].`object`)
+        assertEquals(namedShapes.getValue("s2"), xs[int1!!].`object`)
     }
 
     @Given("set_transform\\(g, scaling\\({int}, {int}, {int}))")
