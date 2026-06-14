@@ -6,6 +6,7 @@ import net.dinkla.raytracerchallenge.Ray
 import net.dinkla.raytracerchallenge.math.Approx.EPSILON
 import net.dinkla.raytracerchallenge.math.Point
 import net.dinkla.raytracerchallenge.math.Vector
+import java.util.Objects
 import kotlin.math.abs
 
 // Flat triangle defined by three vertices, intersected with the Möller–Trumbore algorithm.
@@ -40,4 +41,17 @@ open class Triangle(val p1: Point, val p2: Point, val p3: Point) : Shape() {
     protected open fun intersectionAt(t: Double, u: Double, v: Double): Intersection = isec(t)
 
     override fun normalInObjectSpace(point: Point): Vector = normal
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+        if (other == null || javaClass != other.javaClass) {
+            return false
+        }
+        other as Triangle
+        return p1 == other.p1 && p2 == other.p2 && p3 == other.p3
+    }
+
+    override fun hashCode(): Int = Objects.hash(p1, p2, p3)
 }
