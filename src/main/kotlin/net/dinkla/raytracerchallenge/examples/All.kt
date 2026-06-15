@@ -28,4 +28,5 @@ fun main() {
     chapter16csg()
     csgDie()
     coverImage()
+    stillLife()
 }
