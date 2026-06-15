@@ -100,22 +100,24 @@ private fun stillLifeWorld(): World {
     return w
 }
 
-private fun render(fileName: String, width: Int, height: Int) {
+private fun render(fileName: String, width: Int, height: Int, samples: Int) {
     val camera = Camera(width, height, Math.PI / 3.0).apply {
         transform = viewTransform(point(0.0, 2.8, -8.0), point(0.0, 0.9, 0.0))
     }
     lateinit var canvas: Canvas
     val timeInMillis = measureTimeMillis {
-        canvas = stillLifeWorld().render(camera)
+        canvas = stillLifeWorld().render(camera, samples)
     }
     PNG.save(canvas, fileName)
     println("rendering took: ${timeInMillis / 1000.0} seconds")
 }
 
-internal fun stillLife(width: Int = 700, height: Int = 450) {
-    render(prefixFileName("stilllife.png"), width, height)
+// samples > 1 enables n x n supersampling to anti-alias the edges.
+internal fun stillLife(width: Int = 700, height: Int = 450, samples: Int = 1) {
+    render(prefixFileName("stilllife.png"), width, height, samples)
 }
 
 fun main() {
-    stillLife()
+    // A higher-resolution, supersampled "hero" render: 900x600 with 3x3 samples per pixel.
+    stillLife(900, 600, 3)
 }

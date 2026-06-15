@@ -49,33 +49,50 @@ class World {
         }
     }
 
-    fun render(camera: Camera): Canvas = if (camera.hSize % gridSize == 0 && camera.vSize % gridSize == 0) {
-        renderInParallel(camera)
-    } else {
-        renderSequential(camera)
-    }
+    // samples is the number of sub-pixel samples per axis: 1 shoots a single ray through the pixel
+    // centre (no anti-aliasing); n > 1 averages an n x n stratified grid of rays to anti-alias edges.
+    fun render(camera: Camera, samples: Int = 1): Canvas =
+        if (camera.hSize % gridSize == 0 && camera.vSize % gridSize == 0) {
+            renderInParallel(camera, samples)
+        } else {
+            renderSequential(camera, samples)
+        }
 
-    fun renderSequential(camera: Camera): Canvas = Canvas(camera.hSize, camera.vSize).apply {
+    fun renderSequential(camera: Camera, samples: Int = 1): Canvas = Canvas(camera.hSize, camera.vSize).apply {
         loop { x: Int, y: Int ->
-            val ray = camera.rayForPixel(x, y)
-            colorAt(ray)
+            colorForPixel(camera, x, y, samples)
         }
     }
 
-    fun renderInParallel(camera: Camera): Canvas = Canvas(camera.hSize, camera.vSize).apply {
+    fun renderInParallel(camera: Camera, samples: Int = 1): Canvas = Canvas(camera.hSize, camera.vSize).apply {
         runBlocking(Dispatchers.Default) {
             for (y in 0 until height step gridSize) {
                 for (x in 0 until width step gridSize) {
                     launch {
                         for (sy in 0 until gridSize) {
                             for (sx in 0 until gridSize) {
-                                set(x+sx, y+sy, colorAt(camera.rayForPixel(x+sx, y+sy)))
+                                set(x + sx, y + sy, colorForPixel(camera, x + sx, y + sy, samples))
                             }
                         }
                     }
                 }
             }
         }
+    }
+
+    // Averages an n x n grid of sub-pixel samples; the single-sample path is unchanged (pixel centre).
+    private fun colorForPixel(camera: Camera, x: Int, y: Int, samples: Int): Color {
+        if (samples <= 1) {
+            return colorAt(camera.rayForPixel(x, y))
+        }
+        val step = 1.0 / samples
+        var sum = Color.BLACK
+        for (sy in 0 until samples) {
+            for (sx in 0 until samples) {
+                sum += colorAt(camera.rayForPixel(x, y, (sx + 0.5) * step, (sy + 0.5) * step))
+            }
+        }
+        return sum * (1.0 / (samples * samples))
     }
 
     fun isShadowed(point: Point): Boolean {
