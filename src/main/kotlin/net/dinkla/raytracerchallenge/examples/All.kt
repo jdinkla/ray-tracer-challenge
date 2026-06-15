@@ -24,5 +24,6 @@ fun main() {
     chapter15triangles()
     chapter15smoothtriangles()
     chapter15objfile()
+    chapter15teapot()
     chapter16csg()
 }
