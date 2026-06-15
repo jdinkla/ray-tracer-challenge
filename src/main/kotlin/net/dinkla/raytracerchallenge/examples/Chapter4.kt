@@ -10,7 +10,7 @@ import net.dinkla.raytracerchallenge.ui.PNG
 import java.io.File
 import javax.imageio.ImageIO
 
-private fun clock(fileName: String) {
+internal fun clock(fileName: String) {
     val canvas = Canvas(1080, 1080)
 
     canvas.loop { _: Int, _: Int ->

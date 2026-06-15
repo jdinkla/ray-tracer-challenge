@@ -18,7 +18,7 @@ internal fun chapter6extended() {
         s.material.diffuse = diffuse
         for (specular in speculars) {
             s.material.specular = specular
-            val fileName ="../" + addTimeStamp("spheres_${String.format("%.2f", diffuse)}_${String.format("%.2f", specular)}.png")
+            val fileName = prefixFileName("spheres_${String.format("%.2f", diffuse)}_${String.format("%.2f", specular)}.png")
             println(fileName)
             rayTrace(s, fileName)
         }

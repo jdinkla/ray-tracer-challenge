@@ -15,7 +15,7 @@ data class Projectile(val position: Point, val velocity: Vector) {
 
 data class Environment(val gravity: Vector, val wind: Vector)
 
-private fun projectileExample() {
+internal fun projectileExample() {
     var p = Projectile(point(0, 1, 0), vector(1, 1, 0).normalize())
     val e = Environment(vector(0.0, -0.1, 0.0), vector(-0.01, 0.0, 0.0))
 

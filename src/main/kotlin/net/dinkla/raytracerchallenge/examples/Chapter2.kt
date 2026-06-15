@@ -53,9 +53,13 @@ fun saveAsPng(canvas: Canvas, fileName: String) {
     ImageIO.write(img,"png", file)
 }
 
-fun main() {
+internal fun chapter2() {
     val fileName = "projectile_ppm_example"
     val canvas = simulate()
     saveAsPpm(canvas, prefixFileName("$fileName.ppm"))
     saveAsPng(canvas, prefixFileName("$fileName.png"))
+}
+
+fun main() {
+    chapter2()
 }
