@@ -26,5 +26,6 @@ fun main() {
     chapter15objfile()
     chapter15teapot()
     chapter16csg()
+    csgDie()
     coverImage()
 }
